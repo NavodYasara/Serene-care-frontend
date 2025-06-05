@@ -5,7 +5,7 @@ import axios from "axios";
 import Navbar from "../Components/Navbar/Navbar";
 
 function Login() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -14,8 +14,8 @@ function Login() {
     event.preventDefault();
 
     try {
-      const response = await axios.post("/server/login", {
-        username,
+      const response = await axios.get("http://localhost:5000/api/user/login", {
+        email,
         password,
       });
 
@@ -60,12 +60,12 @@ function Login() {
                 </div>
 
                 <Form.Group className="mb-4">
-                  <Form.Label>User Name</Form.Label>
+                  <Form.Label>Email</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Enter your username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </Form.Group>
                 <Form.Group className="mb-4">
@@ -106,7 +106,7 @@ export default Login;
 
 
 // function Login() {
-//   const [username, setUsername] = useState("");
+//   const [email, setEmail] = useState("");
 //   const [password, setPassword] = useState("");
 //   const [userType, setUserType] = useState("");
 //   const [error, setError] = useState("");
@@ -117,7 +117,7 @@ export default Login;
 
 //   try {
 //     const response = await axios.post("/server/login", {
-//       username,
+//       email,
 //       password,
 //     });
 
@@ -163,12 +163,12 @@ export default Login;
 //                 </div>
 
 //                 <Form.Group className="mb-4">
-//                   <Form.Label>User Name</Form.Label>
+//                   <Form.Label>Email</Form.Label>
 //                   <Form.Control
 //                     type="text"
-//                     placeholder="Enter your username"
-//                     value={username}
-//                     onChange={(e) => setUsername(e.target.value)}
+//                     placeholder="Enter your email"
+//                     value={email}
+//                     onChange={(e) => setEmail(e.target.value)}
 //                   />
 //                 </Form.Group>
 //                 <Form.Group className="mb-4">
