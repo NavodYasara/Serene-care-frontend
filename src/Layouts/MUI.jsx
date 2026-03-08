@@ -101,7 +101,7 @@ function ResponsiveDrawer(props) {
 
   const handleProfileSave = async () => {
     try {
-      await axios.post("http://localhost:5000/api/user/registerPatient", profileData);
+      await axios.post("http://localhost:5000/api/user/registerCaretakerProfile", profileData);
       setOriginalProfileData({ ...profileData });
       setProfileEditMode(false);
     } catch (error) {
@@ -221,7 +221,7 @@ function ResponsiveDrawer(props) {
                   <Grid item xs={12} md={8}>
                     <Paper elevation={3} className="p-4">
                       <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
-                        Patient's Profile
+                        Caretaker's Profile
                       </h2>
                       <TableContainer component={Paper}>
                         <Table>

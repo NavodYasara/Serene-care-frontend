@@ -60,7 +60,7 @@ const CaretakerDashboard = () => {
     const fetchCaretakerData = async () => {
       try {
         // Since we saw inconsistent naming in the backend, let's try to fetch user details first
-        // In a real app, this would be a specific endpoint for the caretaker's patient profile.
+        // In a real app, this would be a specific endpoint for the caretaker's profile.
         const response = await axios.get(
           "http://localhost:5000/api/user/getCaretakerData",
           {
@@ -105,8 +105,8 @@ const CaretakerDashboard = () => {
         ...profileData,
         userId: user.userId,
       };
-      await axios.post(
-        "http://localhost:5000/api/user/registerPatient", 
+      await axios.put(
+        "http://localhost:5000/api/user/updateCaretakerProfile", 
         updatedProfileData
       );
       setOriginalProfileData({ ...profileData });
