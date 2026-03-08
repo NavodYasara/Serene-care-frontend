@@ -10,10 +10,14 @@ import {
   Grid,
 } from "@mui/material";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../Components/Navbar/Navbar";
-
 const Register = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const typeFromUrl = queryParams.get("type") || "caretaker";
+
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -24,12 +28,12 @@ const Register = () => {
     dob: "",
     gender: "",
     address: "",
-    usertype: "caretaker",
+    usertype: typeFromUrl,
+    specialization: typeFromUrl === "caregiver" ? "General" : "",
   });
 
   const [error, setError] = useState(null); // State to hold error messages
   const [openSnackbar, setOpenSnackbar] = useState(false); // State for Snackbar
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -73,10 +77,11 @@ const Register = () => {
 
     try {
       // Submit the form if all validations pass
-      const response = await axios.post(
-        "http://localhost:5000/api/user/registercaretaker",
-        form
-      );
+      const endpoint =
+        form.usertype === "caregiver"
+          ? "http://localhost:5000/api/user/registerCaregiver"
+          : "http://localhost:5000/api/user/registerCaretaker";
+      const response = await axios.post(endpoint, form);
       console.log(response.data);
       navigate("/Login");
     } catch (error) {
@@ -117,7 +122,7 @@ const Register = () => {
           <Card>
             <Box p={3}>
               <Box mb={4} textAlign="center">
-                <h3>Register</h3>
+                <h3>Register as {form.usertype.charAt(0).toUpperCase() + form.usertype.slice(1)}</h3>
               </Box>
               <form onSubmit={handleSubmit}>
                 <Grid container spacing={2}>

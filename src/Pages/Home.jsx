@@ -33,8 +33,8 @@ export default function Home() {
             and lifestyle choices of individuals receiving disability services.
             With a focus on empowerment, we provide a wide range of attendant
             care supports to facilitate independent living and assist clients in
-            achieving their goals.
           </Typography>
+
 
           {/* Carousel */}
           <Grid container justifyContent="center" sx={{ mb: 4 }}>

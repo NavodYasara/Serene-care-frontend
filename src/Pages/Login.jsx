@@ -77,6 +77,7 @@ function Login() {
 
   return (
     <>
+      <Navbar />
       <Container
         component="main"
         maxWidth="xs"
