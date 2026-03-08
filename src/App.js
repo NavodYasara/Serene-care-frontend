@@ -16,6 +16,8 @@ import ManageStaff from "./Pages/ADMIN/ManageStaff";
 import CaregiverDashboard from "./Pages/CAREGIVER/CaregiverDashboard";
 import CaregiverProfile from "./Pages/CAREGIVER/CaregiverProfile";
 
+import CaregiverDetail from "./Pages/CARETAKER/CaregiverDetail";
+
 import CaretakerDashboard from "./Pages/CARETAKER/CaretakerDashboard";
 import Report from "./Pages/CARETAKER/Report";
 import CtRequirement from "./Pages/CARETAKER/CtRequirement";
@@ -29,6 +31,7 @@ import WaitingPlan from "./Pages/MANAGER/WaitingPlan";
 import AcceptedPlan from "./Pages/MANAGER/AcceptedPlan";
 import { useEffect } from "react";
 
+import Testfunction from "./Pages/testmodule.jsx";
 
 function App() {
   
@@ -52,8 +55,9 @@ function App() {
         <Route path="Register" element={<Register />} />
         <Route path="Login" element={<Login />} />
 
-        <Route path="Layout2" element={<Layout2 />} />
-        <Route path="MUI" element={<MUI />} />
+        <Route path="Layout" element={<Layout />} />
+
+        <Route path="AccDashboard" element={<AccDashboard />} />
 
         <Route path="AdminDashboard" element={<AdminDashboard />} />
         <Route path="ManageStaff" element={<ManageStaff />} />
@@ -61,26 +65,21 @@ function App() {
         <Route path="CaregiverDashboard" element={<CaregiverDashboard />} />
         <Route path="CaregiverProfile" element={<CaregiverProfile />} />
 
-        <Route path="CtRequirement" element={<CtRequirement />} />
-        <Route path="Careplan" element={<Careplan />} />
+        <Route path="CaregiverDetail" element={<CaregiverDetail />} />
+
         <Route path="CaretakerDashboard" element={<CaretakerDashboard />} />
         <Route path="Report" element={<Report />} />
         <Route path="Payment" element={<Payment />} />
         <Route path="Feedback" element={<Feedback />} />
 
         <Route path="ManagerDashboard" element={<ManagerDashboard />} />
-        <Route path="Careplan" element={<Careplan />} />
-        
-        <Route path="newTask" element={<NewPlan />} />
-        <Route path="waitingPlan" element={<WaitingPlan />} />
-        <Route path="Finalized" element={<AcceptedPlan />} />
+        <Route path="ManageStaff" element={<ManageStaff />} />
 
         {/* Pass userType to Sidebar */}
-        <Route path="*" element={<Sidebar userType={userType1} />} />
+        <Route path="*" element={<Sidebar userType={userType} />} />
       </Routes>
     </BrowserRouter>
   );
 }
 
 export default App;
-
