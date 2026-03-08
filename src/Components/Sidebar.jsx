@@ -7,9 +7,16 @@ import {
   CDBSidebarMenu,
   CDBSidebarMenuItem,
 } from "cdbreact";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Sidebar = ({ userType }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("userDetails");
+    navigate("/Login");
+  };
+
   const getSidebarMenu = (userType) => {
     switch (userType) {
       case "admin":
@@ -61,10 +68,10 @@ const Sidebar = ({ userType }) => {
                 Caretaker Dashboard{" "}
               </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/CtRequirement" activeClassName="activeClicked">
+            <NavLink exact to="/ServiceRequests" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="table">
                 {" "}
-                Requirments{" "}
+                Service Requests{" "}
               </CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/Feedback" activeClassName="activeClicked">
@@ -135,7 +142,22 @@ const Sidebar = ({ userType }) => {
           </CDBSidebarContent>
 
           <CDBSidebarFooter style={{ textAlign: "center" }}>
-            <div style={{ padding: "20px 5px" }}>Sidebar Footer</div>
+            <div
+              style={{
+                padding: "20px 5px",
+              }}
+            >
+              <div
+                onClick={handleLogout}
+                style={{
+                  cursor: "pointer",
+                }}
+              >
+                <CDBSidebarMenuItem icon="sign-out-alt">
+                  Logout
+                </CDBSidebarMenuItem>
+              </div>
+            </div>
           </CDBSidebarFooter>
         </CDBSidebar>
       </div>

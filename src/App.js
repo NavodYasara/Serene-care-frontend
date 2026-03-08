@@ -18,7 +18,7 @@ import CaregiverProfile from "./Pages/CAREGIVER/CaregiverProfile";
 
 import CaretakerDashboard from "./Pages/CARETAKER/CaretakerDashboard";
 import Report from "./Pages/CARETAKER/Report";
-import CtRequirement from "./Pages/CARETAKER/CtRequirement";
+import ServiceRequests from "./Pages/CARETAKER/ServiceRequests";
 import Payment from "./Pages/CARETAKER/Payment";
 import Feedback from "./Pages/CARETAKER/Feedback";
 
@@ -31,15 +31,14 @@ import { useEffect } from "react";
 
 
 function App() {
-  
-  
+    
   const [userType1, setUserType] = useState("");
   // userType is obtained from local storage
   useEffect(() => {
-    const userTypeFromStorage = localStorage.getItem("userDetails");
-    if (userTypeFromStorage) {
-      setUserType(userTypeFromStorage.userType);
-      console.log(userType1);
+    const userDetails = localStorage.getItem("userDetails");
+    if (userDetails) {
+      const parsedUser = JSON.parse(userDetails);
+      setUserType(parsedUser.userType);
     }
   }, []);
 
@@ -61,7 +60,7 @@ function App() {
         <Route path="CaregiverDashboard" element={<CaregiverDashboard />} />
         <Route path="CaregiverProfile" element={<CaregiverProfile />} />
 
-        <Route path="CtRequirement" element={<CtRequirement />} />
+        <Route path="ServiceRequests" element={<ServiceRequests />} />
         <Route path="Careplan" element={<Careplan />} />
         <Route path="CaretakerDashboard" element={<CaretakerDashboard />} />
         <Route path="Report" element={<Report />} />
