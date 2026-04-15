@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import Button from 'react-bootstrap/Button';
-import img1 from '../../Assets/img1.png';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import Button from "react-bootstrap/Button";
+import img1 from "../../Assets/img1.png";
+import { useNavigate } from "react-router-dom";
 
 function NavbarComponent() {
   const [user, setUser] = useState(null);
@@ -36,7 +36,10 @@ function NavbarComponent() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary shadow-sm" sticky="top">
       <Container>
-        <Navbar.Brand onClick={() => navigate("/")} style={{ cursor: 'pointer' }}>
+        <Navbar.Brand
+          onClick={() => navigate("/")}
+          style={{ cursor: "pointer" }}
+        >
           <img
             alt="LOGO"
             src={img1}
@@ -44,20 +47,24 @@ function NavbarComponent() {
             height="35"
             className="d-inline-block align-top"
           />
-          <span className="ms-2 fw-bold" style={{ color: '#1e3c72' }}>Serene Care</span>
+          <span className="ms-2 fw-bold" style={{ color: "#1e3c72" }}>
+            Serene Care
+          </span>
         </Navbar.Brand>
-        
+
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto align-items-center">
             <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
-            
+
             {user ? (
               <>
-                <Nav.Link onClick={() => navigate(getDashboardPath())}>Dashboard</Nav.Link>
-                <Button 
-                  variant="outline-danger" 
-                  size="sm" 
+                <Nav.Link onClick={() => navigate(getDashboardPath())}>
+                  Dashboard
+                </Nav.Link>
+                <Button
+                  variant="outline-danger"
+                  size="sm"
                   className="ms-lg-3 mt-2 mt-lg-0 px-3"
                   onClick={handleLogout}
                 >
@@ -66,17 +73,14 @@ function NavbarComponent() {
               </>
             ) : (
               <>
-                <Nav.Link onClick={() => navigate("/Register?type=caretaker")}>Get Service</Nav.Link>
-                <Nav.Link onClick={() => navigate("/Register?type=caregiver")}>Join as Caregiver</Nav.Link>
-                <Button 
-                  variant="outline-secondary" 
-                  size="sm" 
+                <Button
+                  variant="outline-secondary"
+                  size="sm"
                   className="ms-lg-3 px-3"
                   onClick={() => navigate("/Login")}
                 >
                   Login
                 </Button>
-               
               </>
             )}
           </Nav>
