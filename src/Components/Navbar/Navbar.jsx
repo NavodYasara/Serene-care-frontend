@@ -74,7 +74,7 @@ function NavbarComponent() {
                   className="ms-lg-3 px-3"
                   onClick={() => navigate("/Login")}
                 >
-                  Admin Login
+                  Login
                 </Button>
                
               </>

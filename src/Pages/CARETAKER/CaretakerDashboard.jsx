@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Sidebar from "../../Components/Sidebar";
+import { useAuth } from "../../auth/AuthContext";
 import {
   Container,
   Grid,
@@ -54,7 +55,7 @@ const CaretakerDashboard = () => {
   const [open, setOpen] = useState(false);
   const theme = useTheme();
 
-  const user = JSON.parse(localStorage.getItem("userDetails")) || {};
+  const { userDetails: user = {} } = useAuth();
 
   useEffect(() => {
     const fetchCaretakerData = async () => {
@@ -150,7 +151,7 @@ const CaretakerDashboard = () => {
 
   return (
     <Box sx={{ display: "flex", bgcolor: "#f4f7fe", minHeight: "100vh" }}>
-      <Sidebar userType={user.userType} />
+      <Sidebar />
       <Box component="main" sx={{ flexGrow: 1, p: 4, overflowX: "hidden" }}>
         <Container maxWidth="lg">
           {/* Header Section */}

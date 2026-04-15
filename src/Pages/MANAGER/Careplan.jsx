@@ -7,9 +7,6 @@ import Navbar from "../../Components/Navbar/Navbar";
 function Careplan() {
   const [careplans, setCareplans] = useState([]);
   const [caretakerStatuses, setCaretakerStatuses] = useState({});
-  const getUserfromLocalStorage = localStorage.getItem("userDetails")
-    ? JSON.parse(localStorage.getItem("userDetails"))
-    : null;
 
   useEffect(() => {
     async function fetchCareplans() {
@@ -59,7 +56,7 @@ function Careplan() {
 
   return (
     <div style={{ display: "flex" }}>
-      <Sidebar userType={getUserfromLocalStorage.userType} />
+      <Sidebar />
       <div style={{ flex: 1 }}>
         <Navbar />
         <Container style={{ padding: "20px" }}>
@@ -179,7 +176,7 @@ export default Careplan;
 
 //   return (
 //     <div style={{ display: "flex" }}>
-//       <Sidebar userType={getUserfromLocalStorage.userType} />
+//       <Sidebar />
 //       <div style={{ flex: 1 }}>
 //         <Navbar />
 //         <Container style={{ padding: "20px" }}>

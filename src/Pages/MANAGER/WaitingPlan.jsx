@@ -34,12 +34,9 @@ const WaitingPlan = () => {
         }
     }
 
-    const getUserfromLocalStorage = localStorage.getItem("userDetails")
-    ? JSON.parse(localStorage.getItem("userDetails"))
-    : null;
   return (
     <div style={{ display: "flex" }}>
-      <Sidebar userType={getUserfromLocalStorage?.userType} />
+      <Sidebar />
       <div style={{ flex: 1 }}>
         <WaitingPlanTable fetchPendingTasks={fetchAssignedAndRejectedTasks} reservationResult={assignedPendngRequirments}/>
         {/* <NavbarComponent /> */}

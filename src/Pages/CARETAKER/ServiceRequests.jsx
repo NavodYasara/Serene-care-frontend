@@ -112,7 +112,7 @@ const ServiceRequests = () => {
 
   return (
     <Box sx={{ display: "flex", bgcolor: "#f4f7fe", minHeight: "100vh" }}>
-      <Sidebar userType={user.userType} />
+      <Sidebar />
       <Box component="main" sx={{ flexGrow: 1, p: 4 }}>
         <Container maxWidth="md">
           {/* Header Section */}
