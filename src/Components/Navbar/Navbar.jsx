@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import Button from 'react-bootstrap/Button';
-import img1 from '../../Assets/img1.png';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { AppBar, Toolbar, Container, Typography, Box, Button, IconButton, Menu, MenuItem } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import { useNavigate } from "react-router-dom";
+import img1 from "../../Assets/img1.png";
 
 function NavbarComponent() {
   const [user, setUser] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const navigate = useNavigate();
+
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   useEffect(() => {
     const userDetails = localStorage.getItem("userDetails");
@@ -17,9 +18,18 @@ function NavbarComponent() {
     }
   }, []);
 
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
+
+  const handleMobileMenuOpen = (event) => {
+    setMobileMoreAnchorEl(event.currentTarget);
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("userDetails");
     setUser(null);
+    handleMobileMenuClose();
     navigate("/Login");
   };
 
@@ -33,56 +43,170 @@ function NavbarComponent() {
     return "/Login";
   };
 
+  const navItemStyle = {
+    color: "#2D3748",
+    fontWeight: 600,
+    textTransform: "none",
+    fontSize: "1.05rem",
+    mx: 1.5,
+    "&:hover": {
+      color: "#2E8B57",
+      backgroundColor: "transparent",
+    }
+  };
+
+  const mobileMenuId = 'primary-search-account-menu-mobile';
+  
   return (
-    <Navbar expand="lg" className="bg-body-tertiary shadow-sm" sticky="top">
-      <Container>
-        <Navbar.Brand onClick={() => navigate("/")} style={{ cursor: 'pointer' }}>
-          <img
-            alt="LOGO"
-            src={img1}
-            width="35"
-            height="35"
-            className="d-inline-block align-top"
-          />
-          <span className="ms-2 fw-bold" style={{ color: '#1e3c72' }}>Serene Care</span>
-        </Navbar.Brand>
-        
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto align-items-center">
-            <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
+    <AppBar 
+      position="sticky" 
+      sx={{ 
+        backgroundColor: "rgba(255, 255, 255, 0.85)", 
+        backdropFilter: "blur(12px)",
+        boxShadow: "0 4px 20px -2px rgba(0, 0, 0, 0.05)",
+        color: "#1A202C",
+        borderBottom: "1px solid rgba(0,0,0,0.05)"
+      }}
+    >
+      <Container maxWidth="xl">
+        <Toolbar disableGutters sx={{ minHeight: "80px" }}>
+          {/* Logo Section */}
+          <Box 
+            onClick={() => navigate("/")} 
+            sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer', flexGrow: { xs: 1, md: 0 }, mr: 4 }}
+          >
+            <Box
+              component="img"
+              src={img1}
+              alt="Serene Care Logo"
+              sx={{ height: 44, width: 44, mr: 2 }}
+            />
+            <Typography
+              variant="h5"
+              noWrap
+              sx={{
+                fontWeight: 800,
+                letterSpacing: '-0.5px',
+                color: '#2E8B57',
+              }}
+            >
+              Serene Care
+            </Typography>
+          </Box>
+
+          {/* Desktop Navigation */}
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end', alignItems: 'center' }}>
+            <Button onClick={() => navigate("/")} sx={navItemStyle}>
+              Home
+            </Button>
             
             {user ? (
               <>
-                <Nav.Link onClick={() => navigate(getDashboardPath())}>Dashboard</Nav.Link>
+                <Button onClick={() => navigate(getDashboardPath())} sx={navItemStyle}>
+                  Dashboard
+                </Button>
                 <Button 
-                  variant="outline-danger" 
-                  size="sm" 
-                  className="ms-lg-3 mt-2 mt-lg-0 px-3"
+                  variant="outlined" 
                   onClick={handleLogout}
+                  sx={{ 
+                    ml: 3, 
+                    color: "#E53E3E", 
+                    borderColor: "rgba(229, 62, 62, 0.5)",
+                    borderRadius: "30px",
+                    px: 3,
+                    py: 1,
+                    textTransform: "none",
+                    fontWeight: 600,
+                    "&:hover": {
+                      backgroundColor: "rgba(229, 62, 62, 0.04)",
+                      borderColor: "#C53030"
+                    }
+                  }}
                 >
                   Logout
                 </Button>
               </>
             ) : (
-              <>
-                <Nav.Link onClick={() => navigate("/Register?type=caretaker")}>Get Service</Nav.Link>
-                <Nav.Link onClick={() => navigate("/Register?type=caregiver")}>Join as Caregiver</Nav.Link>
-                <Button 
-                  variant="outline-secondary" 
-                  size="sm" 
-                  className="ms-lg-3 px-3"
-                  onClick={() => navigate("/Login")}
-                >
-                  Admin Login
-                </Button>
-               
-              </>
+              <Button 
+                variant="contained" 
+                onClick={() => navigate("/Login")}
+                sx={{ 
+                  ml: 3, 
+                  backgroundColor: "#2E8B57",
+                  color: "white",
+                  borderRadius: "30px",
+                  px: 4,
+                  py: 1,
+                  fontSize: "1.05rem",
+                  textTransform: "none",
+                  fontWeight: 600,
+                  boxShadow: "none",
+                  "&:hover": {
+                    backgroundColor: "#246e45",
+                    boxShadow: "0 4px 10px -1px rgba(46, 139, 87, 0.4)"
+                  }
+                }}
+              >
+                Login
+              </Button>
             )}
-          </Nav>
-        </Navbar.Collapse>
+          </Box>
+
+          {/* Mobile Menu Icon */}
+          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+          </Box>
+        </Toolbar>
       </Container>
-    </Navbar>
+      
+      {/* Mobile Menu Dropdown */}
+      <Menu
+        anchorEl={mobileMoreAnchorEl}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        id={mobileMenuId}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={isMobileMenuOpen}
+        onClose={handleMobileMenuClose}
+        PaperProps={{
+          sx: { width: 250, mt: 1.5, borderRadius: 3, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }
+        }}
+      >
+        <MenuItem onClick={() => { navigate("/"); handleMobileMenuClose(); }} sx={{ py: 1.5 }}>
+          <Typography textAlign="center" fontWeight={600} color="#2D3748">Home</Typography>
+        </MenuItem>
+        
+        {user ? (
+          [
+            <MenuItem key="dashboard" onClick={() => { navigate(getDashboardPath()); handleMobileMenuClose(); }} sx={{ py: 1.5 }}>
+              <Typography textAlign="center" fontWeight={600} color="#2D3748">Dashboard</Typography>
+            </MenuItem>,
+            <MenuItem key="logout" onClick={handleLogout} sx={{ py: 1.5 }}>
+              <Typography textAlign="center" fontWeight={600} color="#E53E3E">Logout</Typography>
+            </MenuItem>
+          ]
+        ) : (
+          <MenuItem onClick={() => { navigate("/Login"); handleMobileMenuClose(); }} sx={{ py: 1.5 }}>
+            <Typography textAlign="center" fontWeight={600} color="#2E8B57">Login</Typography>
+          </MenuItem>
+        )}
+      </Menu>
+    </AppBar>
   );
 }
 

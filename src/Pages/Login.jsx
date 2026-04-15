@@ -8,9 +8,10 @@ import {
   Alert,
   Box,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../Components/Navbar/Navbar";
+import { useAuth } from "../auth/AuthContext";
 
 function Login() {
   const [userName, setUsername] = useState("");
@@ -18,6 +19,18 @@ function Login() {
   const [error, setError] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const navigate = useNavigate();
+  const { login, isAuthenticated, userType, loading } = useAuth();
+
+  // Already logged in → skip the login page entirely
+  if (!loading && isAuthenticated) {
+    const dashboardMap = {
+      admin:     "/AdminDashboard",
+      caregiver: "/CaregiverDashboard",
+      caretaker: "/CaretakerDashboard",
+      manager:   "/ManagerDashboard",
+    };
+    return <Navigate to={dashboardMap[userType] || "/"} replace />;
+  }
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -36,11 +49,10 @@ function Login() {
       });
 
       if (response.status === 200) {
-        const userType = response.data.userType;
-        localStorage.setItem(
-          "userDetails",
-          JSON.stringify(response.data.userDetails)
-        );
+        const { userType, userDetails } = response.data;
+
+        // Persist auth state via context (also writes to localStorage)
+        login(userDetails, userType);
 
         switch (userType) {
           case "caretaker":
@@ -64,8 +76,8 @@ function Login() {
         setError("Invalid login credentials.");
         setOpenSnackbar(true);
       }
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err);
       setError("An error occurred while logging in.");
       setOpenSnackbar(true);
     }

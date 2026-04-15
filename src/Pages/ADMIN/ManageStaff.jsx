@@ -6,14 +6,9 @@ import Navbar from "../../Components/Navbar/Navbar";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const ManageStaff = () => {
-
-  const getUserfromLocalStorage = localStorage.getItem("userDetails")
-    ? JSON.parse(localStorage.getItem("userDetails"))
-    : null;
-
   return (
     <div style={{ display: "flex" }}>
-      <Sidebar userType={getUserfromLocalStorage.userType} />
+      <Sidebar />
       <div className="manage-staff" style={{ flex: 1 }}>
         <Navbar />
         <div className="container">

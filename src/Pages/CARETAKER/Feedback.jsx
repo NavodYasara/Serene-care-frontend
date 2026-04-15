@@ -104,7 +104,7 @@ const AddFeedbackPage = () => {
 
   return (
     <div style={{ display: "flex" }}>
-      <Sidebar userType={getUserFromLocalStorage.userType} />
+      <Sidebar />
       <div style={{ flex: 1 }}>
         <Navbar />
         <div className="mgd-main" style={{ padding: "20px" }}>

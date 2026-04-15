@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   CDBSidebar,
   CDBSidebarContent,
@@ -8,16 +8,18 @@ import {
   CDBSidebarMenuItem,
 } from "cdbreact";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../auth/AuthContext";
 
-const Sidebar = ({ userType }) => {
+const Sidebar = () => {
+  const { userType, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("userDetails");
+    logout();           // clears context state + localStorage
     navigate("/Login");
   };
 
-  const getSidebarMenu = (userType) => {
+  const getSidebarMenu = () => {
     switch (userType) {
       case "admin":
         return (
@@ -26,136 +28,95 @@ const Sidebar = ({ userType }) => {
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/ManageStaff" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">
-                {" "}
-                Manage Staff{" "}
-              </CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="table">Manage Staff</CDBSidebarMenuItem>
             </NavLink>
           </>
         );
+
       case "caregiver":
         return (
-          <div>
-            <NavLink
-              exact
-              to="/CaregiverDashboard"
-              activeClassName="activeClicked"
-            >
-              <CDBSidebarMenuItem icon="columns">
-                Caregiver Dashboard
-              </CDBSidebarMenuItem>
+          <>
+            <NavLink exact to="/CaregiverDashboard" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink
-              exact
-              to="/CaregiverProfile"
-              activeClassName="activeClicked"
-            >
-              <CDBSidebarMenuItem icon="user">
-                Caregiver Profile
-              </CDBSidebarMenuItem>
+            <NavLink exact to="/CaregiverProfile" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="user">My Profile</CDBSidebarMenuItem>
             </NavLink>
-          </div>
+          </>
         );
+
       case "caretaker":
         return (
           <>
-            <NavLink
-              exact
-              to="/CaretakerDashboard"
-              activeClassName="activeClicked"
-            >
-              <CDBSidebarMenuItem icon="user">
-                Caretaker Dashboard{" "}
-              </CDBSidebarMenuItem>
+            <NavLink exact to="/CaretakerDashboard" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/ServiceRequests" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">
-                {" "}
-                Service Requests{" "}
-              </CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="concierge-bell">Service Requests</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/Feedback" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="columns">
-                {" "}
-                Feedbacks{" "}
-              </CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="comment-dots">Feedbacks</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/Report" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line">Reports</CDBSidebarMenuItem>
             </NavLink>
+            <NavLink exact to="/Payment" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="credit-card">Payment</CDBSidebarMenuItem>
+            </NavLink>
           </>
         );
+
       case "manager":
         return (
           <>
-            <NavLink
-              exact
-              to="/ManagerDashboard"
-              activeClassName="activeClicked"
-            >
+            <NavLink exact to="/ManagerDashboard" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/newTask" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="columns">New Plan</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="plus-circle">New Plan</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/waitingPlan" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="columns">
-                Assigned Plan
-              </CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="clock">Assigned Plans</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/Finalized" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="columns">
-                Finalized Plan
-              </CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="check-circle">Finalized Plans</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/Careplan" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">
-                {" "}
-                Create CarePlan{" "}
-              </CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="table">Create Care Plan</CDBSidebarMenuItem>
             </NavLink>
           </>
         );
+
       default:
         return null;
     }
   };
 
+  const roleLabel = {
+    admin:     "Admin Panel",
+    caregiver: "Caregiver Panel",
+    caretaker: "Patient Panel",
+    manager:   "Manager Panel",
+  };
+
   return (
     <div className="sidebar-container">
-      <div
-        style={{ display: "flex", height: "100vh", overflow: "scroll initial" }}
-      >
+      <div style={{ display: "flex", height: "100vh", overflow: "scroll initial" }}>
         <CDBSidebar textColor="#fff" backgroundColor="#333">
-          <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
-            <a
-              href
-              className="text-decoration-none"
-              style={{ color: "inherit" }}
-            >
-              Sidebar({userType})
+          <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large" />}>
+            <a href="/" className="text-decoration-none" style={{ color: "inherit" }}>
+              {roleLabel[userType] || "Serene Care"}
             </a>
           </CDBSidebarHeader>
 
           <CDBSidebarContent className="sidebar-content">
-            <CDBSidebarMenu>{getSidebarMenu(userType)}</CDBSidebarMenu>
+            <CDBSidebarMenu>{getSidebarMenu()}</CDBSidebarMenu>
           </CDBSidebarContent>
 
           <CDBSidebarFooter style={{ textAlign: "center" }}>
-            <div
-              style={{
-                padding: "20px 5px",
-              }}
-            >
-              <div
-                onClick={handleLogout}
-                style={{
-                  cursor: "pointer",
-                }}
-              >
-                <CDBSidebarMenuItem icon="sign-out-alt">
-                  Logout
-                </CDBSidebarMenuItem>
+            <div style={{ padding: "20px 5px" }}>
+              <div onClick={handleLogout} style={{ cursor: "pointer" }}>
+                <CDBSidebarMenuItem icon="sign-out-alt">Logout</CDBSidebarMenuItem>
               </div>
             </div>
           </CDBSidebarFooter>

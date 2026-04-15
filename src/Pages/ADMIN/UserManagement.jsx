@@ -5,13 +5,10 @@ import Navbar from "../Components/Navbar/Navbar";
 
 const Layout2 = () => {
   
-  const getUserfromLocalStorage = localStorage.getItem("userDetails")
-    ? JSON.parse(localStorage.getItem("userDetails"))
-    : null;
 
   return (
     <div style={{ display: "flex" }}>
-      <Sidebar userType={getUserfromLocalStorage.userType} />
+      <Sidebar />
       <div style={{ flex: 1 }}>
         <Navbar />
         <div className="mgd-main" style={{ padding: "20px" }}>

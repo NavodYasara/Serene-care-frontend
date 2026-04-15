@@ -3,48 +3,35 @@ import Navbar from "../Components/Navbar/Navbar";
 import "../App.css";
 import Sidebar from "../Components/Sidebar";
 
-function Layout() {
-  
+function Layout({ children }) {
   const [isFixed, setIsFixed] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     function handleScroll() {
-      if (window.scrollY >= 100) {
-        setIsFixed(true);
-      } else {
-        setIsFixed(false);
-      }
+      setIsFixed(window.scrollY >= 100);
     }
-
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   function toggleSidebar() {
-    setIsSidebarOpen(!isSidebarOpen);
+    setIsSidebarOpen((prev) => !prev);
   }
 
   return (
     <>
       <div className="main">
-        <div className={`navbar-part ${isFixed ? 'fixed' : ''}`}>
-          <Navbar/>
+        <div className={`navbar-part ${isFixed ? "fixed" : ""}`}>
+          <Navbar onMenuClick={toggleSidebar} />
         </div>
         <div className="row page-part">
-          <div className={`col-2 sidebar-part ${isSidebarOpen ? 'open' : ''}`}>
-            <Sidebar/>
+          <div className={`col-2 sidebar-part ${isSidebarOpen ? "open" : ""}`}>
+            {/* Sidebar reads userType from AuthContext — no prop needed */}
+            <Sidebar />
           </div>
           <div className="col-10 content-part">
-            {/* Content goes here */}
-            
-            <div style={{ height: "2000px", overflow: "auto", padding: "20px" }}>
-             
-
-            </div>
+            {children}
           </div>
         </div>
       </div>
