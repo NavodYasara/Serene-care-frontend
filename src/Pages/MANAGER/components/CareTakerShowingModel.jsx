@@ -1,12 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { Modal, message, Row, Col, Typography } from 'antd';
-import { UserOutlined, PhoneOutlined, HomeOutlined, IdcardOutlined, CalendarOutlined, SafetyOutlined } from '@ant-design/icons';
-import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useEffect, useState } from "react";
+import { Modal, message, Row, Col, Typography } from "antd";
+import {
+  UserOutlined,
+  PhoneOutlined,
+  HomeOutlined,
+  IdcardOutlined,
+  CalendarOutlined,
+  SafetyOutlined,
+} from "@ant-design/icons";
+import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const { Title, Text } = Typography;
 
-const CareTakerShowingModel = ({ careTakerShowingModelOpen, setCareTakerShowingModelOpen, selectedCareTaker }) => {
+const CareTakerShowingModel = ({
+  careTakerShowingModelOpen,
+  setCareTakerShowingModelOpen,
+  selectedCareTaker,
+}) => {
   const [careTakerDetails, setCareTakerDetails] = useState(null);
 
   useEffect(() => {
@@ -17,7 +28,9 @@ const CareTakerShowingModel = ({ careTakerShowingModelOpen, setCareTakerShowingM
 
   const getCareTakerDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/manager/getCaretakerById/${selectedCareTaker}`);
+      const response = await axios.get(
+        `http://localhost:5000/api/manager/getCaretakerById/${selectedCareTaker}`,
+      );
       setCareTakerDetails(response.data);
     } catch (error) {
       message.error("Error fetching caretaker details!");
@@ -44,46 +57,64 @@ const CareTakerShowingModel = ({ careTakerShowingModelOpen, setCareTakerShowingM
         <div className="container">
           <Row gutter={[16, 16]} className="mb-2">
             <Col span={24}>
-              <Title level={4}><UserOutlined /> Care Taker Information</Title>
+              <Title level={4}>
+                <UserOutlined /> Care Taker Information
+              </Title>
             </Col>
           </Row>
           <Row gutter={[16, 16]} className="mb-2">
             <Col span={12}>
-              <Text strong><UserOutlined /> Name: </Text>
+              <Text strong>
+                <UserOutlined /> Name:{" "}
+              </Text>
               <Text>{`${careTakerDetails.firstName} ${careTakerDetails.lastName}`}</Text>
             </Col>
             <Col span={12}>
-              <Text strong><PhoneOutlined /> Mobile No: </Text>
+              <Text strong>
+                <PhoneOutlined /> Mobile No:{" "}
+              </Text>
               <Text>{careTakerDetails.mobileNo}</Text>
             </Col>
           </Row>
           <Row gutter={[16, 16]} className="mb-2">
             <Col span={12}>
-              <Text strong><HomeOutlined /> Address: </Text>
+              <Text strong>
+                <HomeOutlined /> Address:{" "}
+              </Text>
               <Text>{careTakerDetails.address}</Text>
             </Col>
             <Col span={12}>
-              <Text strong><IdcardOutlined /> National ID: </Text>
+              <Text strong>
+                <IdcardOutlined /> National ID:{" "}
+              </Text>
               <Text>{careTakerDetails.nationalId}</Text>
             </Col>
           </Row>
           <Row gutter={[16, 16]} className="mb-2">
             <Col span={12}>
-              <Text strong><CalendarOutlined /> Date of Birth: </Text>
+              <Text strong>
+                <CalendarOutlined /> Date of Birth:{" "}
+              </Text>
               <Text>{new Date(careTakerDetails.dob).toLocaleDateString()}</Text>
             </Col>
             <Col span={12}>
-              <Text strong><SafetyOutlined /> Medical Condition: </Text>
-              <Text>{careTakerDetails.mediCondition}</Text>
+              <Text strong>
+                <SafetyOutlined /> Medical Condition:{" "}
+              </Text>
+              <Text>{careTakerDetails.mediCon}</Text>
             </Col>
           </Row>
           <Row gutter={[16, 16]} className="mb-2">
             <Col span={12}>
-              <Text strong><UserOutlined /> Category: </Text>
+              <Text strong>
+                <UserOutlined /> Category:{" "}
+              </Text>
               <Text>{careTakerDetails.category}</Text>
             </Col>
             <Col span={12}>
-              <Text strong><PhoneOutlined /> Emergency Contact: </Text>
+              <Text strong>
+                <PhoneOutlined /> Emergency Contact:{" "}
+              </Text>
               <Text>{careTakerDetails.emergCont}</Text>
             </Col>
           </Row>

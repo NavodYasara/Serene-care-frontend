@@ -8,8 +8,8 @@ import {
   Card,
   CardContent,
 } from "@mui/material";
-import Sidebar from '../../../components/Sidebar/Sidebar';
-import Navbar from '../../../components/Navbar/Navbar';
+import Sidebar from "../../../components/Sidebar/Sidebar";
+import Navbar from "../../../components/Navbar/Navbar";
 import axios from "axios";
 
 const DateCalendarValue = () => {
@@ -25,7 +25,7 @@ const DateCalendarValue = () => {
     try {
       const userID = JSON.parse(localStorage.getItem("userDetails"))?.userId;
       const response = await axios.get(
-        `http://localhost:5000/api/caregiver/assignedcaretakers?caregiverId=${userID}`
+        `http://localhost:5000/api/caregiver/assignedcaretakers?caregiverId=${userID}`,
       );
 
       setCaretakers(response.data);
@@ -38,7 +38,7 @@ const DateCalendarValue = () => {
   const fetchRequirements = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/caregiver/getAllRequirements"
+        "http://localhost:5000/api/caregiver/getAllRequirements",
       );
       console.log(response.data);
       setRequirements(response.data);
@@ -57,7 +57,7 @@ const DateCalendarValue = () => {
       console.log("statusData", statusData);
       const response = await axios.patch(
         `http://localhost:5000/api/caregiver/acceptrequest`,
-        statusData
+        statusData,
       );
       if (response.status === 200) {
         fetchCaretakers();
@@ -72,7 +72,7 @@ const DateCalendarValue = () => {
         console.log("Request accepted");
       } else {
         console.error(
-          `Error accepting request for caretaker with ID ${requirmentID}`
+          `Error accepting request for caretaker with ID ${requirmentID}`,
         );
       }
     } catch (error) {
@@ -83,19 +83,19 @@ const DateCalendarValue = () => {
   const handleRejectRequest = async (caretakerId) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/caregiver/rejectrequest/${caretakerId}`
+        `http://localhost:5000/api/caregiver/rejectrequest/${caretakerId}`,
       );
       if (response.status === 200) {
         setCaretakers((prevCaretakers) =>
           prevCaretakers.map((caretaker) =>
             caretaker.caretakerId === caretakerId
               ? { ...caretaker, status: "Rejected" }
-              : caretaker
-          )
+              : caretaker,
+          ),
         );
       } else {
         console.error(
-          `Error rejecting request for caretaker with ID ${caretakerId}`
+          `Error rejecting request for caretaker with ID ${caretakerId}`,
         );
       }
     } catch (error) {
@@ -127,7 +127,7 @@ const DateCalendarValue = () => {
             ) : (
               caretakers.map((caretaker) => {
                 const requirement = requirements.find(
-                  (req) => req.caretakerId === caretaker.caretakerId
+                  (req) => req.caretakerId === caretaker.caretakerId,
                 );
 
                 return (
@@ -153,7 +153,7 @@ const DateCalendarValue = () => {
                             Emergency Contact: {caretaker.emergCont}
                           </Typography>
                           <Typography variant="body2">
-                            Medical Condition: {caretaker.mediCondition}
+                            Medical Condition: {caretaker.mediCon}
                           </Typography>
                           <Typography variant="body2">
                             Category:{" "}
@@ -180,7 +180,7 @@ const DateCalendarValue = () => {
                                 onClick={() =>
                                   handleAcceptRequest(
                                     requirement?.requirementId,
-                                    "Accepted"
+                                    "Accepted",
                                   )
                                 }
                                 sx={{ mt: 1, mr: 1 }}
@@ -209,7 +209,7 @@ const DateCalendarValue = () => {
                                   onClick={() =>
                                     handleAcceptRequest(
                                       requirement?.requirementId,
-                                      "Finished"
+                                      "Finished",
                                     )
                                   }
                                 >
@@ -220,7 +220,7 @@ const DateCalendarValue = () => {
                                   onClick={() =>
                                     handleAcceptRequest(
                                       requirement?.requirementId,
-                                      "Started"
+                                      "Started",
                                     )
                                   }
                                 >
@@ -231,7 +231,7 @@ const DateCalendarValue = () => {
                                   onClick={() =>
                                     handleAcceptRequest(
                                       requirement?.requirementId,
-                                      "Finished"
+                                      "Finished",
                                     )
                                   }
                                 >

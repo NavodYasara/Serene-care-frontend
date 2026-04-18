@@ -50,7 +50,7 @@ const CaretakerDashboard = () => {
     mobileNo: "",
     dob: "",
     address: "",
-    mediCondition: "",
+    mediCon: "",
     emergCont: "",
     category: "",
   });
@@ -404,7 +404,7 @@ const CaretakerDashboard = () => {
                         <InfoRow
                           icon={MedicalServicesIcon}
                           label="Medical Condition"
-                          value={profileData.mediCondition}
+                          value={profileData.mediCon}
                         />
                         <InfoRow
                           icon={ContactPhoneIcon}
@@ -739,8 +739,8 @@ const CaretakerDashboard = () => {
                   <Grid item xs={12}>
                     <TextField
                       label="Medical Conditions or Notes"
-                      name="mediCondition"
-                      value={profileData.mediCondition || ""}
+                      name="mediCon"
+                      value={profileData.mediCon || ""}
                       onChange={handleChange}
                       fullWidth
                       multiline
