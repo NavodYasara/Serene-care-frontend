@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Sidebar from '../../../components/Sidebar/Sidebar';
-import { useAuth } from '../../../context/AuthContext';
+import Sidebar from "../../../components/Sidebar/Sidebar";
+import { useAuth } from "../../../context/AuthContext";
 import {
   Container,
   Grid,
@@ -14,7 +14,6 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogTitle,
   TextField,
   Select,
   MenuItem,
