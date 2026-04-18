@@ -1,4 +1,3 @@
-import React from "react";
 import Sidebar from '../../../components/Sidebar/Sidebar';
 import { Container, Typography, Grid, Paper } from "@mui/material";
 import Navbar from '../../../components/Navbar/Navbar';
