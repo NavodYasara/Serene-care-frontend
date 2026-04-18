@@ -7,10 +7,10 @@ import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute   from "./routes/ProtectedRoute";
 
 // Public pages
-import Home        from "./pages/Home/Home";
-import Register    from "./pages/Register/Register";
-import Login       from "./pages/Login/Login";
-import Unauthorized from "./pages/Unauthorized/Unauthorized";
+import Home        from "./pages/Home/Home.jsx";
+import Register    from "./pages/Register/Register.jsx";
+import Login       from "./pages/Login/Login.jsx";
+import Unauthorized from "./pages/Unauthorized/Unauthorized.jsx";
 
 // Layouts (kept for reference / legacy routes)
 import Layout2 from "./layouts/Layout2";
