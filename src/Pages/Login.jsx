@@ -14,7 +14,7 @@ import Navbar from "../Components/Navbar/Navbar";
 import { useAuth } from "../auth/AuthContext";
 
 function Login() {
-  const [userName, setUsername] = useState("");
+  const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -24,10 +24,10 @@ function Login() {
   // Already logged in → skip the login page entirely
   if (!loading && isAuthenticated) {
     const dashboardMap = {
-      admin:     "/AdminDashboard",
+      admin: "/AdminDashboard",
       caregiver: "/CaregiverDashboard",
       caretaker: "/CaretakerDashboard",
-      manager:   "/ManagerDashboard",
+      manager: "/ManagerDashboard",
     };
     return <Navigate to={dashboardMap[userType] || "/"} replace />;
   }
@@ -36,15 +36,15 @@ function Login() {
     event.preventDefault();
 
     // Basic validation
-    if (!userName || !password) {
-      setError("Please enter both username and password.");
+    if (!email || !password) {
+      setError("Please enter both email and password.");
       setOpenSnackbar(true);
       return;
     }
 
     try {
       const response = await axios.post("/api/user/login", {
-        userName,
+        email,
         password,
       });
 
@@ -110,9 +110,9 @@ function Login() {
               required
               fullWidth
               label="User Name"
-              name="userName"
-              value={userName}
-              onChange={(e) => setUsername(e.target.value)}
+              name="email"
+              value={email}
+              onChange={(e) => setemail(e.target.value)}
             />
             <TextField
               margin="normal"
@@ -162,7 +162,7 @@ export default Login;
 // import Navbar from "../Components/Navbar/Navbar";
 
 // function Login() {
-//   const [userName, setUsername] = useState("");
+//   const [email, setemail] = useState("");
 //   const [password, setPassword] = useState("");
 //   const [error, setError] = useState("");
 //   const navigate = useNavigate();
@@ -172,10 +172,10 @@ export default Login;
 
 //     try {
 
-//       console.log(userName);
+//       console.log(email);
 
 //       const response = await axios.post("/api/user/login", {
-//         userName,
+//         email,
 //         password,
 //       });
 
@@ -229,9 +229,9 @@ export default Login;
 //                   <Form.Label>User Name</Form.Label>
 //                   <Form.Control
 //                     type="text"
-//                     placeholder="Enter your username"
-//                     value={userName}
-//                     onChange={(e) => setUsername(e.target.value)}
+//                     placeholder="Enter your email"
+//                     value={email}
+//                     onChange={(e) => setemail(e.target.value)}
 //                   />
 //                 </Form.Group>
 //                 <Form.Group className="mb-4">

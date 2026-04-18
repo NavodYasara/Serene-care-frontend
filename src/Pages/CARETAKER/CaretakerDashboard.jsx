@@ -186,7 +186,7 @@ const CaretakerDashboard = () => {
                   Welcome back,{" "}
                   {profileData.firstName ||
                     user.firstName ||
-                    user.userName ||
+                    user.email ||
                     "Guest"}
                   !
                 </Typography>
@@ -241,7 +241,7 @@ const CaretakerDashboard = () => {
                       }}
                     >
                       {profileData.firstName?.charAt(0) ||
-                        user.userName?.charAt(0) ||
+                        user.email?.charAt(0) ||
                         "U"}
                     </Avatar>
                     <Typography variant="h5" fontWeight="bold">
