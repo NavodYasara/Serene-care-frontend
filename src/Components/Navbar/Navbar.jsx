@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { AppBar, Toolbar, Container, Typography, Box, Button, IconButton, Menu, MenuItem } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import img1 from "../../Assets/img1.png";
 
 function NavbarComponent() {
   const [user, setUser] = useState(null);
+  const location = useLocation();
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const navigate = useNavigate();
+
+  const hideLoginPath = ["/Login"]
+  const isLoginPage = hideLoginPath.includes(location.pathname);
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -17,6 +21,8 @@ function NavbarComponent() {
       setUser(JSON.parse(userDetails));
     }
   }, []);
+
+
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -126,7 +132,7 @@ function NavbarComponent() {
                   Logout
                 </Button>
               </>
-            ) : (
+            ) : !isLoginPage && (
               <Button 
                 variant="contained" 
                 onClick={() => navigate("/Login")}
