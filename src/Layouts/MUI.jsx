@@ -32,7 +32,7 @@ import {
 } from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import axios from "axios";
-import Navbar from "../Components/Navbar/Navbar";
+import Navbar from '../components/Navbar/Navbar';
 
 const drawerWidth = 240;
 

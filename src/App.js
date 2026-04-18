@@ -3,40 +3,40 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 // Auth
-import { AuthProvider } from "./auth/AuthContext";
-import ProtectedRoute   from "./auth/ProtectedRoute";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute   from "./routes/ProtectedRoute";
 
 // Public pages
-import Home        from "./Pages/Home";
-import Register    from "./Pages/Register";
-import Login       from "./Pages/Login";
-import Unauthorized from "./Pages/Unauthorized";
+import Home        from "./pages/Home/Home.jsx";
+import Register    from "./pages/Register/Register.jsx";
+import Login       from "./pages/Login/Login.jsx";
+import Unauthorized from "./pages/Unauthorized/Unauthorized.jsx";
 
 // Layouts (kept for reference / legacy routes)
-import Layout2 from "./Layouts/Layout2";
-import MUI     from "./Layouts/MUI";
+import Layout2 from "./layouts/Layout2";
+import MUI     from "./layouts/MUI";
 
 // ── ADMIN pages ──────────────────────────────────────────────────────────────
-import AdminDashboard from "./Pages/ADMIN/AdminDashboard";
-import ManageStaff    from "./Pages/ADMIN/ManageStaff";
+import AdminDashboard from "./pages/admin/Dashboard/AdminDashboard";
+import ManageStaff    from "./pages/admin/ManageStaff/ManageStaff";
 
 // ── CAREGIVER pages ───────────────────────────────────────────────────────────
-import CaregiverDashboard from "./Pages/CAREGIVER/CaregiverDashboard";
-import CaregiverProfile   from "./Pages/CAREGIVER/CaregiverProfile";
+import CaregiverDashboard from "./pages/caregiver/Dashboard/CaregiverDashboard";
+import CaregiverProfile   from "./pages/caregiver/Profile/CaregiverProfile";
 
 // ── CARETAKER (patient) pages ─────────────────────────────────────────────────
-import CaretakerDashboard from "./Pages/CARETAKER/CaretakerDashboard";
-import Report             from "./Pages/CARETAKER/Report";
-import ServiceRequests    from "./Pages/CARETAKER/ServiceRequests";
-import Payment            from "./Pages/CARETAKER/Payment";
-import Feedback           from "./Pages/CARETAKER/Feedback";
+import CaretakerDashboard from "./pages/caretaker/Dashboard/CaretakerDashboard";
+import Report             from "./pages/caretaker/Report/Report";
+import ServiceRequests    from "./pages/caretaker/ServiceRequests/ServiceRequests";
+import Payment            from "./pages/caretaker/Payment/Payment";
+import Feedback           from "./pages/caretaker/Feedback/Feedback";
 
 // ── MANAGER pages ─────────────────────────────────────────────────────────────
-import ManagerDashboard from "./Pages/MANAGER/ManagerDashboard";
-import Careplan         from "./Pages/MANAGER/Careplan";
-import NewPlan          from "./Pages/MANAGER/NewPlan";
-import WaitingPlan      from "./Pages/MANAGER/WaitingPlan";
-import AcceptedPlan     from "./Pages/MANAGER/AcceptedPlan";
+import ManagerDashboard from "./pages/manager/Dashboard/ManagerDashboard";
+import Careplan         from "./pages/manager/Careplan/Careplan";
+import NewPlan          from "./pages/manager/NewPlan/NewPlan";
+import WaitingPlan      from "./pages/manager/WaitingPlan/WaitingPlan";
+import AcceptedPlan     from "./pages/manager/AcceptedPlan/AcceptedPlan";
 
 function App() {
   return (
