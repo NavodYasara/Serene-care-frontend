@@ -21,7 +21,7 @@ const Register = () => {
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
-    userName: "",
+    email: "",
     password: "",
     confPassword: "",
     mobileNo: "",
@@ -49,7 +49,7 @@ const Register = () => {
 
     // Basic validations
     if (
-      form.userName === "" ||
+      form.email === "" ||
       form.password === "" ||
       form.confPassword === "" ||
       form.mobileNo === "" ||
@@ -91,12 +91,10 @@ const Register = () => {
           setError("Bad request. Please check your inputs and try again.");
         } else if (error.response.status === 401) {
           setError(
-            "Unauthorized. Please check your credentials and try again."
+            "Unauthorized. Please check your credentials and try again.",
           );
         } else if (error.response.status === 409) {
-          setError(
-            "Username already exists. Please choose a different username."
-          );
+          setError("email already exists. Please choose a different email.");
         } else {
           setError("An error occurred. Please try again later.");
         }
@@ -122,7 +120,11 @@ const Register = () => {
           <Card>
             <Box p={3}>
               <Box mb={4} textAlign="center">
-                <h3>Register as {form.usertype.charAt(0).toUpperCase() + form.usertype.slice(1)}</h3>
+                <h3>
+                  Register as{" "}
+                  {form.usertype.charAt(0).toUpperCase() +
+                    form.usertype.slice(1)}
+                </h3>
               </Box>
               <form onSubmit={handleSubmit}>
                 <Grid container spacing={2}>
@@ -154,8 +156,8 @@ const Register = () => {
                       required
                       fullWidth
                       label="User Name"
-                      name="userName"
-                      value={form.userName}
+                      name="email"
+                      value={form.email}
                       onChange={handleChange}
                     />
                   </Grid>
@@ -262,7 +264,7 @@ export default Register;
 //   const [form, setForm] = useState({
 //     firstName: "",
 //     lastName: "",
-//     userName: "",
+//     email: "",
 //     password: "",
 //     confPassword: "",
 //     mobileNo: "",
@@ -286,7 +288,7 @@ export default Register;
 //   const handleSubmit = async (e) => {
 //     e.preventDefault();
 //     if (
-//       form.userName === "" ||
+//       form.email === "" ||
 //       form.password === "" ||
 //       form.confPassword === "" ||
 //       form.mobileNo === "" ||
@@ -317,7 +319,7 @@ export default Register;
 //         } else if (error.response.status === 401) {
 //           setError("Unauthorized. Please check your credentials and try again.");
 //         } else if (error.response.status === 409) {
-//           setError("Username already exists. Please choose a different username.");
+//           setError("email already exists. Please choose a different email.");
 //         } else {
 //           setError("An error occurred. Please try again later.");
 //         }
@@ -368,7 +370,7 @@ export default Register;
 //                     <Form.Control
 //                       type="text"
 //                       placeholder="Enter your user name"
-//                       name="userName"
+//                       name="email"
 //                       onChange={handleChange}
 //                     />
 //                   </Form.Group>

@@ -34,22 +34,25 @@ const AddFeedbackPage = () => {
     fetchCaregivers();
   }, []);
 
-  
   const fetchCaregivers = async () => {
-  const userId = getUserFromLocalStorage ? getUserFromLocalStorage.userId : null;
-  if (userId) {
-    try {
-      const response = await fetch(`http://localhost:5000/api/feedback/getcaregiver/${userId}`);
-      console.log(response);
-      const caregiversData = await response.json();
-      setCaregivers(caregiversData);
-    } catch (error) {
-      console.error('Error fetching caregivers:', error);
+    const userId = getUserFromLocalStorage
+      ? getUserFromLocalStorage.userId
+      : null;
+    if (userId) {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/feedback/getcaregiver/${userId}`,
+        );
+        console.log(response);
+        const caregiversData = await response.json();
+        setCaregivers(caregiversData);
+      } catch (error) {
+        console.error("Error fetching caregivers:", error);
+      }
+    } else {
+      console.error("No user ID found in local storage.");
     }
-  } else {
-    console.error('No user ID found in local storage.');
-  }
-};
+  };
 
   const handleFeedbackChange = (event) => {
     setFeedback(event.target.value);
@@ -128,7 +131,7 @@ const AddFeedbackPage = () => {
                       <TableBody>
                         {caregivers.map((caregiver, index) => (
                           <TableRow key={index}>
-                            <TableCell>{caregiver.userName}</TableCell>
+                            <TableCell>{caregiver.email}</TableCell>
                             <TableCell>{caregiver.gender}</TableCell>
                             <TableCell>{caregiver.mobileNo}</TableCell>
                             <TableCell>
@@ -165,7 +168,7 @@ const AddFeedbackPage = () => {
       >
         <Modal.Header closeButton>
           <Modal.Title>
-            Leave Feedback for {selectedCaregiver?.userName}
+            Leave Feedback for {selectedCaregiver?.email}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -212,9 +215,7 @@ const AddFeedbackPage = () => {
         onHide={() => setShowRequirementModal(false)}
       >
         <Modal.Header closeButton>
-          <Modal.Title>
-            Requirement for {selectedCaregiver?.userName}
-          </Modal.Title>
+          <Modal.Title>Requirement for {selectedCaregiver?.email}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -258,4 +259,3 @@ const AddFeedbackPage = () => {
 };
 
 export default AddFeedbackPage;
-
