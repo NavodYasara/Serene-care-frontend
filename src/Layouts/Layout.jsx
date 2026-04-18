@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../Components/Navbar/Navbar";
+import Navbar from '../components/Navbar/Navbar';
 import "../App.css";
-import Sidebar from "../Components/Sidebar";
+import Sidebar from '../components/Sidebar/Sidebar';
 
 function Layout({ children }) {
   const [isFixed, setIsFixed] = useState(false);
