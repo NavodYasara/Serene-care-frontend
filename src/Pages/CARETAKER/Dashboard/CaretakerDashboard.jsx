@@ -246,15 +246,7 @@ const CaretakerDashboard = () => {
                     <Typography variant="h5" fontWeight="bold">
                       {profileData.firstName} {profileData.lastName}
                     </Typography>
-                    <Typography color="text.secondary" sx={{ mb: 2 }}>
-                      {user.userType?.toUpperCase()} ID: #{user.userId}
-                    </Typography>
-                    <Chip
-                      label={profileData.category || "General"}
-                      color="primary"
-                      variant="outlined"
-                      sx={{ textTransform: "capitalize", px: 2, mb: 3 }}
-                    />
+
                     <Divider sx={{ my: 1 }} />
                     <Button
                       fullWidth
@@ -695,7 +687,7 @@ const CaretakerDashboard = () => {
               </Card>
             </Box>
 
-            {/* Health Needs Section */}
+            {/* Health Condition Section */}
             <Box>
               <Typography
                 variant="subtitle1"
@@ -708,7 +700,7 @@ const CaretakerDashboard = () => {
                   color: "#1e3c72",
                 }}
               >
-                <MedicalServicesIcon color="primary" /> Health Needs
+                <MedicalServicesIcon color="primary" /> Medical Condition
               </Typography>
               <Card
                 sx={{
@@ -718,24 +710,6 @@ const CaretakerDashboard = () => {
                 }}
               >
                 <Grid container spacing={3}>
-                  <Grid item xs={12} sm={6}>
-                    <FormControl fullWidth>
-                      <InputLabel>Care Category</InputLabel>
-                      <Select
-                        name="category"
-                        value={profileData.category || ""}
-                        label="Care Category"
-                        onChange={handleChange}
-                      >
-                        <MenuItem value={"mental"}>Mental Health</MenuItem>
-                        <MenuItem value={"disabled"}>Disabled Care</MenuItem>
-                        <MenuItem value={"eldering"}>Elderly Care</MenuItem>
-                        <MenuItem value={"others"}>
-                          Other Special Needs
-                        </MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Grid>
                   <Grid item xs={12}>
                     <TextField
                       label="Medical Conditions or Notes"

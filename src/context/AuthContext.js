@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import axios from "axios";
 
 const AuthContext = createContext(null);
 
@@ -9,18 +10,26 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
   const [userDetails, setUserDetails] = useState(null);
   const [userType, setUserType]       = useState(null);
+  const [authToken, setAuthToken]     = useState(null);
   const [loading, setLoading]         = useState(true); // prevents flicker on refresh
 
   // Hydrate from localStorage on first mount
   useEffect(() => {
     const stored = localStorage.getItem("userDetails");
+    const token = localStorage.getItem("authToken");
+
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
         setUserDetails(parsed);
         setUserType(parsed.userType || null);
+        if (token) {
+          setAuthToken(token);
+          axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        }
       } catch {
         localStorage.removeItem("userDetails");
+        localStorage.removeItem("authToken");
       }
     }
     setLoading(false);
@@ -31,24 +40,32 @@ export const AuthProvider = ({ children }) => {
    * @param {object} details  — full user object returned by the server
    * @param {string} role     — "admin" | "caretaker" | "caregiver" | "manager"
    */
-  const login = (details, role) => {
+  const login = (details, role, token) => {
     const payload = { ...details, userType: role };
     localStorage.setItem("userDetails", JSON.stringify(payload));
+    if (token) localStorage.setItem("authToken", token);
+    
     setUserDetails(payload);
     setUserType(role);
+    if (token) {
+      setAuthToken(token);
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    }
   };
 
   const logout = () => {
-    localStorage.removeItem("userDetails");
+    localStorage.clear();
     setUserDetails(null);
     setUserType(null);
+    setAuthToken(null);
+    delete axios.defaults.headers.common["Authorization"];
   };
 
   const isAuthenticated = !!userType;
 
   return (
     <AuthContext.Provider
-      value={{ userDetails, userType, isAuthenticated, loading, login, logout }}
+      value={{ userDetails, userType, authToken, isAuthenticated, loading, login, logout }}
     >
       {children}
     </AuthContext.Provider>

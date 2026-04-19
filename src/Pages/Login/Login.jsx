@@ -49,10 +49,10 @@ function Login() {
       });
 
       if (response.status === 200) {
-        const { userType, userDetails } = response.data;
+        const { userType, userDetails, token } = response.data;
 
         // Persist auth state via context (also writes to localStorage)
-        login(userDetails, userType);
+        login(userDetails, userType, token);
 
         switch (userType) {
           case "caretaker":
