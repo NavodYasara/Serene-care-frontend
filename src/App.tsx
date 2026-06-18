@@ -1,3 +1,4 @@
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
@@ -30,14 +31,7 @@ import ServiceRequests from "./pages/CARETAKER/ServiceRequests/ServiceRequests";
 import Payment from "./pages/CARETAKER/Payment/Payment";
 import Feedback from "./pages/CARETAKER/Feedback/Feedback";
 
-// ── MANAGER pages ─────────────────────────────────────────────────────────────
-// import ManagerDashboard from "./pages/MANAGER/Dashboard/ManagerDashboard";
-// import appoinment from "./pages/MANAGER/appoinment/appoinment";
-// import NewPlan from "./pages/MANAGER/NewPlan/NewPlan";
-// import WaitingPlan from "./pages/MANAGER/WaitingPlan/WaitingPlan";
-// import AcceptedPlan from "./pages/MANAGER/AcceptedPlan/AcceptedPlan";
-
-function App() {
+function App(): React.JSX.Element {
   return (
     <AuthProvider>
       <BrowserRouter>
@@ -79,15 +73,6 @@ function App() {
             <Route path="/Report" element={<Report />} />
             <Route path="/Payment" element={<Payment />} />
           </Route>
-
-          {/* ── MANAGER only ──────────────────────────────────────────── */}
-          {/* <Route element={<ProtectedRoute allowedRoles={["manager"]} />}>
-            <Route path="/ManagerDashboard" element={<ManagerDashboard />} />
-            <Route path="/appoinment" element={<appoinment />} />
-            <Route path="/newTask" element={<NewPlan />} />
-            <Route path="/waitingPlan" element={<WaitingPlan />} />
-            <Route path="/Finalized" element={<AcceptedPlan />} />
-          </Route> */}
 
           {/* ── Catch-all → redirect to login ─────────────────────────── */}
           <Route path="*" element={<Navigate to="/Login" replace />} />

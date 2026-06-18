@@ -14,10 +14,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useLocation, useNavigate } from "react-router-dom";
 import img1 from "../../Assets/img1.png";
 
-function NavbarComponent() {
-  const [user, setUser] = useState(null);
+function NavbarComponent(): React.JSX.Element {
+  const [user, setUser] = useState<any>(null);
   const location = useLocation();
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<HTMLElement | null>(null);
   const navigate = useNavigate();
 
   const hideLoginPath = ["/Login"];
@@ -32,22 +32,22 @@ function NavbarComponent() {
     }
   }, []);
 
-  const handleMobileMenuClose = () => {
+  const handleMobileMenuClose = (): void => {
     setMobileMoreAnchorEl(null);
   };
 
-  const handleMobileMenuOpen = (event) => {
+  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>): void => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const handleLogout = () => {
+  const handleLogout = (): void => {
     localStorage.removeItem("userProfile");
     setUser(null);
     handleMobileMenuClose();
     navigate("/Login");
   };
 
-  const getDashboardPath = () => {
+  const getDashboardPath = (): string => {
     if (!user) return "/Login";
     const type = user.userType?.toLowerCase();
     if (type === "caretaker") return "/CaretakerDashboard";

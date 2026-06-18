@@ -10,24 +10,24 @@ import {
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
-const Sidebar = () => {
+const Sidebar = (): React.JSX.Element => {
   const { userType, logout } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+  const handleLogout = (): void => {
     logout(); // clears context state + localStorage
     navigate("/Login");
   };
 
-  const getSidebarMenu = () => {
+  const getSidebarMenu = (): React.JSX.Element | null => {
     switch (userType) {
       case "admin":
         return (
           <>
-            <NavLink exact to="/AdminDashboard" activeClassName="activeClicked">
+            <NavLink to="/AdminDashboard">
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/ManageStaff" activeClassName="activeClicked">
+            <NavLink to="/ManageStaff">
               <CDBSidebarMenuItem icon="table">Manage Staff</CDBSidebarMenuItem>
             </NavLink>
           </>
@@ -36,18 +36,10 @@ const Sidebar = () => {
       case "caregiver":
         return (
           <>
-            <NavLink
-              exact
-              to="/CaregiverDashboard"
-              activeClassName="activeClicked"
-            >
+            <NavLink to="/CaregiverDashboard">
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink
-              exact
-              to="/CaregiverProfile"
-              activeClassName="activeClicked"
-            >
+            <NavLink to="/CaregiverProfile">
               <CDBSidebarMenuItem icon="user">My Profile</CDBSidebarMenuItem>
             </NavLink>
           </>
@@ -56,31 +48,23 @@ const Sidebar = () => {
       case "caretaker":
         return (
           <>
-            <NavLink
-              exact
-              to="/CaretakerDashboard"
-              activeClassName="activeClicked"
-            >
+            <NavLink to="/CaretakerDashboard">
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink
-              exact
-              to="/ServiceRequests"
-              activeClassName="activeClicked"
-            >
+            <NavLink to="/ServiceRequests">
               <CDBSidebarMenuItem icon="concierge-bell">
                 Service Requests
               </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/Feedback" activeClassName="activeClicked">
+            <NavLink to="/Feedback">
               <CDBSidebarMenuItem icon="comment-dots">
                 Feedbacks
               </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/Report" activeClassName="activeClicked">
+            <NavLink to="/Report">
               <CDBSidebarMenuItem icon="chart-line">Reports</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/Payment" activeClassName="activeClicked">
+            <NavLink to="/Payment">
               <CDBSidebarMenuItem icon="credit-card">
                 Payment
               </CDBSidebarMenuItem>
@@ -91,29 +75,25 @@ const Sidebar = () => {
       case "manager":
         return (
           <>
-            <NavLink
-              exact
-              to="/ManagerDashboard"
-              activeClassName="activeClicked"
-            >
+            <NavLink to="/ManagerDashboard">
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/newTask" activeClassName="activeClicked">
+            <NavLink to="/newTask">
               <CDBSidebarMenuItem icon="plus-circle">
                 New Plan
               </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/waitingPlan" activeClassName="activeClicked">
+            <NavLink to="/waitingPlan">
               <CDBSidebarMenuItem icon="clock">
                 Assigned Plans
               </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/Finalized" activeClassName="activeClicked">
+            <NavLink to="/Finalized">
               <CDBSidebarMenuItem icon="check-circle">
                 Finalized Plans
               </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/appoinment" activeClassName="activeClicked">
+            <NavLink to="/appoinment">
               <CDBSidebarMenuItem icon="table">
                 Create Care Plan
               </CDBSidebarMenuItem>
@@ -126,7 +106,7 @@ const Sidebar = () => {
     }
   };
 
-  const roleLabel = {
+  const roleLabel: Record<string, string> = {
     admin: "Admin Panel",
     caregiver: "Caregiver Panel",
     caretaker: "Patient Panel",
@@ -145,7 +125,7 @@ const Sidebar = () => {
               className="text-decoration-none"
               style={{ color: "inherit" }}
             >
-              {roleLabel[userType] || "Serene Care"}
+              {userType && roleLabel[userType] ? roleLabel[userType] : "Serene Care"}
             </a>
           </CDBSidebarHeader>
 

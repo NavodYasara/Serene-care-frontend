@@ -2,22 +2,15 @@ import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-/**
- * ProtectedRoute
- *
- * Usage in App.js:
- *   <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
- *     <Route path="/AdminDashboard" element={<AdminDashboard />} />
- *   </Route>
- *
- * Props:
- *   allowedRoles  — array of role strings allowed to access the nested routes
- *   redirectPath  — where to redirect unauthenticated users (default: /Login)
- */
+interface ProtectedRouteProps {
+  allowedRoles?: string[];
+  redirectPath?: string;
+}
+
 const ProtectedRoute = ({
   allowedRoles = [],
   redirectPath = "/Login",
-}) => {
+}: ProtectedRouteProps): React.JSX.Element | null => {
   const { isAuthenticated, userType, loading } = useAuth();
 
   // While restoring auth state from localStorage, render nothing to avoid flicker
@@ -31,7 +24,7 @@ const ProtectedRoute = ({
   }
 
   // Logged in but wrong role → show Unauthorized page
-  if (allowedRoles.length > 0 && !allowedRoles.includes(userType)) {
+  if (allowedRoles.length > 0 && userType && !allowedRoles.includes(userType)) {
     return <Navigate to="/Unauthorized" replace />;
   }
 
