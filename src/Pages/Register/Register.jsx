@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
-import Navbar from '../../components/Navbar/Navbar';
+import Navbar from "../../components/Navbar/Navbar";
 const Register = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -155,7 +155,7 @@ const Register = () => {
                       margin="normal"
                       required
                       fullWidth
-                      label="User Name"
+                      label="email"
                       name="email"
                       value={form.email}
                       onChange={handleChange}
@@ -366,10 +366,10 @@ export default Register;
 //                     />
 //                   </Form.Group>
 //                   <Form.Group className="mb-4">
-//                     <Form.Label>User Name</Form.Label>
+//                     <Form.Label>email</Form.Label>
 //                     <Form.Control
 //                       type="text"
-//                       placeholder="Enter your user name"
+//                       placeholder="Enter your email"
 //                       name="email"
 //                       onChange={handleChange}
 //                     />

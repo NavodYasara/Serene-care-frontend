@@ -3,39 +3,39 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 // Auth
 import { AuthProvider } from "./context/AuthContext";
-import ProtectedRoute   from "./routes/ProtectedRoute";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 // Public pages
-import Home        from "./pages/Home/Home.jsx";
-import Register    from "./pages/Register/Register.jsx";
-import Login       from "./pages/Login/Login.jsx";
+import Home from "./pages/Home/Home.jsx";
+import Register from "./pages/Register/Register.jsx";
+import Login from "./pages/Login/Login.jsx";
 import Unauthorized from "./pages/Unauthorized/Unauthorized.jsx";
 
 // Layouts (kept for reference / legacy routes)
 import Layout2 from "./layouts/Layout2";
-import MUI     from "./layouts/MUI";
+import MUI from "./layouts/MUI";
 
 // ── ADMIN pages ──────────────────────────────────────────────────────────────
 import AdminDashboard from "./pages/ADMIN/Dashboard/AdminDashboard";
-import ManageStaff    from "./pages/ADMIN/ManageStaff/ManageStaff";
+import ManageStaff from "./pages/ADMIN/ManageStaff/ManageStaff";
 
 // ── CAREGIVER pages ───────────────────────────────────────────────────────────
 import CaregiverDashboard from "./pages/CAREGIVER/Dashboard/CaregiverDashboard";
-import CaregiverProfile   from "./pages/CAREGIVER/Profile/CaregiverProfile";
+import CaregiverProfile from "./pages/CAREGIVER/Profile/CaregiverProfile";
 
 // ── CARETAKER (patient) pages ─────────────────────────────────────────────────
 import CaretakerDashboard from "./pages/CARETAKER/Dashboard/CaretakerDashboard";
-import Report             from "./pages/CARETAKER/Report/Report";
-import ServiceRequests    from "./pages/CARETAKER/ServiceRequests/ServiceRequests";
-import Payment            from "./pages/CARETAKER/Payment/Payment";
-import Feedback           from "./pages/CARETAKER/Feedback/Feedback";
+import Report from "./pages/CARETAKER/Report/Report";
+import ServiceRequests from "./pages/CARETAKER/ServiceRequests/ServiceRequests";
+import Payment from "./pages/CARETAKER/Payment/Payment";
+import Feedback from "./pages/CARETAKER/Feedback/Feedback";
 
 // ── MANAGER pages ─────────────────────────────────────────────────────────────
-import ManagerDashboard from "./pages/MANAGER/Dashboard/ManagerDashboard";
-import Careplan         from "./pages/MANAGER/Careplan/Careplan";
-import NewPlan          from "./pages/MANAGER/NewPlan/NewPlan";
-import WaitingPlan      from "./pages/MANAGER/WaitingPlan/WaitingPlan";
-import AcceptedPlan     from "./pages/MANAGER/AcceptedPlan/AcceptedPlan";
+// import ManagerDashboard from "./pages/MANAGER/Dashboard/ManagerDashboard";
+// import appoinment from "./pages/MANAGER/appoinment/appoinment";
+// import NewPlan from "./pages/MANAGER/NewPlan/NewPlan";
+// import WaitingPlan from "./pages/MANAGER/WaitingPlan/WaitingPlan";
+// import AcceptedPlan from "./pages/MANAGER/AcceptedPlan/AcceptedPlan";
 
 function App() {
   return (
@@ -43,45 +43,51 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* ── Public routes ─────────────────────────────────────────── */}
-          <Route path="/"        element={<Home />} />
-          <Route path="/Home"    element={<Home />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/Home" element={<Home />} />
           <Route path="/Register" element={<Register />} />
-          <Route path="/Login"    element={<Login />} />
+          <Route path="/Login" element={<Login />} />
           <Route path="/Unauthorized" element={<Unauthorized />} />
 
           {/* Legacy layout routes */}
           <Route path="/Layout2" element={<Layout2 />} />
-          <Route path="/MUI"     element={<MUI />} />
+          <Route path="/MUI" element={<MUI />} />
 
           {/* ── ADMIN only ────────────────────────────────────────────── */}
           <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
             <Route path="/AdminDashboard" element={<AdminDashboard />} />
-            <Route path="/ManageStaff"    element={<ManageStaff />} />
+            <Route path="/ManageStaff" element={<ManageStaff />} />
           </Route>
 
           {/* ── CAREGIVER only ────────────────────────────────────────── */}
           <Route element={<ProtectedRoute allowedRoles={["caregiver"]} />}>
-            <Route path="/CaregiverDashboard" element={<CaregiverDashboard />} />
-            <Route path="/CaregiverProfile"   element={<CaregiverProfile />} />
+            <Route
+              path="/CaregiverDashboard"
+              element={<CaregiverDashboard />}
+            />
+            <Route path="/CaregiverProfile" element={<CaregiverProfile />} />
           </Route>
 
           {/* ── CARETAKER (patient) only ──────────────────────────────── */}
           <Route element={<ProtectedRoute allowedRoles={["caretaker"]} />}>
-            <Route path="/CaretakerDashboard" element={<CaretakerDashboard />} />
-            <Route path="/ServiceRequests"    element={<ServiceRequests />} />
-            <Route path="/Feedback"           element={<Feedback />} />
-            <Route path="/Report"             element={<Report />} />
-            <Route path="/Payment"            element={<Payment />} />
+            <Route
+              path="/CaretakerDashboard"
+              element={<CaretakerDashboard />}
+            />
+            <Route path="/ServiceRequests" element={<ServiceRequests />} />
+            <Route path="/Feedback" element={<Feedback />} />
+            <Route path="/Report" element={<Report />} />
+            <Route path="/Payment" element={<Payment />} />
           </Route>
 
           {/* ── MANAGER only ──────────────────────────────────────────── */}
-          <Route element={<ProtectedRoute allowedRoles={["manager"]} />}>
+          {/* <Route element={<ProtectedRoute allowedRoles={["manager"]} />}>
             <Route path="/ManagerDashboard" element={<ManagerDashboard />} />
-            <Route path="/Careplan"         element={<Careplan />} />
-            <Route path="/newTask"          element={<NewPlan />} />
-            <Route path="/waitingPlan"      element={<WaitingPlan />} />
-            <Route path="/Finalized"        element={<AcceptedPlan />} />
-          </Route>
+            <Route path="/appoinment" element={<appoinment />} />
+            <Route path="/newTask" element={<NewPlan />} />
+            <Route path="/waitingPlan" element={<WaitingPlan />} />
+            <Route path="/Finalized" element={<AcceptedPlan />} />
+          </Route> */}
 
           {/* ── Catch-all → redirect to login ─────────────────────────── */}
           <Route path="*" element={<Navigate to="/Login" replace />} />

@@ -12,11 +12,11 @@ import {
 } from "@mui/material";
 import FeedbackIcon from "@mui/icons-material/Feedback";
 import NoteIcon from "@mui/icons-material/Note";
-import Sidebar from '../../../components/Sidebar/Sidebar';
-import Navbar from '../../../components/Navbar/Navbar';
+import Sidebar from "../../../components/Sidebar/Sidebar";
+import Navbar from "../../../components/Navbar/Navbar";
 
-const getUserFromLocalStorage = localStorage.getItem("userDetails")
-  ? JSON.parse(localStorage.getItem("userDetails"))
+const getUserFromLocalStorage = localStorage.getItem("userProfile")
+  ? JSON.parse(localStorage.getItem("userProfile"))
   : null;
 
 const AddFeedbackPage = () => {

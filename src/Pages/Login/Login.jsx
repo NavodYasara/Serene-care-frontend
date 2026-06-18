@@ -49,10 +49,10 @@ function Login() {
       });
 
       if (response.status === 200) {
-        const { userType, userDetails, token } = response.data;
+        const { userType, userProfile, token } = response.data;
 
         // Persist auth state via context (also writes to localStorage)
-        login(userDetails, userType, token);
+        login(userProfile, userType, token);
 
         switch (userType) {
           case "caretaker":
@@ -109,7 +109,7 @@ function Login() {
               margin="normal"
               required
               fullWidth
-              label="User Name"
+              label="email"
               name="email"
               value={email}
               onChange={(e) => setemail(e.target.value)}

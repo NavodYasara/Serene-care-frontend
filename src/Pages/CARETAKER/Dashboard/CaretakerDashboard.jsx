@@ -58,7 +58,7 @@ const CaretakerDashboard = () => {
   const [open, setOpen] = useState(false);
   const theme = useTheme();
 
-  const { userDetails: user = {} } = useAuth();
+  const { userProfile: user = {} } = useAuth();
 
   useEffect(() => {
     const fetchCaretakerData = async () => {

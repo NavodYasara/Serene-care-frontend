@@ -5,30 +5,30 @@ const AuthContext = createContext(null);
 
 /**
  * AuthProvider — wraps the app and exposes auth state globally.
- * Persists userDetails + userType to localStorage so refreshes keep the session.
+ * Persists userProfile + userType to localStorage so refreshes keep the session.
  */
 export const AuthProvider = ({ children }) => {
-  const [userDetails, setUserDetails] = useState(null);
+  const [userProfile, setuserProfile] = useState(null);
   const [userType, setUserType]       = useState(null);
   const [authToken, setAuthToken]     = useState(null);
   const [loading, setLoading]         = useState(true); // prevents flicker on refresh
 
   // Hydrate from localStorage on first mount
   useEffect(() => {
-    const stored = localStorage.getItem("userDetails");
+    const stored = localStorage.getItem("userProfile");
     const token = localStorage.getItem("authToken");
 
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
-        setUserDetails(parsed);
+        setuserProfile(parsed);
         setUserType(parsed.userType || null);
         if (token) {
           setAuthToken(token);
           axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         }
       } catch {
-        localStorage.removeItem("userDetails");
+        localStorage.removeItem("userProfile");
         localStorage.removeItem("authToken");
       }
     }
@@ -42,10 +42,10 @@ export const AuthProvider = ({ children }) => {
    */
   const login = (details, role, token) => {
     const payload = { ...details, userType: role };
-    localStorage.setItem("userDetails", JSON.stringify(payload));
+    localStorage.setItem("userProfile", JSON.stringify(payload));
     if (token) localStorage.setItem("authToken", token);
     
-    setUserDetails(payload);
+    setuserProfile(payload);
     setUserType(role);
     if (token) {
       setAuthToken(token);
@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.clear();
-    setUserDetails(null);
+    setuserProfile(null);
     setUserType(null);
     setAuthToken(null);
     delete axios.defaults.headers.common["Authorization"];
@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ userDetails, userType, authToken, isAuthenticated, loading, login, logout }}
+      value={{ userProfile, userType, authToken, isAuthenticated, loading, login, logout }}
     >
       {children}
     </AuthContext.Provider>

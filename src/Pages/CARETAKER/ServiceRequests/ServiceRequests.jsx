@@ -28,7 +28,7 @@ import EventIcon from "@mui/icons-material/Event";
 import WcIcon from "@mui/icons-material/Wc";
 
 const ServiceRequests = () => {
-  const user = JSON.parse(localStorage.getItem("userDetails")) || {};
+  const user = JSON.parse(localStorage.getItem("userProfile")) || {};
   const theme = useTheme();
 
   const [requestData, setRequestData] = useState({
@@ -79,7 +79,7 @@ const ServiceRequests = () => {
 
     try {
       await axios.post(
-        "http://localhost:5000/api/requirement/insertRequirement",
+        "http://localhost:5000/api/requirement/insertRequest",
         submissionData,
       );
 

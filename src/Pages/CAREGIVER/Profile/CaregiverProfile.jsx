@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Sidebar from '../../../components/Sidebar/Sidebar';
-import Navbar from '../../../components/Navbar/Navbar';
+import Sidebar from "../../../components/Sidebar/Sidebar";
+import Navbar from "../../../components/Navbar/Navbar";
 import {
   Container,
   Box,
@@ -45,7 +45,6 @@ function CaregiverProfile() {
     // Add your form submission logic here
     handleClose();
   };
-
 
   return (
     <div style={{ display: "flex" }}>
@@ -96,7 +95,7 @@ function CaregiverProfile() {
                             onChange={handleChange}
                           />
                         </Grid>
-                        
+
                         <Grid item xs={12} sm={6}>
                           <TextField
                             variant="outlined"
@@ -155,12 +154,12 @@ export default CaregiverProfile;
 // import CaregiverForm from "../../Components/CaregiverForm";
 
 // const CaregiverProfile = () => {
-//   const [userDetails, setUserDetails] = useState(null);
+//   const [userProfile, setuserProfile] = useState(null);
 
 //   useEffect(() => {
-//     const storedUserDetails = localStorage.getItem("userDetails");
-//     if (storedUserDetails) {
-//       setUserDetails(JSON.parse(storedUserDetails));
+//     const storeduserProfile = localStorage.getItem("userProfile");
+//     if (storeduserProfile) {
+//       setuserProfile(JSON.parse(storeduserProfile));
 //     }
 //   }, []);
 

@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Container, Table, Typography, Paper, Box } from "@mui/material";
-import Sidebar from '../../../components/Sidebar/Sidebar';
-import Navbar from '../../../components/Navbar/Navbar';
+import Sidebar from "../../../components/Sidebar/Sidebar";
+import Navbar from "../../../components/Navbar/Navbar";
 
-function Careplan() {
-  const [careplans, setCareplans] = useState([]);
+function appoinment() {
+  const [appoinments, setappoinments] = useState([]);
   const [caretakerStatuses, setCaretakerStatuses] = useState({});
 
   useEffect(() => {
-    async function fetchCareplans() {
+    async function fetchappoinments() {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/careplan/getCareplans"
+          "http://localhost:5000/api/appoinment/getappoinments",
         );
-        setCareplans(response.data);
+        setappoinments(response.data);
       } catch (error) {
         console.error("Error fetching care plans:", error);
       }
     }
 
-    fetchCareplans();
+    fetchappoinments();
   }, []);
 
   const getCaretakerStatus = async (caretakerId) => {
@@ -32,8 +32,8 @@ function Careplan() {
         caretaker.status === "available"
           ? "available"
           : caretaker.status === "onprocess"
-          ? "onprocess"
-          : "pending";
+            ? "onprocess"
+            : "pending";
 
       setCaretakerStatuses((prevStatuses) => ({
         ...prevStatuses,
@@ -49,10 +49,10 @@ function Careplan() {
   };
 
   useEffect(() => {
-    careplans.forEach((careplan) => {
-      getCaretakerStatus(careplan.caretakerId);
+    appoinments.forEach((appoinment) => {
+      getCaretakerStatus(appoinment.caretakerId);
     });
-  }, [careplans]);
+  }, [appoinments]);
 
   return (
     <div style={{ display: "flex" }}>
@@ -63,44 +63,44 @@ function Careplan() {
           <Typography variant="h4" gutterBottom>
             Current Care Plans
           </Typography>
-          {careplans.map((careplan) => (
+          {appoinments.map((appoinment) => (
             <Paper
-              key={careplan.careplanId}
+              key={appoinment.appoinmentId}
               style={{ padding: "20px", marginBottom: "20px" }}
             >
               <Box>
                 <Typography variant="h6">
-                  Care Plan ID: {careplan.careplanId}
+                  Care Plan ID: {appoinment.appoinmentId}
                 </Typography>
                 <Table>
                   <tbody>
                     <tr>
                       <td>Caregiver:</td>
                       <td>
-                        {careplan.caregiverFirstName}{" "}
-                        {careplan.caregiverLastName}
+                        {appoinment.caregiverFirstName}{" "}
+                        {appoinment.caregiverLastName}
                       </td>
                     </tr>
                     <tr>
                       <td>Caretaker:</td>
                       <td>
-                        {careplan.caretakerFirstName}{" "}
-                        {careplan.caretakerLastName}
+                        {appoinment.caretakerFirstName}{" "}
+                        {appoinment.caretakerLastName}
                       </td>
                     </tr>
                     <tr>
                       <td>Started On:</td>
                       <td>
-                        {new Date(careplan.startDate).toLocaleDateString()}
+                        {new Date(appoinment.startDate).toLocaleDateString()}
                       </td>
                     </tr>
                     <tr>
                       <td>Requirement:</td>
-                      <td>{careplan.instruction}</td>
+                      <td>{appoinment.instruction}</td>
                     </tr>
                     <tr>
                       <td>Caretaker Status:</td>
-                      <td>{caretakerStatuses[careplan.caretakerId]}</td>
+                      <td>{caretakerStatuses[appoinment.caretakerId]}</td>
                     </tr>
                   </tbody>
                 </Table>
@@ -113,7 +113,7 @@ function Careplan() {
   );
 }
 
-export default Careplan;
+export default appoinment;
 
 // import React, { useState, useEffect } from "react";
 // import axios from "axios";
@@ -121,26 +121,26 @@ export default Careplan;
 // import Sidebar from '../../../components/Sidebar/Sidebar';
 // import Navbar from '../../../components/Navbar/Navbar';
 
-// function Careplan() {
-//   const [careplans, setCareplans] = useState([]);
+// function appoinment() {
+//   const [appoinments, setappoinments] = useState([]);
 //   const [caretakerStatuses, setCaretakerStatuses] = useState({});
-//   const getUserfromLocalStorage = localStorage.getItem("userDetails")
-//     ? JSON.parse(localStorage.getItem("userDetails"))
+//   const getUserfromLocalStorage = localStorage.getItem("userProfile")
+//     ? JSON.parse(localStorage.getItem("userProfile"))
 //     : null;
 
 //   useEffect(() => {
-//     async function fetchCareplans() {
+//     async function fetchappoinments() {
 //       try {
 //         const response = await axios.get(
-//           "http://localhost:5000/api/careplan/getCareplans"
+//           "http://localhost:5000/api/appoinment/getappoinments"
 //         );
-//         setCareplans(response.data);
+//         setappoinments(response.data);
 //       } catch (error) {
 //         console.error("Error fetching care plans:", error);
 //       }
 //     }
 
-//     fetchCareplans();
+//     fetchappoinments();
 //   }, []);
 
 //  const getCaretakerStatus = async (caretakerId) => {
@@ -169,10 +169,10 @@ export default Careplan;
 //   };
 
 //   useEffect(() => {
-//     careplans.forEach((careplan) => {
-//       getCaretakerStatus(careplan.caretakerId);
+//     appoinments.forEach((appoinment) => {
+//       getCaretakerStatus(appoinment.caretakerId);
 //     });
-//   }, [careplans]);
+//   }, [appoinments]);
 
 //   return (
 //     <div style={{ display: "flex" }}>
@@ -183,44 +183,44 @@ export default Careplan;
 //           <Typography variant="h4" gutterBottom>
 //             Current Care Plans
 //           </Typography>
-//           {careplans.map((careplan) => (
+//           {appoinments.map((appoinment) => (
 //             <Paper
-//               key={careplan.careplanId}
+//               key={appoinment.appoinmentId}
 //               style={{ padding: "20px", marginBottom: "20px" }}
 //             >
 //               <Box>
 //                 <Typography variant="h6">
-//                   Care Plan ID: {careplan.careplanId}
+//                   Care Plan ID: {appoinment.appoinmentId}
 //                 </Typography>
 //                 <Table>
 //                   <tbody>
 //                     <tr>
 //                       <td>Caregiver:</td>
 //                       <td>
-//                         {careplan.caregiverFirstName}{" "}
-//                         {careplan.caregiverLastName}
+//                         {appoinment.caregiverFirstName}{" "}
+//                         {appoinment.caregiverLastName}
 //                       </td>
 //                     </tr>
 //                     <tr>
 //                       <td>Caretaker:</td>
 //                       <td>
-//                         {careplan.caretakerFirstName}{" "}
-//                         {careplan.caretakerLastName}
+//                         {appoinment.caretakerFirstName}{" "}
+//                         {appoinment.caretakerLastName}
 //                       </td>
 //                     </tr>
 //                     <tr>
 //                       <td>Started On:</td>
 //                       <td>
-//                         {new Date(careplan.startDate).toLocaleDateString()}
+//                         {new Date(appoinment.startDate).toLocaleDateString()}
 //                       </td>
 //                     </tr>
 //                     <tr>
 //                       <td>Requirement:</td>
-//                       <td>{careplan.instruction}</td>
+//                       <td>{appoinment.instruction}</td>
 //                     </tr>
 //                     <tr>
 //                       <td>Caretaker Status:</td>
-//                       <td>{caretakerStatuses[careplan.caretakerId]}</td>
+//                       <td>{caretakerStatuses[appoinment.caretakerId]}</td>
 //                     </tr>
 //                   </tbody>
 //                 </Table>
@@ -233,4 +233,4 @@ export default Careplan;
 //   );
 // }
 
-// export default Careplan;
+// export default appoinment;

@@ -8,14 +8,14 @@ import {
   CDBSidebarMenuItem,
 } from "cdbreact";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from "../context/AuthContext";
 
 const Sidebar = () => {
   const { userType, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout();           // clears context state + localStorage
+    logout(); // clears context state + localStorage
     navigate("/Login");
   };
 
@@ -36,10 +36,18 @@ const Sidebar = () => {
       case "caregiver":
         return (
           <>
-            <NavLink exact to="/CaregiverDashboard" activeClassName="activeClicked">
+            <NavLink
+              exact
+              to="/CaregiverDashboard"
+              activeClassName="activeClicked"
+            >
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/CaregiverProfile" activeClassName="activeClicked">
+            <NavLink
+              exact
+              to="/CaregiverProfile"
+              activeClassName="activeClicked"
+            >
               <CDBSidebarMenuItem icon="user">My Profile</CDBSidebarMenuItem>
             </NavLink>
           </>
@@ -48,20 +56,34 @@ const Sidebar = () => {
       case "caretaker":
         return (
           <>
-            <NavLink exact to="/CaretakerDashboard" activeClassName="activeClicked">
+            <NavLink
+              exact
+              to="/CaretakerDashboard"
+              activeClassName="activeClicked"
+            >
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/ServiceRequests" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="concierge-bell">Service Requests</CDBSidebarMenuItem>
+            <NavLink
+              exact
+              to="/ServiceRequests"
+              activeClassName="activeClicked"
+            >
+              <CDBSidebarMenuItem icon="concierge-bell">
+                Service Requests
+              </CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/Feedback" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="comment-dots">Feedbacks</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="comment-dots">
+                Feedbacks
+              </CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/Report" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line">Reports</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/Payment" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="credit-card">Payment</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="credit-card">
+                Payment
+              </CDBSidebarMenuItem>
             </NavLink>
           </>
         );
@@ -69,20 +91,32 @@ const Sidebar = () => {
       case "manager":
         return (
           <>
-            <NavLink exact to="/ManagerDashboard" activeClassName="activeClicked">
+            <NavLink
+              exact
+              to="/ManagerDashboard"
+              activeClassName="activeClicked"
+            >
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/newTask" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="plus-circle">New Plan</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="plus-circle">
+                New Plan
+              </CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/waitingPlan" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="clock">Assigned Plans</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="clock">
+                Assigned Plans
+              </CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/Finalized" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="check-circle">Finalized Plans</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="check-circle">
+                Finalized Plans
+              </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/Careplan" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Create Care Plan</CDBSidebarMenuItem>
+            <NavLink exact to="/appoinment" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="table">
+                Create Care Plan
+              </CDBSidebarMenuItem>
             </NavLink>
           </>
         );
@@ -93,18 +127,24 @@ const Sidebar = () => {
   };
 
   const roleLabel = {
-    admin:     "Admin Panel",
+    admin: "Admin Panel",
     caregiver: "Caregiver Panel",
     caretaker: "Patient Panel",
-    manager:   "Manager Panel",
+    manager: "Manager Panel",
   };
 
   return (
     <div className="sidebar-container">
-      <div style={{ display: "flex", height: "100vh", overflow: "scroll initial" }}>
+      <div
+        style={{ display: "flex", height: "100vh", overflow: "scroll initial" }}
+      >
         <CDBSidebar textColor="#fff" backgroundColor="#333">
           <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large" />}>
-            <a href="/" className="text-decoration-none" style={{ color: "inherit" }}>
+            <a
+              href="/"
+              className="text-decoration-none"
+              style={{ color: "inherit" }}
+            >
               {roleLabel[userType] || "Serene Care"}
             </a>
           </CDBSidebarHeader>
@@ -116,7 +156,9 @@ const Sidebar = () => {
           <CDBSidebarFooter style={{ textAlign: "center" }}>
             <div style={{ padding: "20px 5px" }}>
               <div onClick={handleLogout} style={{ cursor: "pointer" }}>
-                <CDBSidebarMenuItem icon="sign-out-alt">Logout</CDBSidebarMenuItem>
+                <CDBSidebarMenuItem icon="sign-out-alt">
+                  Logout
+                </CDBSidebarMenuItem>
               </div>
             </div>
           </CDBSidebarFooter>

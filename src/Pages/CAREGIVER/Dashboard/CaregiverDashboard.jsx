@@ -23,7 +23,7 @@ const DateCalendarValue = () => {
 
   const fetchCaretakers = async () => {
     try {
-      const userID = JSON.parse(localStorage.getItem("userDetails"))?.userId;
+      const userID = JSON.parse(localStorage.getItem("userProfile"))?.userId;
       const response = await axios.get(
         `http://localhost:5000/api/caregiver/assignedcaretakers?caregiverId=${userID}`,
       );
@@ -104,8 +104,8 @@ const DateCalendarValue = () => {
   };
 
   const getUserFromLocalStorage = () => {
-    const userDetails = localStorage.getItem("userDetails");
-    return userDetails ? JSON.parse(userDetails) : null;
+    const userProfile = localStorage.getItem("userProfile");
+    return userProfile ? JSON.parse(userProfile) : null;
   };
 
   const localUser = getUserFromLocalStorage();
