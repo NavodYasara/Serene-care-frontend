@@ -23,16 +23,16 @@ function Login() {
 
   // Already logged in → skip the login page entirely
   if (!loading && isAuthenticated) {
-    const dashboardMap = {
+    const dashboardMap: Record<string, string> = {
       admin: "/AdminDashboard",
       caregiver: "/CaregiverDashboard",
       caretaker: "/CaretakerDashboard",
       manager: "/ManagerDashboard",
     };
-    return <Navigate to={dashboardMap[userType] || "/"} replace />;
+    return <Navigate to={(userType && dashboardMap[userType]) || "/"} replace />;
   }
 
-  const handleLogin = async (event) => {
+  const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
 
     // Basic validation
@@ -89,66 +89,67 @@ function Login() {
 
   return (
     <>
-      <Navbar />
-      <Container
-        component="main"
-        maxWidth="xs"
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          mt: 8,
-        }}
-      >
-        <Card sx={{ p: 3, mt: 5, width: "100%" }}>
-          <Box textAlign="center" mb={4}>
-            <h3>Login</h3>
-          </Box>
-          <form onSubmit={handleLogin}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              label="email"
-              name="email"
-              value={email}
-              onChange={(e) => setemail(e.target.value)}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              type="password"
-              label="Password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-          </form>
-        </Card>
-        <Snackbar
-          open={openSnackbar}
-          autoHideDuration={6000}
-          onClose={handleCloseSnackbar}
+      <div>
+        <Container
+          component="main"
+          maxWidth="xs"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            mt: 8,
+          }}
         >
-          <Alert
+          <Card sx={{ p: 3, mt: 5, width: "100%" }}>
+            <Box textAlign="center" mb={4}>
+              <h3>Login</h3>
+            </Box>
+            <form onSubmit={handleLogin}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                label="email"
+                name="email"
+                value={email}
+                onChange={(e) => setemail(e.target.value)}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                type="password"
+                label="Password"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign In
+              </Button>
+            </form>
+          </Card>
+          <Snackbar
+            open={openSnackbar}
+            autoHideDuration={6000}
             onClose={handleCloseSnackbar}
-            severity="error"
-            sx={{ width: "100%" }}
           >
-            {error}
-          </Alert>
-        </Snackbar>
-      </Container>
+            <Alert
+              onClose={handleCloseSnackbar}
+              severity="error"
+              sx={{ width: "100%" }}
+            >
+              {error}
+            </Alert>
+          </Snackbar>
+        </Container>
+      </div>
     </>
   );
 }

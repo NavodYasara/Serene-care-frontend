@@ -13,8 +13,8 @@ import Navbar from "../../../components/Navbar/Navbar";
 import axios from "axios";
 
 const DateCalendarValue = () => {
-  const [caretakers, setCaretakers] = useState([]);
-  const [requirements, setRequirements] = useState([]);
+  const [caretakers, setCaretakers] = useState<any[]>([]);
+  const [requirements, setRequirements] = useState<any[]>([]);
 
   useEffect(() => {
     fetchCaretakers();
@@ -23,7 +23,7 @@ const DateCalendarValue = () => {
 
   const fetchCaretakers = async () => {
     try {
-      const userID = JSON.parse(localStorage.getItem("userProfile"))?.userId;
+      const userID = JSON.parse(localStorage.getItem("userProfile") || "{}")?.userId;
       const response = await axios.get(
         `http://localhost:5000/api/caregiver/assignedcaretakers?caregiverId=${userID}`,
       );
@@ -48,7 +48,7 @@ const DateCalendarValue = () => {
     }
   };
 
-  const handleAcceptRequest = async (requirmentID, status) => {
+  const handleAcceptRequest = async (requirmentID: any, status: any) => {
     try {
       const statusData = {
         requirmentID: requirmentID,
@@ -80,7 +80,7 @@ const DateCalendarValue = () => {
     }
   };
 
-  const handleRejectRequest = async (caretakerId) => {
+  const handleRejectRequest = async (caretakerId: any) => {
     try {
       const response = await axios.put(
         `http://localhost:5000/api/caregiver/rejectrequest/${caretakerId}`,
@@ -241,7 +241,7 @@ const DateCalendarValue = () => {
                             </Typography>
                           )}
 
-                          {requirement.status === "Rejected" && (
+                          {requirement?.status === "Rejected" && (
                             <Typography variant="body2">
                               Request Rejected
                             </Typography>

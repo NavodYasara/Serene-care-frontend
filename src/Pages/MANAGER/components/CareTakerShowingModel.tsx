@@ -13,12 +13,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const { Title, Text } = Typography;
 
+interface CareTakerShowingModelProps {
+  careTakerShowingModelOpen: boolean;
+  setCareTakerShowingModelOpen: (open: boolean) => void;
+  selectedCareTaker: any;
+}
+
 const CareTakerShowingModel = ({
   careTakerShowingModelOpen,
   setCareTakerShowingModelOpen,
   selectedCareTaker,
-}) => {
-  const [careTakerDetails, setCareTakerDetails] = useState(null);
+}: CareTakerShowingModelProps) => {
+  const [careTakerDetails, setCareTakerDetails] = useState<any>(null);
 
   useEffect(() => {
     if (careTakerShowingModelOpen) {

@@ -10,7 +10,6 @@ function AccDashboard() {
       </div>
 
       <div
-        fluid
         className="vh-100 d-flex "
         style={{ width: "100%", marginTop: "100px" }}
       >

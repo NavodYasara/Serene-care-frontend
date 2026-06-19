@@ -16,7 +16,7 @@ import Sidebar from "../../../components/Sidebar/Sidebar";
 import Navbar from "../../../components/Navbar/Navbar";
 
 const getUserFromLocalStorage = localStorage.getItem("userProfile")
-  ? JSON.parse(localStorage.getItem("userProfile"))
+  ? JSON.parse(localStorage.getItem("userProfile") || "null")
   : null;
 
 const AddFeedbackPage = () => {
@@ -24,10 +24,10 @@ const AddFeedbackPage = () => {
   const [showRequirementModal, setShowRequirementModal] = useState(false);
   const [feedback, setFeedback] = useState("");
   const [requirement, setRequirement] = useState("");
-  const [selectedCaregiver, setSelectedCaregiver] = useState(null);
-  const [caregivers, setCaregivers] = useState([]);
-  const [pastFeedback, setPastFeedback] = useState([]);
-  const [pastRequirement, setPastRequirement] = useState([]);
+  const [selectedCaregiver, setSelectedCaregiver] = useState<any>(null);
+  const [caregivers, setCaregivers] = useState<any[]>([]);
+  const [pastFeedback, setPastFeedback] = useState<any[]>([]);
+  const [pastRequirement, setPastRequirement] = useState<any[]>([]);
 
   useEffect(() => {
     // Fetch caregivers data from server
@@ -54,11 +54,11 @@ const AddFeedbackPage = () => {
     }
   };
 
-  const handleFeedbackChange = (event) => {
+  const handleFeedbackChange = (event: any) => {
     setFeedback(event.target.value);
   };
 
-  const handleRequirementChange = (event) => {
+  const handleRequirementChange = (event: any) => {
     setRequirement(event.target.value);
   };
 
@@ -76,12 +76,12 @@ const AddFeedbackPage = () => {
     setShowRequirementModal(false);
   };
 
-  const handleLeaveFeedback = (caregiver) => {
+  const handleLeaveFeedback = (caregiver: any) => {
     setSelectedCaregiver(caregiver);
     setShowFeedbackModal(true);
   };
 
-  const handleViewPastFeedback = (caregiver) => {
+  const handleViewPastFeedback = (caregiver: any) => {
     // Fetch past feedback for the selected caregiver
     // Replace with actual API call
     const feedbackData = [
@@ -93,7 +93,7 @@ const AddFeedbackPage = () => {
     setShowFeedbackModal(true);
   };
 
-  const handleViewRequirement = (caregiver) => {
+  const handleViewRequirement = (caregiver: any) => {
     // Fetch past requirement for the selected caregiver
     // Replace with actual API call
     const requirementData = [

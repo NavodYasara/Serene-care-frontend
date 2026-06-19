@@ -7,9 +7,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const { Meta } = Card;
 const { TextArea } = Input;
 
-const CareGiverSelectingModel = ({ openCareGiverSelectingModel, setOpenCareGiverSelectingModel, selectedRequirment,fetchPendingTasks }) => {
-  const [caregivers, setCaregivers] = useState([]);
-  const [selectedCareGiver, setSelectedCareGiver] = useState(null);
+interface CareGiverSelectingModelProps {
+  openCareGiverSelectingModel: boolean;
+  setOpenCareGiverSelectingModel: (open: boolean) => void;
+  selectedRequirment: any;
+  fetchPendingTasks: () => void;
+}
+
+const CareGiverSelectingModel = ({
+  openCareGiverSelectingModel,
+  setOpenCareGiverSelectingModel,
+  selectedRequirment,
+  fetchPendingTasks,
+}: CareGiverSelectingModelProps) => {
+  const [caregivers, setCaregivers] = useState<any[]>([]);
+  const [selectedCareGiver, setSelectedCareGiver] = useState<any>(null);
   const [instructions, setInstructions] = useState("");
 
   useEffect(() => {

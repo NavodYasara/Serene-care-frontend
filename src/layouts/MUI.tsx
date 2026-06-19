@@ -36,7 +36,7 @@ import Navbar from '../components/Navbar/Navbar';
 
 const drawerWidth = 240;
 
-function ResponsiveDrawer(props) {
+function ResponsiveDrawer(props: any) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
@@ -63,7 +63,7 @@ function ResponsiveDrawer(props) {
     medicalCondition: "",
     emergCont: "",
   });
-  const [caregivers, setCaregivers] = useState([]);
+  const [caregivers, setCaregivers] = useState<any[]>([]);
 
   useEffect(() => {
     fetchCaretakerProfile();
@@ -113,7 +113,7 @@ function ResponsiveDrawer(props) {
     }
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setProfileData((prevState) => ({
       ...prevState,

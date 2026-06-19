@@ -28,7 +28,7 @@ import EventIcon from "@mui/icons-material/Event";
 import WcIcon from "@mui/icons-material/Wc";
 
 const ServiceRequests = () => {
-  const user = JSON.parse(localStorage.getItem("userProfile")) || {};
+  const user = JSON.parse(localStorage.getItem("userProfile") || "{}") || {};
   const theme = useTheme();
 
   const [requestData, setRequestData] = useState({
@@ -39,20 +39,24 @@ const ServiceRequests = () => {
     caretakerId: "",
   });
 
-  const [caretakers, setCaretakers] = useState([]);
+  const [caretakers, setCaretakers] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-  const [snackbar, setSnackbar] = useState({
+  const [snackbar, setSnackbar] = useState<{
+    open: boolean;
+    message: string;
+    severity: "success" | "info" | "warning" | "error";
+  }>({
     open: false,
     message: "",
     severity: "success",
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setRequestData({ ...requestData, [name]: value });
   };
 
-  const handleSelectCaretaker = (e) => {
+  const handleSelectCaretaker = (e: any) => {
     setRequestData({ ...requestData, caretakerId: e.target.value });
   };
 
@@ -117,7 +121,7 @@ const ServiceRequests = () => {
         );
         const allCaretakers = response.data;
         const filteredCaretakers = allCaretakers.filter(
-          (caretaker) => caretaker.userId === user.userId,
+          (caretaker: any) => caretaker.userId === user.userId,
         );
         setCaretakers(filteredCaretakers);
       } catch (error) {

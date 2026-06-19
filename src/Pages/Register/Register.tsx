@@ -32,10 +32,10 @@ const Register = () => {
     specialization: typeFromUrl === "caregiver" ? "General" : "",
   });
 
-  const [error, setError] = useState(null); // State to hold error messages
+  const [error, setError] = useState<string | null>(null); // State to hold error messages
   const [openSnackbar, setOpenSnackbar] = useState(false); // State for Snackbar
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setForm((prevForm) => ({
       ...prevForm,
@@ -43,7 +43,7 @@ const Register = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null); // Clear previous errors
 
@@ -84,24 +84,24 @@ const Register = () => {
       const response = await axios.post(endpoint, form);
       console.log(response.data);
       navigate("/Login");
-    } catch (error) {
+    } catch (err: any) {
       // Handle axios request errors
-      if (error.response) {
-        if (error.response.status === 400) {
+      if (err.response) {
+        if (err.response.status === 400) {
           setError("Bad request. Please check your inputs and try again.");
-        } else if (error.response.status === 401) {
+        } else if (err.response.status === 401) {
           setError(
             "Unauthorized. Please check your credentials and try again.",
           );
-        } else if (error.response.status === 409) {
+        } else if (err.response.status === 409) {
           setError("email already exists. Please choose a different email.");
         } else {
           setError("An error occurred. Please try again later.");
         }
-      } else if (error.request) {
+      } else if (err.request) {
         setError("No response from the server. Please try again later.");
       } else {
-        console.error("Error:", error.message);
+        console.error("Error:", err.message);
         setError("An error occurred. Please try again later.");
       }
       setOpenSnackbar(true);
@@ -114,7 +114,6 @@ const Register = () => {
 
   return (
     <>
-      <Navbar />
       <Container component="main" maxWidth="md">
         <Box mt={8}>
           <Card>

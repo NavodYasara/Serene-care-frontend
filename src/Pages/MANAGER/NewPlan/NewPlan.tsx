@@ -4,32 +4,29 @@ import NavbarComponent from '../../../components/Navbar/Navbar';
 import NewTaskTable from '../components/NewTaskTable';
 import axios from 'axios';
 import dayjs from 'dayjs';
-import WaitingPlanTable from '../components/WaitingPlanTable';
-import AcceptedTable from '../components/AcceptedTable';
 
-const AcceptedPlan = () => {
-    const [finalizedRequirments,setFinalizedRequirments]=useState([]);
+const NewPlan = () => {
+    const [pendingRequirmentList,setPendingRequirmentList]=useState<any[]>([]);
 
 
     useEffect(()=>{
-        fetchFinalizedPlans();
+        fetchPendingTasks();
     },[])
 
 
 
    
-    const fetchFinalizedPlans=async()=>{
+    const fetchPendingTasks=async()=>{
         try {
-            const results=await axios.get("http://localhost:5000/api/manager/finalizedPlans")
-            console.log("results assigned finalized ",results);
-            const finalTaskArray=results.data?.map((res)=>({
+            const results=await axios.get("http://localhost:5000/api/manager/pendingTasks")
+            console.log("results ",results);
+            const finalTaskArray=results.data?.map((res: any)=>({
                 ...res,
-                assignee:res?.userId+"  "+res?.firstName+" "+res?.lastName,
                 startDate:dayjs(res?.startDate).format("YYYY-MM-DD"),
                 endDate:dayjs(res?.endDate).format("YYYY-MM-DD")
             }))
 
-            setFinalizedRequirments(finalTaskArray);
+            setPendingRequirmentList(finalTaskArray);
         } catch (error) {
             console.log("pending tasks fetching error! ",error);
         }
@@ -39,7 +36,7 @@ const AcceptedPlan = () => {
     <div style={{ display: "flex" }}>
       <Sidebar />
       <div style={{ flex: 1 }}>
-       <AcceptedTable fetchPendingTasks={fetchFinalizedPlans} reservationResult={finalizedRequirments}/>
+        <NewTaskTable fetchPendingTasks={fetchPendingTasks} reservationResult={pendingRequirmentList}/>
         {/* <NavbarComponent /> */}
         
       </div>
@@ -47,5 +44,4 @@ const AcceptedPlan = () => {
   )
 }
 
-
-export default AcceptedPlan
+export default NewPlan

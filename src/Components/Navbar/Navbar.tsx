@@ -14,7 +14,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useLocation, useNavigate } from "react-router-dom";
 import img1 from "../../Assets/img1.png";
 
-function NavbarComponent(): React.JSX.Element {
+interface NavbarComponentProps {
+  onMenuClick?: () => void;
+}
+
+function NavbarComponent({ onMenuClick }: NavbarComponentProps = {}): React.JSX.Element {
   const [user, setUser] = useState<any>(null);
   const location = useLocation();
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<HTMLElement | null>(null);
@@ -191,7 +195,7 @@ function NavbarComponent(): React.JSX.Element {
               aria-label="show more"
               aria-controls={mobileMenuId}
               aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
+              onClick={onMenuClick || handleMobileMenuOpen}
               color="inherit"
             >
               <MenuIcon />

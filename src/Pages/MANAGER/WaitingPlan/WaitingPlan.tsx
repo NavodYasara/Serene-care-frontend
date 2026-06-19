@@ -4,29 +4,31 @@ import NavbarComponent from '../../../components/Navbar/Navbar';
 import NewTaskTable from '../components/NewTaskTable';
 import axios from 'axios';
 import dayjs from 'dayjs';
+import WaitingPlanTable from '../components/WaitingPlanTable';
 
-const NewPlan = () => {
-    const [pendingRequirmentList,setPendingRequirmentList]=useState([]);
+const WaitingPlan = () => {
+    const [assignedPendngRequirments,setAssignedPendingReuirments]=useState<any[]>([]);
 
 
     useEffect(()=>{
-        fetchPendingTasks();
+        fetchAssignedAndRejectedTasks();
     },[])
 
 
 
    
-    const fetchPendingTasks=async()=>{
+    const fetchAssignedAndRejectedTasks=async()=>{
         try {
-            const results=await axios.get("http://localhost:5000/api/manager/pendingTasks")
-            console.log("results ",results);
-            const finalTaskArray=results.data?.map((res)=>({
+            const results=await axios.get("http://localhost:5000/api/manager/assignedAndRejected")
+            console.log("results assigned ",results);
+            const finalTaskArray=results.data?.map((res: any)=>({
                 ...res,
+                assignee:res?.userId+"  "+res?.firstName+" "+res?.lastName,
                 startDate:dayjs(res?.startDate).format("YYYY-MM-DD"),
                 endDate:dayjs(res?.endDate).format("YYYY-MM-DD")
             }))
 
-            setPendingRequirmentList(finalTaskArray);
+            setAssignedPendingReuirments(finalTaskArray);
         } catch (error) {
             console.log("pending tasks fetching error! ",error);
         }
@@ -36,7 +38,7 @@ const NewPlan = () => {
     <div style={{ display: "flex" }}>
       <Sidebar />
       <div style={{ flex: 1 }}>
-        <NewTaskTable fetchPendingTasks={fetchPendingTasks} reservationResult={pendingRequirmentList}/>
+        <WaitingPlanTable fetchPendingTasks={fetchAssignedAndRejectedTasks} reservationResult={assignedPendngRequirments}/>
         {/* <NavbarComponent /> */}
         
       </div>
@@ -44,4 +46,5 @@ const NewPlan = () => {
   )
 }
 
-export default NewPlan
+
+export default WaitingPlan

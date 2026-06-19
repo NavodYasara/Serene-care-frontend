@@ -54,7 +54,7 @@ const CaretakerDashboard = () => {
     emergCont: "",
     category: "",
   });
-  const [originalProfileData, setOriginalProfileData] = useState({});
+  const [originalProfileData, setOriginalProfileData] = useState<any>({});
   const [open, setOpen] = useState(false);
   const theme = useTheme();
 
@@ -118,7 +118,7 @@ const CaretakerDashboard = () => {
     }
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setProfileData((prevState) => ({
       ...prevState,
@@ -126,7 +126,7 @@ const CaretakerDashboard = () => {
     }));
   };
 
-  const InfoRow = ({ icon: Icon, label, value }) => (
+  const InfoRow = ({ icon: Icon, label, value }: { icon: any; label: string; value: string }) => (
     <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
       <Avatar
         sx={{

@@ -10,26 +10,26 @@ import Navbar from '../../../components/Navbar/Navbar';
 import Modal from "@mui/material/Modal";
 
 const ManagerDashboard = () => {
-  const [caretakers, setCaretakers] = useState([]);
-  const [selectedCaretaker, setSelectedCaretaker] = useState(null);
-  const [selectedCaregiver, setSelectedCaregiver] = useState(null);
+  const [caretakers, setCaretakers] = useState<any[]>([]);
+  const [selectedCaretaker, setSelectedCaretaker] = useState<any>(null);
+  const [selectedCaregiver, setSelectedCaregiver] = useState<any>(null);
   const [openModel, setOpenModel] = useState(false);
   const [instruction, setInstruction] = useState("");
 
-  const [caretakerDetails, setCaretakerDetails] = useState(null);
-  const [caregivers, setCaregivers] = useState([]);
+  const [caretakerDetails, setCaretakerDetails] = useState<any>(null);
+  const [caregivers, setCaregivers] = useState<any>([]);
   const [selectedCaregiverDetails, setSelectedCaregiverDetails] =
-    useState(null);
-  const [selectedCaregivers, setSelectedCaregivers] = useState(
-    JSON.parse(localStorage.getItem("selectedCaregivers")) || {}
+    useState<any>(null);
+  const [selectedCaregivers, setSelectedCaregivers] = useState<Record<string, any>>(
+    JSON.parse(localStorage.getItem("selectedCaregivers") || "{}")
   );
-  const [caretakerStatuses, setCaretakerStatuses] = useState({});
+  const [caretakerStatuses, setCaretakerStatuses] = useState<Record<string, string>>({});
 
   const handleCloseModel = () => {
     setOpenModel(false);
   };
 
-  const handleInstructionChange = (event) => {
+  const handleInstructionChange = (event: any) => {
     setInstruction(event.target.value);
   };
 
@@ -38,7 +38,7 @@ const ManagerDashboard = () => {
       .then((response) => response.json())
       .then((data) => {
         setCaretakers(Array.isArray(data) ? data : []);
-        data.forEach((caretaker) => {
+        data.forEach((caretaker: any) => {
           getCaretakerStatus(caretaker.caretakerId);
         });
       })
@@ -46,11 +46,14 @@ const ManagerDashboard = () => {
 
     fetch("http://localhost:5000/api/manager/getCaregivers")
       .then((response) => response.json())
-      .then((data) => console.log("caregivers", data) || setCaregivers(data))
+      .then((data) => {
+        console.log("caregivers", data);
+        setCaregivers(data);
+      })
       .catch((error) => console.error("Error:", error));
   }, []);
 
-  const handleRowClick = (caretaker) => {
+  const handleRowClick = (caretaker: any) => {
     setSelectedCaretaker(caretaker);
     fetch(
       `http://localhost:5000/api/manager/getCaretakerById/${caretaker.caretakerId}`
@@ -60,9 +63,9 @@ const ManagerDashboard = () => {
       .catch((error) => console.error("Error:", error));
   };
 
-  const handleViewCaregiver = (eventKey) => {
+  const handleViewCaregiver = (eventKey: any) => {
     const selectedCaregiver = caregivers.find(
-      (caregiver) => caregiver.caregiverId.toString() === eventKey
+      (caregiver: any) => caregiver.caregiverId.toString() === eventKey
     );
 
     if (selectedCaregiver) {
@@ -77,7 +80,7 @@ const ManagerDashboard = () => {
     }
   };
 
-  const handleAllocateCaregiver = async (caretaker, eventKey) => {
+  const handleAllocateCaregiver = async (caretaker: any, eventKey: any) => {
     console.log("selected event key ", eventKey);
     // const selectedCaregiver = caregivers.find(
     //   (caregiver) => caregiver.caregiverId.toString() === eventKey
@@ -191,7 +194,7 @@ const ManagerDashboard = () => {
     }
   };
 
-  const calculateAge = (dobString) => {
+  const calculateAge = (dobString: any) => {
     if (!dobString) {
       return "N/A";
     }
@@ -200,13 +203,13 @@ const ManagerDashboard = () => {
     return now.diff(dob, "year");
   };
 
-  const getCaretakerStatus = async (caretakerId) => {
+  const getCaretakerStatus = async (caretakerId: any) => {
     try {
       const response = await axios.get("/api/manager/getCaretakerInformation");
       const caretakers = response.data;
 
       const caretaker = caretakers.find(
-        (caretaker) => caretaker.caretakerId === caretakerId
+        (caretaker: any) => caretaker.caretakerId === caretakerId
       );
 
       if (caretaker) {
@@ -228,8 +231,8 @@ const ManagerDashboard = () => {
           [caretakerId]: "No Care Plan",
         }));
       }
-    } catch (error) {
-      console.error(error.message);
+    } catch (err: any) {
+      console.error(err.message);
       setCaretakerStatuses((prevStatuses) => ({
         ...prevStatuses,
         [caretakerId]: "Error fetching caretaker information",
@@ -265,20 +268,23 @@ const ManagerDashboard = () => {
     p: 4,
   };
 
-  const handleOpenModel = (careTakerData) => {
+  const handleOpenModel = (careTakerData: any) => {
     setOpenModel(true);
     console.log("careTakerData", careTakerData);
     setInstruction(careTakerData.requirement);
   };
 
-  const fetchCareGivers = async (startDate, endDate, preffGender) => {
+  const fetchCareGivers = async (startDate: any, endDate: any, preffGender: any) => {
     try {
       fetch("http://localhost:5000/api/manager/getCaregivers")
         .then((response) => response.json())
-        .then((data) => console.log("caregivers", data) || setCaregivers(data))
+        .then((data) => {
+          console.log("caregivers", data);
+          setCaregivers(data);
+        })
         .catch((error) => console.error("Error:", error));
-    } catch (error) {
-      console.error(error.message);
+    } catch (err: any) {
+      console.error(err.message);
     }
   };
 
@@ -359,7 +365,7 @@ const ManagerDashboard = () => {
                               </Dropdown.Toggle>
                               <Dropdown.Menu>
                                 {caregivers[caretaker.requirementId]?.map(
-                                  (caregiver) => (
+                                  (caregiver: any) => (
                                     <Dropdown.Item
                                       key={caregiver?.caregiverId}
                                       eventKey={caregiver?.caregiverId?.toString()}

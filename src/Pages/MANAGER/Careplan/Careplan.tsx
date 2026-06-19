@@ -5,8 +5,8 @@ import Sidebar from "../../../components/Sidebar/Sidebar";
 import Navbar from "../../../components/Navbar/Navbar";
 
 function appoinment() {
-  const [appoinments, setappoinments] = useState([]);
-  const [caretakerStatuses, setCaretakerStatuses] = useState({});
+  const [appoinments, setappoinments] = useState<any[]>([]);
+  const [caretakerStatuses, setCaretakerStatuses] = useState<Record<string, string>>({});
 
   useEffect(() => {
     async function fetchappoinments() {
@@ -23,7 +23,7 @@ function appoinment() {
     fetchappoinments();
   }, []);
 
-  const getCaretakerStatus = async (caretakerId) => {
+  const getCaretakerStatus = async (caretakerId: any) => {
     try {
       const response = await axios.get(`/api/caretakers/${caretakerId}`);
       const caretaker = response.data;
@@ -39,8 +39,8 @@ function appoinment() {
         ...prevStatuses,
         [caretakerId]: status,
       }));
-    } catch (error) {
-      console.error(error.message);
+    } catch (err: any) {
+      console.error(err.message);
       setCaretakerStatuses((prevStatuses) => ({
         ...prevStatuses,
         [caretakerId]: "Error fetching caretaker information",
@@ -49,7 +49,7 @@ function appoinment() {
   };
 
   useEffect(() => {
-    appoinments.forEach((appoinment) => {
+    appoinments.forEach((appoinment: any) => {
       getCaretakerStatus(appoinment.caretakerId);
     });
   }, [appoinments]);
@@ -63,7 +63,7 @@ function appoinment() {
           <Typography variant="h4" gutterBottom>
             Current Care Plans
           </Typography>
-          {appoinments.map((appoinment) => (
+          {appoinments.map((appoinment: any) => (
             <Paper
               key={appoinment.appoinmentId}
               style={{ padding: "20px", marginBottom: "20px" }}

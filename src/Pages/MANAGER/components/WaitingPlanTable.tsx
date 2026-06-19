@@ -2,32 +2,36 @@ import React, { useRef, useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import { Avatar, Button, Input, Popconfirm, Space, Table, Tag, message } from "antd";
 import Highlighter from "react-highlight-words";
-import { render } from "@testing-library/react";
 import CareGiverSelectingModel from './CareGiverSelectingModel';
 import CareTakerShowingModel from './CareTakerShowingModel';
 
 
 
 
-const WaitingPlanTable = ({reservationResult,fetchPendingTasks }) => {
+interface WaitingPlanTableProps {
+  reservationResult: any[];
+  fetchPendingTasks: () => void;
+}
+
+const WaitingPlanTable = ({reservationResult,fetchPendingTasks }: WaitingPlanTableProps) => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
-  const searchInput = useRef(null);
+  const searchInput = useRef<any>(null);
   const [openCareGiverSelectingModel,setOpenCareGiverSelectingModel]=useState(false);
-  const [selectedRequirment,setSelectedRequirment]=useState(null);
+  const [selectedRequirment,setSelectedRequirment]=useState<any>(null);
   const [careTakerShowingModelOpen,setCareTakerShowingModelOpen]=useState(false);
-  const [selectedCareTaker,setSelectedCareTaker]=useState(null);
+  const [selectedCareTaker,setSelectedCareTaker]=useState<any>(null);
 
 
 
 
-  const handleOpenModel=(rowData)=>{
+  const handleOpenModel=(rowData: any)=>{
     setSelectedRequirment(rowData?.requirementId)
       setOpenCareGiverSelectingModel(true);
   }
 
 
-  const handleOpenCaretakerModel=(rowData)=>{
+  const handleOpenCaretakerModel=(rowData: any)=>{
     setSelectedCareTaker(rowData?.caretakerId)
     setCareTakerShowingModelOpen(true);
   }
@@ -39,23 +43,23 @@ const WaitingPlanTable = ({reservationResult,fetchPendingTasks }) => {
 
 
 
-  const handleSearch = (selectedKeys, confirm, dataIndex) => {
+  const handleSearch = (selectedKeys: any, confirm: any, dataIndex: any) => {
     confirm();
     setSearchText(selectedKeys[0]);
     setSearchedColumn(dataIndex);
   };
-  const handleReset = (clearFilters) => {
+  const handleReset = (clearFilters: any) => {
     clearFilters();
     setSearchText("");
   };
-  const getColumnSearchProps = (dataIndex) => ({
+  const getColumnSearchProps = (dataIndex: any) => ({
     filterDropdown: ({
       setSelectedKeys,
       selectedKeys,
       confirm,
       clearFilters,
       close,
-    }) => (
+    }: any) => (
       <div
         style={{
           padding: 8,
@@ -121,21 +125,21 @@ const WaitingPlanTable = ({reservationResult,fetchPendingTasks }) => {
         </Space>
       </div>
     ),
-    filterIcon: (filtered) => (
+    filterIcon: (filtered: any) => (
       <SearchOutlined
         style={{
           color: filtered ? "#1677ff" : undefined,
         }}
       />
     ),
-    onFilter: (value, record) =>
+    onFilter: (value: any, record: any) =>
       record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
-    onFilterDropdownOpenChange: (visible) => {
+    onFilterDropdownOpenChange: (visible: any) => {
       if (visible) {
         setTimeout(() => searchInput.current?.select(), 100);
       }
     },
-    render: (text) =>
+    render: (text: any) =>
       searchedColumn === dataIndex ? (
         <Highlighter
           highlightStyle={{
@@ -186,7 +190,7 @@ const WaitingPlanTable = ({reservationResult,fetchPendingTasks }) => {
         dataIndex: "caretakerId",
         key: "caretakerId",
         width: "10%",
-        render:(pic,rowdata)=>{
+        render:(pic: any, rowdata: any)=>{
             return (
                 <button onClick={()=>handleOpenCaretakerModel(rowdata)}>
                     View CareTaker
@@ -199,7 +203,7 @@ const WaitingPlanTable = ({reservationResult,fetchPendingTasks }) => {
         dataIndex: "status",
         key: "status",
         width: "10%",
-        render:(pic)=>{
+        render:(pic: any)=>{
             return(
                 <p>{pic=="assigned"?"Assigned/Not Accepted":pic}</p>
             )
@@ -215,7 +219,7 @@ const WaitingPlanTable = ({reservationResult,fetchPendingTasks }) => {
       title: "Action",
       dataIndex: "userStatus",
       key: "userStatus",
-      render: (pic,rowData) => {
+      render: (pic: any, rowData: any) => {
         return (
             <div className="w-full  flex flex-row justify-between">
                 <button onClick={()=>handleOpenModel(rowData)}>Reassign Care Giver</button>

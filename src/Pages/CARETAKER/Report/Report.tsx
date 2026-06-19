@@ -29,12 +29,8 @@ function Report() {
       },
       // Add more work history objects as needed
     ],
-    professionalReferences: [
-      // Add objects with contact information for professional references
-    ],
-    personalReferences: [
-      // Add objects with contact information for personal references
-    ],
+    professionalReferences: [] as any[],
+    personalReferences: [] as any[],
     travelAvailability: "[Yes/No]",
     drivingLicense: "[Yes/No]",
     criminalBackgroundCheck: "[Yes/No]",

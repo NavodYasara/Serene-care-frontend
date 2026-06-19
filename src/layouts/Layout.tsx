@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
-import Navbar from '../components/Navbar/Navbar';
+import Navbar from "../components/Navbar/Navbar";
 import "../App.css";
-import Sidebar from '../components/Sidebar/Sidebar';
+import Sidebar from "../components/Sidebar/Sidebar";
 
-function Layout({ children }) {
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+function Layout({ children }: LayoutProps) {
   const [isFixed, setIsFixed] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -30,9 +34,7 @@ function Layout({ children }) {
             {/* Sidebar reads userType from AuthContext — no prop needed */}
             <Sidebar />
           </div>
-          <div className="col-10 content-part">
-            {children}
-          </div>
+          <div className="col-10 content-part">{children}</div>
         </div>
       </div>
     </>

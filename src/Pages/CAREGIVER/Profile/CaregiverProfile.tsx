@@ -34,12 +34,12 @@ function CaregiverProfile() {
     setOpen(false);
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(formValues);
     // Add your form submission logic here
@@ -53,7 +53,7 @@ function CaregiverProfile() {
         <Navbar />
         <div className="parent">
           <div className="content-part">
-            <Container fluid>
+            <Container>
               <h2 className="text-center m-2">Caregiver Profile</h2>
               <div className="p-3">
                 <Button variant="outlined" onClick={handleClickOpen}>

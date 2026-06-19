@@ -4,7 +4,7 @@ import { Box, Typography, Button } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useAuth } from '../../context/AuthContext';
 
-const dashboardMap = {
+const dashboardMap: Record<string, string> = {
   admin:     "/AdminDashboard",
   caregiver: "/CaregiverDashboard",
   caretaker: "/CaretakerDashboard",
@@ -16,7 +16,7 @@ function Unauthorized() {
   const navigate = useNavigate();
 
   const handleBack = () => {
-    if (isAuthenticated && dashboardMap[userType]) {
+    if (isAuthenticated && userType && dashboardMap[userType]) {
       navigate(dashboardMap[userType]);
     } else {
       navigate("/Login");

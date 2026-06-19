@@ -29,7 +29,7 @@ const PaymentPage = () => {
       <div style={{ flex: 1 }}>
         <Navbar />
         <div className="mgd-main" style={{ padding: "20px" }}>
-          <Container fluid maxWidth="md">
+          <Container maxWidth="md">
             <Paper elevation={3} style={{ padding: "20px", marginTop: "20px" }}>
               <Typography variant="h4" gutterBottom>
                 Payment Details
