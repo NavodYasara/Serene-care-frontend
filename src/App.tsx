@@ -29,12 +29,15 @@ import Report from "./pages/CARETAKER/Report/Report";
 import ServiceRequests from "./pages/CARETAKER/ServiceRequests/ServiceRequests";
 import Payment from "./pages/CARETAKER/Payment/Payment";
 import Feedback from "./pages/CARETAKER/Feedback/Feedback";
+import MasterLayout from "./layouts/MasterLayout";
 
 function App(): React.JSX.Element {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
+          <Route path="/sandbox" element={<MasterLayout />} />
+
           {/* ── Public routes ─────────────────────────────────────────── */}
           <Route element={<AuthLayout/>}> 
             <Route path="/" element={<Home />} />
