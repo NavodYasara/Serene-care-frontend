@@ -14,10 +14,6 @@ import {
   DialogActions,
   DialogContent,
   TextField,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
   Card,
   CardContent,
   Stack,
@@ -117,7 +113,9 @@ const CaretakerDashboard = () => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = e.target;
     setProfileData((prevState) => ({
       ...prevState,
@@ -125,7 +123,15 @@ const CaretakerDashboard = () => {
     }));
   };
 
-  const InfoRow = ({ icon: Icon, label, value }: { icon: any; label: string; value: string }) => (
+  const InfoRow = ({
+    icon: Icon,
+    label,
+    value,
+  }: {
+    icon: any;
+    label: string;
+    value: string;
+  }) => (
     <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
       <Avatar
         sx={{
@@ -155,327 +161,268 @@ const CaretakerDashboard = () => {
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 4, overflowX: "hidden" }}>
       <Container maxWidth="lg">
-          {/* Header Section */}
-          <Box
-            sx={{
-              mb: 4,
-              p: 4,
-              borderRadius: 4,
-              background: "linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)",
-              color: "white",
-              boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
-              position: "relative",
-              overflow: "hidden",
-            }}
-          >
-            <Box
-              sx={{
-                position: "relative",
-                zIndex: 1,
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <Box>
-                <Typography variant="h4" fontWeight="bold" gutterBottom>
-                  Welcome back,{" "}
-                  {profileData.firstName ||
-                    user.firstName ||
-                    user.email ||
-                    "Guest"}
-                  !
-                </Typography>
-                <Typography variant="body1" sx={{ opacity: 0.8 }}>
-                  Your health profile is up to date. Managing your care has
-                  never been easier.
-                </Typography>
-              </Box>
-              <Box sx={{ display: { xs: "none", sm: "block" } }}>
-                <Typography
-                  variant="h3"
-                  sx={{ opacity: 0.2, fontWeight: "bold" }}
-                >
-                  SERENE
-                </Typography>
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                position: "absolute",
-                top: -50,
-                right: -50,
-                width: 200,
-                height: 200,
-                borderRadius: "50%",
-                background: "rgba(255, 255, 255, 0.1)",
-              }}
-            />
-          </Box>
-
-          <Grid container spacing={4}>
-            {/* Left Column: Profile Card */}
-            <Grid item xs={12} md={4}>
-              <Stack spacing={4}>
-                <Card
-                  sx={{
-                    borderRadius: 4,
-                    boxShadow: "0 4px 20px 0 rgba(0,0,0,0.05)",
-                    textAlign: "center",
-                  }}
-                >
-                  <CardContent sx={{ pt: 4 }}>
-                    <Avatar
-                      sx={{
-                        width: 120,
-                        height: 120,
-                        margin: "0 auto",
-                        mb: 2,
-                        border: `4px solid ${theme.palette.primary.light}`,
-                        fontSize: "3rem",
-                        bgcolor: theme.palette.primary.main,
-                      }}
-                    >
-                      {profileData.firstName?.charAt(0) ||
-                        user.email?.charAt(0) ||
-                        "U"}
-                    </Avatar>
-                    <Typography variant="h5" fontWeight="bold">
-                      {profileData.firstName} {profileData.lastName}
-                    </Typography>
-
-                    <Divider sx={{ my: 1 }} />
-                    <Button
-                      fullWidth
-                      variant="contained"
-                      startIcon={<EditIcon />}
-                      onClick={handleClickOpen}
-                      sx={{
-                        mt: 2,
-                        borderRadius: 2,
-                        py: 1,
-                        background:
-                          "linear-gradient(45deg, #1e3c72 30%, #2a5298 90%)",
-                        boxShadow: "0 3px 5px 2px rgba(30, 60, 114, .3)",
-                      }}
-                    >
-                      Edit Profile
-                    </Button>
-                  </CardContent>
-                </Card>
-
-                {/* Quick Stats Card */}
-                <Card
-                  sx={{
-                    borderRadius: 4,
-                    boxShadow: "0 4px 20px 0 rgba(0,0,0,0.05)",
-                  }}
-                >
-                  <CardContent>
-                    <Typography
-                      variant="subtitle2"
-                      color="text.secondary"
-                      gutterBottom
-                    >
-                      Healthcare Overview
-                    </Typography>
-                    <Stack spacing={2} sx={{ mt: 2 }}>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <Typography variant="body2">Plan Status</Typography>
-                        <Chip size="small" label="Active" color="success" />
-                      </Box>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <Typography variant="body2">Last Checkup</Typography>
-                        <Typography variant="body2" fontWeight="bold">
-                          2 days ago
-                        </Typography>
-                      </Box>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <Typography variant="body2">
-                          Assigned Caregiver
-                        </Typography>
-                        <Typography variant="body2" color="primary">
-                          Dr. Smith
-                        </Typography>
-                      </Box>
-                    </Stack>
-                  </CardContent>
-                </Card>
-              </Stack>
-            </Grid>
-
-            {/* Right Column: Detailed Info & Timeline */}
-            <Grid item xs={12} md={8}>
-              <Stack spacing={4}>
-                {/* Information Sections */}
-                <Card
-                  sx={{
-                    borderRadius: 4,
-                    boxShadow: "0 4px 20px 0 rgba(0,0,0,0.05)",
-                  }}
-                >
-                  <Box
+        <Grid container spacing={4}>
+          {/* Left Column: Profile Card */}
+          <Grid item xs={12} md={4}>
+            <Stack spacing={4}>
+              <Card
+                sx={{
+                  borderRadius: 4,
+                  boxShadow: "0 4px 20px 0 rgba(0,0,0,0.05)",
+                  textAlign: "center",
+                }}
+              >
+                <CardContent sx={{ pt: 4 }}>
+                  <Avatar
                     sx={{
-                      p: 2,
-                      bgcolor: "#fafafa",
-                      borderBottom: "1px solid #efefef",
+                      width: 120,
+                      height: 120,
+                      margin: "0 auto",
+                      mb: 2,
+                      border: `4px solid ${theme.palette.primary.light}`,
+                      fontSize: "3rem",
+                      bgcolor: theme.palette.primary.main,
                     }}
                   >
-                    <Typography variant="h6" fontWeight="bold">
-                      Account Details
-                    </Typography>
-                  </Box>
-                  <CardContent>
-                    <Grid container spacing={4}>
-                      <Grid item xs={12} sm={6}>
-                        <Typography
-                          variant="subtitle1"
-                          fontWeight="bold"
-                          sx={{
-                            mb: 2,
-                            display: "flex",
-                            alignItems: "center",
-                            gap: 1,
-                          }}
-                        >
-                          <BadgeIcon color="primary" /> Personal
-                        </Typography>
-                        <InfoRow
-                          icon={BadgeIcon}
-                          label="Medicare Number"
-                          value={profileData.nationalId}
-                        />
-                        <InfoRow
-                          icon={CakeIcon}
-                          label="Date of Birth"
-                          value={profileData.dob}
-                        />
-                        <InfoRow
-                          icon={HomeIcon}
-                          label="Address"
-                          value={profileData.address}
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6}>
-                        <Typography
-                          variant="subtitle1"
-                          fontWeight="bold"
-                          sx={{
-                            mb: 2,
-                            display: "flex",
-                            alignItems: "center",
-                            gap: 1,
-                          }}
-                        >
-                          <MedicalServicesIcon color="primary" /> Health &
-                          Contact
-                        </Typography>
-                        <InfoRow
-                          icon={PhoneIcon}
-                          label="Phone Number"
-                          value={profileData.mobileNo}
-                        />
-                        <InfoRow
-                          icon={MedicalServicesIcon}
-                          label="Medical Condition"
-                          value={profileData.mediCon}
-                        />
-                        <InfoRow
-                          icon={ContactPhoneIcon}
-                          label="Emergency Contact"
-                          value={profileData.emergCont}
-                        />
-                      </Grid>
-                    </Grid>
-                  </CardContent>
-                </Card>
+                    {profileData.firstName?.charAt(0) ||
+                      user.email?.charAt(0) ||
+                      "U"}
+                  </Avatar>
+                  <Typography variant="h5" fontWeight="bold">
+                    {profileData.firstName} {profileData.lastName}
+                  </Typography>
 
-                {/* Recent Activity Section */}
-                <Card
-                  sx={{
-                    borderRadius: 4,
-                    boxShadow: "0 4px 20px 0 rgba(0,0,0,0.05)",
-                  }}
-                >
-                  <Box
+                  <Divider sx={{ my: 1 }} />
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    startIcon={<EditIcon />}
+                    onClick={handleClickOpen}
                     sx={{
-                      p: 2,
-                      bgcolor: "#fafafa",
-                      borderBottom: "1px solid #efefef",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
+                      mt: 2,
+                      borderRadius: 2,
+                      py: 1,
+                      background:
+                        "linear-gradient(45deg, #1e3c72 30%, #2a5298 90%)",
+                      boxShadow: "0 3px 5px 2px rgba(30, 60, 114, .3)",
                     }}
                   >
-                    <Typography
-                      variant="h6"
-                      fontWeight="bold"
-                      sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                    Edit Profile
+                  </Button>
+                </CardContent>
+              </Card>
+
+              {/* Quick Stats Card */}
+              <Card
+                sx={{
+                  borderRadius: 4,
+                  boxShadow: "0 4px 20px 0 rgba(0,0,0,0.05)",
+                }}
+              >
+                <CardContent>
+                  <Typography
+                    variant="subtitle2"
+                    color="text.secondary"
+                    gutterBottom
+                  >
+                    Healthcare Overview
+                  </Typography>
+                  <Stack spacing={2} sx={{ mt: 2 }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
                     >
-                      <HistoryIcon /> Recent Activity
-                    </Typography>
-                    <Button size="small">View All</Button>
-                  </Box>
-                  <CardContent sx={{ p: 0 }}>
-                    <List>
-                      <ListItem divider>
-                        <ListItemIcon>
-                          <CheckCircleOutlineIcon color="success" />
-                        </ListItemIcon>
-                        <ListItemText
-                          primary="Care Plan Updated"
-                          secondary="Your daily medication plan was updated by Manager"
-                        />
-                        <Typography variant="caption" color="text.secondary">
-                          Today
-                        </Typography>
-                      </ListItem>
-                      <ListItem divider>
-                        <ListItemIcon>
-                          <CheckCircleOutlineIcon color="success" />
-                        </ListItemIcon>
-                        <ListItemText
-                          primary="Profile Verified"
-                          secondary="Your medicare number has been verified successfully"
-                        />
-                        <Typography variant="caption" color="text.secondary">
-                          Yesterday
-                        </Typography>
-                      </ListItem>
-                      <ListItem>
-                        <ListItemIcon>
-                          <CheckCircleOutlineIcon color="success" />
-                        </ListItemIcon>
-                        <ListItemText
-                          primary="System Login"
-                          secondary="Successful login from a new device"
-                        />
-                        <Typography variant="caption" color="text.secondary">
-                          2 days ago
-                        </Typography>
-                      </ListItem>
-                    </List>
-                  </CardContent>
-                </Card>
-              </Stack>
-            </Grid>
+                      <Typography variant="body2">Plan Status</Typography>
+                      <Chip size="small" label="Active" color="success" />
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Typography variant="body2">Last Checkup</Typography>
+                      <Typography variant="body2" fontWeight="bold">
+                        2 days ago
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Typography variant="body2">
+                        Assigned Caregiver
+                      </Typography>
+                      <Typography variant="body2" color="primary">
+                        Dr. Smith
+                      </Typography>
+                    </Box>
+                  </Stack>
+                </CardContent>
+              </Card>
+            </Stack>
           </Grid>
-        </Container>
+
+          {/* Right Column: Detailed Info & Timeline */}
+          <Grid item xs={12} md={8}>
+            <Stack spacing={4}>
+              {/* Information Sections */}
+              <Card
+                sx={{
+                  borderRadius: 4,
+                  boxShadow: "0 4px 20px 0 rgba(0,0,0,0.05)",
+                }}
+              >
+                <Box
+                  sx={{
+                    p: 2,
+                    bgcolor: "#fafafa",
+                    borderBottom: "1px solid #efefef",
+                  }}
+                >
+                  <Typography variant="h6" fontWeight="bold">
+                    Account Details
+                  </Typography>
+                </Box>
+                <CardContent>
+                  <Grid container spacing={4}>
+                    <Grid item xs={12} sm={6}>
+                      <Typography
+                        variant="subtitle1"
+                        fontWeight="bold"
+                        sx={{
+                          mb: 2,
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 1,
+                        }}
+                      >
+                        <BadgeIcon color="primary" /> Personal
+                      </Typography>
+                      <InfoRow
+                        icon={BadgeIcon}
+                        label="Medicare Number"
+                        value={profileData.nationalId}
+                      />
+                      <InfoRow
+                        icon={CakeIcon}
+                        label="Date of Birth"
+                        value={profileData.dob}
+                      />
+                      <InfoRow
+                        icon={HomeIcon}
+                        label="Address"
+                        value={profileData.address}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <Typography
+                        variant="subtitle1"
+                        fontWeight="bold"
+                        sx={{
+                          mb: 2,
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 1,
+                        }}
+                      >
+                        <MedicalServicesIcon color="primary" /> Health & Contact
+                      </Typography>
+                      <InfoRow
+                        icon={PhoneIcon}
+                        label="Phone Number"
+                        value={profileData.mobileNo}
+                      />
+                      <InfoRow
+                        icon={MedicalServicesIcon}
+                        label="Medical Condition"
+                        value={profileData.mediCon}
+                      />
+                      <InfoRow
+                        icon={ContactPhoneIcon}
+                        label="Emergency Contact"
+                        value={profileData.emergCont}
+                      />
+                    </Grid>
+                  </Grid>
+                </CardContent>
+              </Card>
+
+              {/* Recent Activity Section */}
+              <Card
+                sx={{
+                  borderRadius: 4,
+                  boxShadow: "0 4px 20px 0 rgba(0,0,0,0.05)",
+                }}
+              >
+                <Box
+                  sx={{
+                    p: 2,
+                    bgcolor: "#fafafa",
+                    borderBottom: "1px solid #efefef",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Typography
+                    variant="h6"
+                    fontWeight="bold"
+                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                  >
+                    <HistoryIcon /> Recent Activity
+                  </Typography>
+                  <Button size="small">View All</Button>
+                </Box>
+                <CardContent sx={{ p: 0 }}>
+                  <List>
+                    <ListItem divider>
+                      <ListItemIcon>
+                        <CheckCircleOutlineIcon color="success" />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary="Care Plan Updated"
+                        secondary="Your daily medication plan was updated by Manager"
+                      />
+                      <Typography variant="caption" color="text.secondary">
+                        Today
+                      </Typography>
+                    </ListItem>
+                    <ListItem divider>
+                      <ListItemIcon>
+                        <CheckCircleOutlineIcon color="success" />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary="Profile Verified"
+                        secondary="Your medicare number has been verified successfully"
+                      />
+                      <Typography variant="caption" color="text.secondary">
+                        Yesterday
+                      </Typography>
+                    </ListItem>
+                    <ListItem>
+                      <ListItemIcon>
+                        <CheckCircleOutlineIcon color="success" />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary="System Login"
+                        secondary="Successful login from a new device"
+                      />
+                      <Typography variant="caption" color="text.secondary">
+                        2 days ago
+                      </Typography>
+                    </ListItem>
+                  </List>
+                </CardContent>
+              </Card>
+            </Stack>
+          </Grid>
+        </Grid>
+      </Container>
 
       {/* Edit Dialog */}
       <Dialog
