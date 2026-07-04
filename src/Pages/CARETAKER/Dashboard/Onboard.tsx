@@ -13,6 +13,7 @@ interface OnboardFormData {
 
 const OnboardForm: React.FC = () => {
   const navigate = useNavigate();
+
   // State to hold the form values
   const [formData, setFormData] = useState<OnboardFormData>({
     fullName: "",
@@ -41,177 +42,171 @@ const OnboardForm: React.FC = () => {
   };
 
   return (
-    <div className="p-6 md:p-10 lg:p-12 flex flex-col justify-between h-full min-h-full">
-      <div>
-        <div className="flex justify-between items-center mb-8 pb-4 border-b border-neutral-100">
-          {/* Personal Information Title */}
-          <h2 className="font-['Red_Hat_Display'] font-bold text-2xl md:text-3xl lg:text-4xl text-[#1D1D1D] tracking-tight">
-            Personal Information
-          </h2>
-        </div>
+    <div className="p-8 md:p-12 flex flex-col justify-between h-full min-h-full">
+      <form
+        id="onboard-form"
+        onSubmit={handleSubmit}
+        className="flex flex-col justify-between h-full"
+      >
+        <div>
+          {/* Header Row: Title & Next Step Button */}
+          <div className="flex justify-between items-center mb-10">
+            <h2 className="font-['Red_Hat_Display'] font-medium text-3xl md:text-4xl text-[#1D1D1D] tracking-tight">
+              Personal Information
+            </h2>
 
-        {/* Form Content */}
-        <form id="onboard-form" onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 max-w-[750px] mx-auto">
-            {/* Full Name */}
-            <div className="flex flex-col md:col-span-2">
-              <label
-                htmlFor="fullName"
-                className="block text-sm font-semibold text-neutral-700 mb-1.5 font-['Red_Hat_Display']"
-              >
-                Full Name
-              </label>
-              <input
-                type="text"
-                id="fullName"
-                name="fullName"
-                value={formData.fullName}
-                onChange={handleChange}
-                placeholder="John Doe"
-                className="w-full h-11 bg-white border border-neutral-300 rounded-xl px-4 font-['Red_Hat_Display'] text-sm text-neutral-800 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all shadow-sm"
-                required
-              />
-            </div>
-
-            {/* National ID */}
-            <div className="flex flex-col">
-              <label
-                htmlFor="nationalId"
-                className="block text-sm font-semibold text-neutral-700 mb-1.5 font-['Red_Hat_Display']"
-              >
-                National ID
-              </label>
-              <input
-                type="text"
-                id="nationalId"
-                name="nationalId"
-                value={formData.nationalId}
-                onChange={handleChange}
-                placeholder="998323135V"
-                className="w-full h-11 bg-white border border-neutral-300 rounded-xl px-4 font-['Red_Hat_Display'] text-sm text-neutral-800 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all shadow-sm"
-                required
-              />
-            </div>
-
-            {/* Date of Birth */}
-            <div className="flex flex-col">
-              <label
-                htmlFor="dateOfBirth"
-                className="block text-sm font-semibold text-neutral-700 mb-1.5 font-['Red_Hat_Display']"
-              >
-                Date of Birth
-              </label>
-              <input
-                type="text"
-                id="dateOfBirth"
-                name="dateOfBirth"
-                value={formData.dateOfBirth}
-                onChange={handleChange}
-                placeholder="1964 - 10 - 12"
-                className="w-full h-11 bg-white border border-neutral-300 rounded-xl px-4 font-['Red_Hat_Display'] text-sm text-neutral-800 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all shadow-sm"
-                required
-              />
-            </div>
-
-            {/* Email */}
-            <div className="flex flex-col">
-              <label
-                htmlFor="email"
-                className="block text-sm font-semibold text-neutral-700 mb-1.5 font-['Red_Hat_Display']"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="john@gmail.com"
-                className="w-full h-11 bg-white border border-neutral-300 rounded-xl px-4 font-['Red_Hat_Display'] text-sm text-neutral-800 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all shadow-sm"
-                required
-              />
-            </div>
-
-            {/* Contact Number */}
-            <div className="flex flex-col">
-              <label
-                htmlFor="contactNo"
-                className="block text-sm font-semibold text-neutral-700 mb-1.5 font-['Red_Hat_Display']"
-              >
-                Contact Number
-              </label>
-              <input
-                type="tel"
-                id="contactNo"
-                name="contactNo"
-                value={formData.contactNo}
-                onChange={handleChange}
-                placeholder="0112424321"
-                className="w-full h-11 bg-white border border-neutral-300 rounded-xl px-4 font-['Red_Hat_Display'] text-sm text-neutral-800 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all shadow-sm"
-                required
-              />
-            </div>
-
-            {/* Emergency Contact */}
-            <div className="flex flex-col">
-              <label
-                htmlFor="emergencyContact"
-                className="block text-sm font-semibold text-neutral-700 mb-1.5 font-['Red_Hat_Display']"
-              >
-                Emergency Contact
-              </label>
-              <input
-                type="tel"
-                id="emergencyContact"
-                name="emergencyContact"
-                value={formData.emergencyContact}
-                onChange={handleChange}
-                placeholder="0772424321"
-                className="w-full h-11 bg-white border border-neutral-300 rounded-xl px-4 font-['Red_Hat_Display'] text-sm text-neutral-800 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all shadow-sm"
-                required
-              />
-            </div>
-
-            {/* Address */}
-            <div className="flex flex-col md:col-span-2">
-              <label
-                htmlFor="address"
-                className="block text-sm font-semibold text-neutral-700 mb-1.5 font-['Red_Hat_Display']"
-              >
-                Address
-              </label>
-              <input
-                type="text"
-                id="address"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-                placeholder="No 23, 11 Street, Colombo 7"
-                className="w-full h-11 bg-white border border-neutral-300 rounded-xl px-4 font-['Red_Hat_Display'] text-sm text-neutral-800 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all shadow-sm"
-                required
-              />
-            </div>
-          </div>
-
-          {/* Action Buttons */}
-          <div className="flex justify-end gap-3 mt-8">
-            <button
-              type="button"
-              onClick={() => navigate("/")}
-              className="w-[100px] h-11 border border-neutral-300 bg-white hover:bg-neutral-50 text-neutral-700 font-['Red_Hat_Display'] font-semibold text-sm rounded-xl transition-all cursor-pointer shadow-sm"
-            >
-              Home
-            </button>
+            {/* Circular Next Button */}
             <button
               type="submit"
-              className="w-[100px] h-11 bg-[#1D1D1D] hover:bg-neutral-800 text-white font-['Red_Hat_Display'] font-semibold text-sm rounded-xl transition-all shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+              className="flex items-center justify-center w-11 h-11 rounded-full border-2 border-[#1D1D1D] hover:bg-neutral-50 active:scale-95 transition-all cursor-pointer shadow-sm"
+              aria-label="Next Step"
             >
-              Next
+              <svg
+                className="w-5 h-5 text-[#1D1D1D]"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                />
+              </svg>
             </button>
           </div>
-        </form>
-      </div>
+
+          {/* Form Content: Labels and Inputs in responsive grid */}
+          <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-x-6 gap-y-4 max-w-[620px] mx-auto items-center">
+            {/* Full Name */}
+            <label
+              htmlFor="fullName"
+              className="text-base font-medium text-neutral-800 font-['Red_Hat_Display']"
+            >
+              Full Name
+            </label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleChange}
+              placeholder="John Doe"
+              className="w-full h-11 bg-white border border-neutral-300 rounded-full px-5 font-['Red_Hat_Display'] text-sm text-neutral-800 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+              required
+            />
+
+            {/* National ID */}
+            <label
+              htmlFor="nationalId"
+              className="text-base font-medium text-neutral-800 font-['Red_Hat_Display']"
+            >
+              National ID
+            </label>
+            <input
+              type="text"
+              id="nationalId"
+              name="nationalId"
+              value={formData.nationalId}
+              onChange={handleChange}
+              placeholder="998323135V"
+              className="w-full h-11 bg-white border border-neutral-300 rounded-full px-5 font-['Red_Hat_Display'] text-sm text-neutral-800 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+              required
+            />
+
+            {/* Date of Birth */}
+            <label
+              htmlFor="dateOfBirth"
+              className="text-base font-medium text-neutral-800 font-['Red_Hat_Display']"
+            >
+              Birth of Date
+            </label>
+            <input
+              type="text"
+              id="dateOfBirth"
+              name="dateOfBirth"
+              value={formData.dateOfBirth}
+              onChange={handleChange}
+              placeholder="1964 - 10 - 12"
+              className="w-full h-11 bg-white border border-neutral-300 rounded-full px-5 font-['Red_Hat_Display'] text-sm text-neutral-800 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+              required
+            />
+
+            {/* Email */}
+            <label
+              htmlFor="email"
+              className="text-base font-medium text-neutral-800 font-['Red_Hat_Display']"
+            >
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="john@gmail.com"
+              className="w-full h-11 bg-white border border-neutral-300 rounded-full px-5 font-['Red_Hat_Display'] text-sm text-neutral-800 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+              required
+            />
+
+            {/* Address */}
+            <label
+              htmlFor="address"
+              className="text-base font-medium text-neutral-800 font-['Red_Hat_Display']"
+            >
+              Address
+            </label>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              placeholder="No 23, 11 Street, Colombo 7"
+              className="w-full h-11 bg-white border border-neutral-300 rounded-full px-5 font-['Red_Hat_Display'] text-sm text-neutral-800 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+              required
+            />
+
+            {/* Contact Number */}
+            <label
+              htmlFor="contactNo"
+              className="text-base font-medium text-neutral-800 font-['Red_Hat_Display']"
+            >
+              Contact No.
+            </label>
+            <input
+              type="tel"
+              id="contactNo"
+              name="contactNo"
+              value={formData.contactNo}
+              onChange={handleChange}
+              placeholder="0112424321"
+              className="w-full h-11 bg-white border border-neutral-300 rounded-full px-5 font-['Red_Hat_Display'] text-sm text-neutral-800 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+              required
+            />
+
+            {/* Emergency Contact */}
+            <label
+              htmlFor="emergencyContact"
+              className="text-base font-medium text-neutral-800 font-['Red_Hat_Display']"
+            >
+              Immergency Cont.
+            </label>
+            <input
+              type="tel"
+              id="emergencyContact"
+              name="emergencyContact"
+              value={formData.emergencyContact}
+              onChange={handleChange}
+              placeholder="0772424321"
+              className="w-full h-11 bg-white border border-neutral-300 rounded-full px-5 font-['Red_Hat_Display'] text-sm text-neutral-800 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent transition-all"
+              required
+            />
+          </div>
+        </div>
+      </form>
     </div>
   );
 };

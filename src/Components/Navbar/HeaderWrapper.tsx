@@ -1,8 +1,9 @@
 import { FiBell, FiChevronDown } from "react-icons/fi";
-import { useUserProfileContext } from "../../context/UserProfileContext";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 const HeaderWrapper = () => {
-  const { profileData } = useUserProfileContext();
+  const profileData = useSelector((state: RootState) => state.profile.profileData);
 
   // --- UI PLACEHOLDERS ---
   const greeting = "Good Morning"; // Dynamic based on time of day (Morning/Afternoon/Evening)

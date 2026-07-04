@@ -31,7 +31,7 @@ import Payment from "./pages/CARETAKER/Payment/Payment";
 import Feedback from "./pages/CARETAKER/Feedback/Feedback";
 import MasterLayout from "./layouts/MasterLayout";
 import AccDashboard from "./pages/accountant/AccDashboard";
-import OnboardForm from "./pages/CARETAKER/Dashboard/onboard";
+import OnboardForm from "./pages/CARETAKER/Dashboard/Onboard";
 import ServiceCategory from "./pages/CARETAKER/Dashboard/ServiceCategory";
 import StartupLayout from "./layouts/StatupLayout";
 
