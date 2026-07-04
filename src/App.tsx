@@ -30,16 +30,24 @@ import ServiceRequests from "./pages/CARETAKER/ServiceRequests/ServiceRequests";
 import Payment from "./pages/CARETAKER/Payment/Payment";
 import Feedback from "./pages/CARETAKER/Feedback/Feedback";
 import MasterLayout from "./layouts/MasterLayout";
+import AccDashboard from "./pages/accountant/AccDashboard";
+import OnboardForm from "./pages/CARETAKER/Dashboard/onboard";
+import StartupLayout from "./layouts/StatupLayout";
 
 function App(): React.JSX.Element {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/sandbox" element={<MasterLayout />} />
+          <Route element={<MasterLayout />}>
+            <Route path="/sandbox" />
+          </Route>
+          <Route element={<StartupLayout />}>
+            <Route path="/onboard" element={<OnboardForm />} />
+          </Route>
 
           {/* ── Public routes ─────────────────────────────────────────── */}
-          <Route element={<AuthLayout/>}> 
+          <Route element={<AuthLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/Home" element={<Home />} />
             <Route path="/Register" element={<Register />} />
