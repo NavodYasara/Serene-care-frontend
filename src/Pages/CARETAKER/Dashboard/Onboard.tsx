@@ -43,30 +43,11 @@ const OnboardForm: React.FC = () => {
   return (
     <div className="p-6 md:p-10 lg:p-12 flex flex-col justify-between h-full min-h-full">
       <div>
-        {/* Header Area */}
         <div className="flex justify-between items-center mb-8 pb-4 border-b border-neutral-100">
           {/* Personal Information Title */}
           <h2 className="font-['Red_Hat_Display'] font-bold text-2xl md:text-3xl lg:text-4xl text-[#1D1D1D] tracking-tight">
             Personal Information
           </h2>
-          {/* Right arrow icon button as form submit */}
-          <button
-            type="submit"
-            form="onboard-form"
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-[#1D1D1D] hover:bg-neutral-800 text-white shadow-md hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
-            title="Continue"
-          >
-            <svg
-              className="w-5 h-5 stroke-current fill-none"
-              viewBox="0 0 24 24"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </button>
         </div>
 
         {/* Form Content */}
@@ -213,14 +194,20 @@ const OnboardForm: React.FC = () => {
             </div>
           </div>
 
-          {/* Back to Home Button */}
-          <div className="flex justify-center md:justify-end mt-6">
+          {/* Action Buttons */}
+          <div className="flex justify-end gap-3 mt-8">
             <button
               type="button"
               onClick={() => navigate("/")}
-              className="w-full md:w-[150px] h-11 bg-[#1D1D1D] hover:bg-neutral-800 text-white font-['Red_Hat_Display'] font-semibold text-sm rounded-xl transition-all shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+              className="w-[100px] h-11 border border-neutral-300 bg-white hover:bg-neutral-50 text-neutral-700 font-['Red_Hat_Display'] font-semibold text-sm rounded-xl transition-all cursor-pointer shadow-sm"
             >
               Home
+            </button>
+            <button
+              type="submit"
+              className="w-[100px] h-11 bg-[#1D1D1D] hover:bg-neutral-800 text-white font-['Red_Hat_Display'] font-semibold text-sm rounded-xl transition-all shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+            >
+              Next
             </button>
           </div>
         </form>

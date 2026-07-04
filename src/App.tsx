@@ -78,14 +78,16 @@ function App(): React.JSX.Element {
 
           {/* ── CARETAKER (patient) only ──────────────────────────────── */}
           <Route element={<ProtectedRoute allowedRoles={["caretaker"]} />}>
-            <Route
-              path="/CaretakerDashboard"
-              element={<CaretakerDashboard />}
-            />
-            <Route path="/ServiceRequests" element={<ServiceRequests />} />
-            <Route path="/Feedback" element={<Feedback />} />
-            <Route path="/Report" element={<Report />} />
-            <Route path="/Payment" element={<Payment />} />
+            <Route element={<MasterLayout />}>
+              <Route
+                path="/CaretakerDashboard"
+                element={<CaretakerDashboard />}
+              />
+              <Route path="/ServiceRequests" element={<ServiceRequests />} />
+              <Route path="/Feedback" element={<Feedback />} />
+              <Route path="/Report" element={<Report />} />
+              <Route path="/Payment" element={<Payment />} />
+            </Route>
           </Route>
 
           {/* ── Catch-all → redirect to login ─────────────────────────── */}

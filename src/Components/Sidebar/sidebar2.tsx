@@ -1,14 +1,24 @@
 import React from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import {
   FaHeartbeat,
-  FaUsers,
-  FaRegCalendarAlt,
   FaClipboardList,
   FaChartBar,
+  FaCommentDots,
+  FaCreditCard,
 } from "react-icons/fa";
 import { FiSettings, FiLogOut } from "react-icons/fi";
 
 const Sidebar2 = () => {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout(); // clears context state + localStorage
+    navigate("/Login");
+  };
+
   return (
     <div className="sidebar h-screen w-64 bg-[#0f4c43] text-white flex flex-col justify-between p-6">
       {/* Top Section */}
@@ -25,28 +35,65 @@ const Sidebar2 = () => {
 
         {/* Navigation Links */}
         <nav className="mt-8 flex flex-col gap-6">
-          <div className="flex items-center gap-4 text-lg font-medium cursor-pointer hover:text-teal-300 transition-colors">
+          <NavLink
+            to="/CaretakerDashboard"
+            className={({ isActive }) =>
+              `flex items-center gap-4 text-lg font-medium cursor-pointer transition-colors ${
+                isActive ? "text-teal-300 font-bold" : "text-white hover:text-teal-300"
+              }`
+            }
+          >
             <FaHeartbeat className="text-teal-400 text-xl" />
             <span>Dashboard</span>
-          </div>
-        </nav>
-        <nav className="mt-8 flex flex-col gap-6">
-          <div className="flex items-center gap-4 text-lg font-medium cursor-pointer hover:text-teal-300 transition-colors">
+          </NavLink>
+
+          <NavLink
+            to="/ServiceRequests"
+            className={({ isActive }) =>
+              `flex items-center gap-4 text-lg font-medium cursor-pointer transition-colors ${
+                isActive ? "text-teal-300 font-bold" : "text-white hover:text-teal-300"
+              }`
+            }
+          >
             <FaClipboardList className="text-teal-400 text-xl" />
-            <span>My Plan</span>
-          </div>
-        </nav>
-        <nav className="mt-8 flex flex-col gap-6">
-          <div className="flex items-center gap-4 text-lg font-medium cursor-pointer hover:text-teal-300 transition-colors">
-            <FaRegCalendarAlt className="text-teal-400 text-xl" />
-            <span>Schedule</span>
-          </div>
-        </nav>
-        <nav className="mt-8 flex flex-col gap-6">
-          <div className="flex items-center gap-4 text-lg font-medium cursor-pointer hover:text-teal-300 transition-colors">
+            <span>Service Requests</span>
+          </NavLink>
+
+          <NavLink
+            to="/Feedback"
+            className={({ isActive }) =>
+              `flex items-center gap-4 text-lg font-medium cursor-pointer transition-colors ${
+                isActive ? "text-teal-300 font-bold" : "text-white hover:text-teal-300"
+              }`
+            }
+          >
+            <FaCommentDots className="text-teal-400 text-xl" />
+            <span>Feedbacks</span>
+          </NavLink>
+
+          <NavLink
+            to="/Report"
+            className={({ isActive }) =>
+              `flex items-center gap-4 text-lg font-medium cursor-pointer transition-colors ${
+                isActive ? "text-teal-300 font-bold" : "text-white hover:text-teal-300"
+              }`
+            }
+          >
             <FaChartBar className="text-teal-400 text-xl" />
             <span>Reports</span>
-          </div>
+          </NavLink>
+
+          <NavLink
+            to="/Payment"
+            className={({ isActive }) =>
+              `flex items-center gap-4 text-lg font-medium cursor-pointer transition-colors ${
+                isActive ? "text-teal-300 font-bold" : "text-white hover:text-teal-300"
+              }`
+            }
+          >
+            <FaCreditCard className="text-teal-400 text-xl" />
+            <span>Payment</span>
+          </NavLink>
         </nav>
       </div>
 
@@ -57,7 +104,13 @@ const Sidebar2 = () => {
           <span>Settings</span>
         </div>
 
-        {/* Add the logout item here */}
+        <div
+          onClick={handleLogout}
+          className="flex items-center gap-4 text-lg font-medium cursor-pointer hover:text-red-300 transition-colors"
+        >
+          <FiLogOut className="text-xl" />
+          <span>Logout</span>
+        </div>
       </div>
     </div>
   );

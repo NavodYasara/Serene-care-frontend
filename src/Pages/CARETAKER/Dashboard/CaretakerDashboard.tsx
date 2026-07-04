@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Sidebar from "../../../components/Sidebar/Sidebar";
 import { useAuth } from "../../../context/AuthContext";
 import {
   Container,
@@ -154,10 +153,8 @@ const CaretakerDashboard = () => {
   );
 
   return (
-    <Box sx={{ display: "flex", bgcolor: "#f4f7fe", minHeight: "100vh" }}>
-      <Sidebar />
-      <Box component="main" sx={{ flexGrow: 1, p: 4, overflowX: "hidden" }}>
-        <Container maxWidth="lg">
+    <Box component="main" sx={{ flexGrow: 1, p: 4, overflowX: "hidden" }}>
+      <Container maxWidth="lg">
           {/* Header Section */}
           <Box
             sx={{
@@ -479,7 +476,6 @@ const CaretakerDashboard = () => {
             </Grid>
           </Grid>
         </Container>
-      </Box>
 
       {/* Edit Dialog */}
       <Dialog

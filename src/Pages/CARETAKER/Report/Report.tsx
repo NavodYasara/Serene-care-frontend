@@ -1,7 +1,5 @@
 import React from "react";
-import Sidebar from '../../../components/Sidebar/Sidebar';
 import { Container, Row, Col, Image, Table } from "react-bootstrap";
-import Navbar from '../../../components/Navbar/Navbar';
 
 function Report() {
   // You can replace these with actual data from your application
@@ -39,13 +37,10 @@ function Report() {
 
 
   return (
-    <div style={{ display: "flex" }}>
-      <Sidebar />
-      <div style={{ flex: 1 }}>
-        <Navbar />
-        <div className="mgd-main" style={{ padding: "20px" }}>
-          <Container fluid>
-            <div>
+    <>
+      <div className="mgd-main" style={{ padding: "20px" }}>
+        <Container fluid>
+          <div>
               <Container
                 fluid
                 className="vh-90 d-flex"
@@ -230,8 +225,7 @@ function Report() {
             </div>
           </Container>
         </div>
-      </div>
-    </div>
+    </>
   );
 }
 

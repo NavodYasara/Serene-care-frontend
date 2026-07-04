@@ -12,8 +12,6 @@ import {
 } from "@mui/material";
 import FeedbackIcon from "@mui/icons-material/Feedback";
 import NoteIcon from "@mui/icons-material/Note";
-import Sidebar from "../../../components/Sidebar/Sidebar";
-import Navbar from "../../../components/Navbar/Navbar";
 
 const getUserFromLocalStorage = localStorage.getItem("userProfile")
   ? JSON.parse(localStorage.getItem("userProfile") || "null")
@@ -106,12 +104,9 @@ const AddFeedbackPage = () => {
   };
 
   return (
-    <div style={{ display: "flex" }}>
-      <Sidebar />
-      <div style={{ flex: 1 }}>
-        <Navbar />
-        <div className="mgd-main" style={{ padding: "20px" }}>
-          <Container fluid>
+    <>
+      <div className="mgd-main" style={{ padding: "20px" }}>
+        <Container fluid>
             <Container className="mt-5">
               <div className="p-3 shadow rounded">
                 <div className="row">
@@ -159,7 +154,7 @@ const AddFeedbackPage = () => {
             </Container>
           </Container>
         </div>
-      </div>
+
 
       {/* Feedback Modal */}
       <Modal
@@ -254,7 +249,7 @@ const AddFeedbackPage = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </>
   );
 };
 

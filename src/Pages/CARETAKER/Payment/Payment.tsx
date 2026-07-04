@@ -1,6 +1,4 @@
 import React from "react";
-import Sidebar from '../../../components/Sidebar/Sidebar';
-import Navbar from '../../../components/Navbar/Navbar';
 import {
   Container,
   Grid,
@@ -24,12 +22,9 @@ const PaymentPage = () => {
   const price = "$1500";
 
   return (
-    <div style={{ display: "flex" }}>
-      <Sidebar />
-      <div style={{ flex: 1 }}>
-        <Navbar />
-        <div className="mgd-main" style={{ padding: "20px" }}>
-          <Container maxWidth="md">
+    <>
+      <div className="mgd-main" style={{ padding: "20px" }}>
+        <Container maxWidth="md">
             <Paper elevation={3} style={{ padding: "20px", marginTop: "20px" }}>
               <Typography variant="h4" gutterBottom>
                 Payment Details
@@ -80,8 +75,7 @@ const PaymentPage = () => {
             </Paper>
           </Container>
         </div>
-      </div>
-    </div>
+    </>
   );
 };
 

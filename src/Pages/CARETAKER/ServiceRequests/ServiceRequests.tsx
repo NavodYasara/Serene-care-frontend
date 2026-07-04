@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Sidebar from "../../../components/Sidebar/Sidebar";
 import {
   Container,
   Grid,
@@ -135,10 +134,8 @@ const ServiceRequests = () => {
   }, [user.userId]);
 
   return (
-    <Box sx={{ display: "flex", bgcolor: "#f4f7fe", minHeight: "100vh" }}>
-      <Sidebar />
-      <Box component="main" sx={{ flexGrow: 1, p: 4 }}>
-        <Container maxWidth="md">
+    <Box component="main" sx={{ flexGrow: 1, p: 4 }}>
+      <Container maxWidth="md">
           {/* Header Section */}
           <Box
             sx={{
@@ -321,7 +318,6 @@ const ServiceRequests = () => {
             </CardContent>
           </Card>
         </Container>
-      </Box>
 
       <Snackbar
         open={snackbar.open}
