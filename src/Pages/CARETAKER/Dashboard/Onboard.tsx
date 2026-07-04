@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface OnboardFormData {
   fullName: string;
@@ -11,6 +12,7 @@ interface OnboardFormData {
 }
 
 const OnboardForm: React.FC = () => {
+  const navigate = useNavigate();
   // State to hold the form values
   const [formData, setFormData] = useState<OnboardFormData>({
     fullName: "",
@@ -35,6 +37,7 @@ const OnboardForm: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Form Data Submitted:", formData);
+    navigate("/onboard-step2");
   };
 
   return (
@@ -46,11 +49,12 @@ const OnboardForm: React.FC = () => {
           <h2 className="font-['Red_Hat_Display'] font-bold text-2xl md:text-3xl lg:text-4xl text-[#1D1D1D] tracking-tight">
             Personal Information
           </h2>
-          {/* Right arrow icon button */}
+          {/* Right arrow icon button as form submit */}
           <button
-            type="button"
+            type="submit"
+            form="onboard-form"
             className="w-10 h-10 flex items-center justify-center rounded-full bg-[#1D1D1D] hover:bg-neutral-800 text-white shadow-md hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
-            title="Next"
+            title="Continue"
           >
             <svg
               className="w-5 h-5 stroke-current fill-none"
@@ -66,7 +70,7 @@ const OnboardForm: React.FC = () => {
         </div>
 
         {/* Form Content */}
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form id="onboard-form" onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 max-w-[750px] mx-auto">
             {/* Full Name */}
             <div className="flex flex-col md:col-span-2">
@@ -209,13 +213,14 @@ const OnboardForm: React.FC = () => {
             </div>
           </div>
 
-          {/* Save Button */}
+          {/* Back to Home Button */}
           <div className="flex justify-center md:justify-end mt-6">
             <button
-              type="submit"
+              type="button"
+              onClick={() => navigate("/")}
               className="w-full md:w-[150px] h-11 bg-[#1D1D1D] hover:bg-neutral-800 text-white font-['Red_Hat_Display'] font-semibold text-sm rounded-xl transition-all shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
             >
-              Save Info
+              Home
             </button>
           </div>
         </form>

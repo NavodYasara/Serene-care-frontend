@@ -8,6 +8,7 @@ import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 import Navbar from '../../components/Navbar/Navbar';
 import heroImage from "../../Assets/hero_image.png";
+import { useNavigate } from "react-router-dom";
 
 const services = [
   {
@@ -43,6 +44,8 @@ const services = [
 ];
 
 export default function Home() {
+  const navigate = useNavigate();
+
   return (
     <>
       <Navbar />
@@ -73,8 +76,13 @@ export default function Home() {
               <Typography variant="h5" sx={{ mb: 4, opacity: 0.9, lineHeight: 1.8, textShadow: "0px 2px 5px rgba(0,0,0,0.5)" }}>
                 Dedicated to providing high-quality care solutions for individuals with disabilities. We promote dignity, wellbeing, and dedicated support for entirely independent living.
               </Typography>
-              <Button variant="contained" size="large" sx={{ backgroundColor: "#2E8B57", color: "white", px: 4, py: 1.5, fontSize: "1.1rem", borderRadius: "30px", textTransform: "none", mr: 2, "&:hover": { backgroundColor: "#246e45", transform: "translateY(-2px)", transition: "all 0.3s" } }}>
-                Our Services
+              <Button 
+                variant="contained" 
+                size="large" 
+                onClick={() => navigate("/onboard")}
+                sx={{ backgroundColor: "#2E8B57", color: "white", px: 4, py: 1.5, fontSize: "1.1rem", borderRadius: "30px", textTransform: "none", mr: 2, "&:hover": { backgroundColor: "#246e45", transform: "translateY(-2px)", transition: "all 0.3s" } }}
+              >
+                Register as Caretaker
               </Button>
               <Button variant="outlined" size="large" sx={{ color: "white", borderColor: "white", px: 4, py: 1.5, fontSize: "1.1rem", borderRadius: "30px", textTransform: "none", "&:hover": { backgroundColor: "rgba(255,255,255,0.1)", transform: "translateY(-2px)", transition: "all 0.3s" } }}>
                 Contact Us
@@ -95,7 +103,7 @@ export default function Home() {
               Our Specialized Services
             </Typography>
             <Typography variant="body1" sx={{ color: "#4A5568", maxWidth: "600px", mx: "auto" }}>
-              At Serene Care, our core mission is to prioritize the independence and lifestyle choices of individuals receiving disability services.
+              At Serene Care, our core mission is to prioritize the lifestyle choices of individuals receiving disability services.
             </Typography>
           </Box>
           
@@ -144,8 +152,13 @@ export default function Home() {
           <Typography variant="h6" sx={{ mb: 4, fontWeight: 400, opacity: 0.8 }}>
             Reach out today to discuss a tailored care plan designed exclusively for your unique needs.
           </Typography>
-          <Button variant="contained" size="large" sx={{ backgroundColor: "#2E8B57", color: "white", px: 5, py: 2, fontSize: "1.1rem", borderRadius: "30px", textTransform: "none", "&:hover": { backgroundColor: "#246e45" } }}>
-            Get In Touch
+          <Button 
+            variant="contained" 
+            size="large" 
+            onClick={() => navigate("/onboard")}
+            sx={{ backgroundColor: "#2E8B57", color: "white", px: 5, py: 2, fontSize: "1.1rem", borderRadius: "30px", textTransform: "none", "&:hover": { backgroundColor: "#246e45" } }}
+          >
+            Register Now
           </Button>
         </Container>
       </Box>

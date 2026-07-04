@@ -32,6 +32,7 @@ import Feedback from "./pages/CARETAKER/Feedback/Feedback";
 import MasterLayout from "./layouts/MasterLayout";
 import AccDashboard from "./pages/accountant/AccDashboard";
 import OnboardForm from "./pages/CARETAKER/Dashboard/onboard";
+import ServiceCategory from "./pages/CARETAKER/Dashboard/ServiceCategory";
 import StartupLayout from "./layouts/StatupLayout";
 
 function App(): React.JSX.Element {
@@ -44,6 +45,7 @@ function App(): React.JSX.Element {
           </Route>
           <Route element={<StartupLayout />}>
             <Route path="/onboard" element={<OnboardForm />} />
+            <Route path="/onboard-step2" element={<ServiceCategory />} />
           </Route>
 
           {/* ── Public routes ─────────────────────────────────────────── */}
