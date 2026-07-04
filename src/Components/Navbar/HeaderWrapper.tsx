@@ -1,60 +1,13 @@
-import React, { useState, useEffect } from "react";
 import { FiBell, FiChevronDown } from "react-icons/fi";
-import axios from "axios";
-import { useAuth } from "../../context/AuthContext";
+import { useUserProfileContext } from "../../context/UserProfileContext";
 
 const HeaderWrapper = () => {
-  const [profileData, setProfileData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    nationalId: "",
-    mobileNo: "",
-    dob: "",
-    address: "",
-    mediCon: "",
-    emergCont: "",
-    category: "",
-  });
-  const [originalProfileData, setOriginalProfileData] = useState<any>({});
-  const [open, setOpen] = useState(false);
-  const { userProfile: user = {} } = useAuth();
-
-  useEffect(() => {
-    const fetchCaretakerData = async () => {
-      try {
-        const response = await axios
-          .get("http://localhost:5000/api/user/getCaretakerProfile", {
-            params: { userId: user.userId },
-          })
-          .catch(() => ({ data: null }));
-
-        if (response.data) {
-          setOriginalProfileData(response.data);
-          setProfileData(response.data);
-        } else {
-          // Fallback to basic user info from localStorage if profile isn't found
-          setProfileData((prev) => ({
-            ...prev,
-            firstName: user.firstName || "",
-            lastName: user.lastName || "",
-            mobileNo: user.mobileNo || "",
-          }));
-        }
-      } catch (error) {
-        console.error("Error fetching caretaker data:", error);
-      }
-    };
-
-    if (user.userId) {
-      fetchCaretakerData();
-    }
-  }, [user.userId]);
+  const { profileData } = useUserProfileContext();
 
   // --- UI PLACEHOLDERS ---
   const greeting = "Good Morning"; // Dynamic based on time of day (Morning/Afternoon/Evening)
-  const userName = `${profileData.firstName} ${profileData.lastName}`; // Dynamic from user profile
-  const userRole = "Patient"; // Dynamic from user profile (caretaker / caregiver / admin)
+  const userName = `${profileData.firstName || ""} ${profileData.lastName || ""}`;
+  const userRole = "Caretaker"; // Dynamic from user profile (caretaker / caregiver / admin)
   const currentDate = "Saturday, July 4, 2026"; // Dynamic using new Date()
   const avatarLetter = userName.charAt(0) || "U";
 

@@ -35,23 +35,13 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import PersonIcon from "@mui/icons-material/Person";
 import EmailIcon from "@mui/icons-material/Email";
 import InputAdornment from "@mui/material/InputAdornment";
+import { useUserProfileContext } from "../../../context/UserProfileContext";
 
 const CaretakerDashboard = () => {
-  const [profileData, setProfileData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    nationalId: "",
-    mobileNo: "",
-    dob: "",
-    address: "",
-    mediCon: "",
-    emergCont: "",
-    category: "",
-  });
   const [originalProfileData, setOriginalProfileData] = useState<any>({});
   const [open, setOpen] = useState(false);
   const theme = useTheme();
+  const { profileData, setProfileData } = useUserProfileContext();
 
   const { userProfile: user = {} } = useAuth();
 
@@ -69,7 +59,7 @@ const CaretakerDashboard = () => {
           setProfileData(response.data);
         } else {
           // Fallback to basic user info from localStorage if profile isn't found
-          setProfileData((prev) => ({
+          setProfileData((prev: any) => ({
             ...prev,
             firstName: user.firstName || "",
             lastName: user.lastName || "",
@@ -117,7 +107,7 @@ const CaretakerDashboard = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
-    setProfileData((prevState) => ({
+    setProfileData((prevState: any) => ({
       ...prevState,
       [name]: value,
     }));
