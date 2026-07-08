@@ -31,8 +31,10 @@ import Payment from "./pages/CARETAKER/Payment/Payment";
 import Feedback from "./pages/CARETAKER/Feedback/Feedback";
 import MasterLayout from "./layouts/MasterLayout";
 import AccDashboard from "./pages/accountant/AccDashboard";
-import OnboardForm from "./pages/CARETAKER/Dashboard/Onboard";
-import ServiceCategory from "./pages/CARETAKER/Dashboard/ServiceCategory";
+import OnboardForm from "./pages/CARETAKER/OnboadPages/Onboard";
+import ServiceCategory from "./pages/CARETAKER/OnboadPages/ServiceCategory";
+import OnboardRequirement from "./pages/CARETAKER/OnboadPages/OnboardRequirement";
+import OnboardPassword from "./pages/CARETAKER/OnboadPages/OnboardPassword";
 import StartupLayout from "./layouts/StatupLayout";
 
 function App(): React.JSX.Element {
@@ -46,6 +48,8 @@ function App(): React.JSX.Element {
           <Route element={<StartupLayout />}>
             <Route path="/onboard" element={<OnboardForm />} />
             <Route path="/onboard-step2" element={<ServiceCategory />} />
+            <Route path="/onboard-step3" element={<OnboardRequirement />} />
+            <Route path="/onboard-step4" element={<OnboardPassword />} />
           </Route>
 
           {/* ── Public routes ─────────────────────────────────────────── */}
