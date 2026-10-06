@@ -1,23 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { CaretakerProfile } from "../../types/CaretakerProfile";
 
 interface ProfileState {
-  profileData: {
-    firstName: string;
-    lastName: string;
-    nationalId: string;
-    dob: string;
-    mobileNo: string;
-    emergCont: string;
-    category: string;
-    userId: string;
-    mediCon: string;
-    email: string;
-    address: string;
-  };
+  profileData: CaretakerProfile;
 }
 
 const initialState: ProfileState = {
   profileData: {
+    id: 0,
+    userType: "",
+    password: "",
     firstName: "",
     lastName: "",
     nationalId: "",
@@ -36,7 +28,7 @@ const profileSlice = createSlice({
   name: "profile",
   initialState,
   reducers: {
-    updateProfile: (state, action: PayloadAction<any>) => {
+    updateProfile: (state, action: PayloadAction<CaretakerProfile>) => {
       state.profileData = {
         ...state.profileData,
         ...action.payload,
