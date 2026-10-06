@@ -28,7 +28,10 @@ const profileSlice = createSlice({
   name: "profile",
   initialState,
   reducers: {
-    updateProfile: (state, action: PayloadAction<Partial<CaretakerProfile>>) => {
+    updateProfile: (
+      state,
+      action: PayloadAction<Partial<CaretakerProfile>>,
+    ) => {
       state.profileData = {
         ...state.profileData,
         ...action.payload,

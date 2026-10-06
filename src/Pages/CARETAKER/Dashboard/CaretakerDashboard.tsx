@@ -43,17 +43,19 @@ const CaretakerDashboard = () => {
   const [originalProfileData, setOriginalProfileData] = useState<any>({});
   const [open, setOpen] = useState(false);
   const theme = useTheme();
-  const profileData = useSelector((state: RootState) => state.profile.profileData);
-  const dispatch = useDispatch();
 
-  const { userProfile: user = {} } = useAuth();
+  const profileData = useSelector(
+    (state: RootState) => state.profile.profileData,
+  );
+  const dispatch = useDispatch();
+  const { userProfile: user } = useAuth();
 
   useEffect(() => {
     const fetchCaretakerData = async () => {
       try {
         const response = await axios
           .get("/api/user/getCaretakerProfile", {
-            params: { userId: user.userId },
+            params: { userId: user?.id },
           })
           .catch(() => ({ data: null }));
 
@@ -62,21 +64,23 @@ const CaretakerDashboard = () => {
           dispatch(updateProfile(response.data));
         } else {
           // Fallback to basic user info from localStorage if profile isn't found
-          dispatch(updateProfile({
-            firstName: user.firstName || "",
-            lastName: user.lastName || "",
-            mobileNo: user.mobileNo || "",
-          }));
+          dispatch(
+            updateProfile({
+              firstName: user?.firstName || "",
+              lastName: user?.lastName || "",
+              mobileNo: user?.mobileNo || "",
+            }),
+          );
         }
       } catch (error) {
         console.error("Error fetching caretaker data:", error);
       }
     };
 
-    if (user.userId) {
+    if (user?.id) {
       fetchCaretakerData();
     }
-  }, [user.userId]);
+  }, [user?.id]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -91,12 +95,9 @@ const CaretakerDashboard = () => {
     try {
       const updatedProfileData = {
         ...profileData,
-        userId: user.userId,
+        userId: user?.id,
       };
-      await axios.put(
-        "/api/user/updateCaretakerProfile",
-        updatedProfileData,
-      );
+      await axios.put("/api/user/updateCaretakerProfile", updatedProfileData);
       setOriginalProfileData({ ...profileData });
       setOpen(false);
       localStorage.setItem("profileData", JSON.stringify(updatedProfileData));
@@ -118,8 +119,8 @@ const CaretakerDashboard = () => {
     value,
   }: {
     icon: any;
-    label: string;
-    value: string;
+    label: string | undefined;
+    value: string | undefined;
   }) => (
     <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
       <Avatar
@@ -174,7 +175,7 @@ const CaretakerDashboard = () => {
                     }}
                   >
                     {profileData.firstName?.charAt(0) ||
-                      user.email?.charAt(0) ||
+                      user?.email?.charAt(0) ||
                       "U"}
                   </Avatar>
                   <Typography variant="h5" fontWeight="bold">
@@ -717,4 +718,3 @@ const CaretakerDashboard = () => {
 };
 
 export default CaretakerDashboard;
-
