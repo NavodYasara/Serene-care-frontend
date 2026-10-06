@@ -19,7 +19,7 @@ const WaitingPlan = () => {
    
     const fetchAssignedAndRejectedTasks=async()=>{
         try {
-            const results=await axios.get("http://localhost:5000/api/manager/assignedAndRejected")
+            const results=await axios.get("/api/manager/assignedAndRejected")
             console.log("results assigned ",results);
             const finalTaskArray=results.data?.map((res: any)=>({
                 ...res,

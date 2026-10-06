@@ -82,7 +82,7 @@ const ServiceRequests = () => {
 
     try {
       await axios.post(
-        "http://localhost:5000/api/requirement/insertRequest",
+        "/api/requirement/insertRequest",
         submissionData,
       );
 
@@ -116,7 +116,7 @@ const ServiceRequests = () => {
     const fetchCaretakers = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/requirement/getAllcaretakers",
+          "/api/requirement/getAllcaretakers",
         );
         const allCaretakers = response.data;
         const filteredCaretakers = allCaretakers.filter(
@@ -338,3 +338,4 @@ const ServiceRequests = () => {
 };
 
 export default ServiceRequests;
+

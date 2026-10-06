@@ -17,7 +17,7 @@ const AcceptedPlan = () => {
   const fetchFinalizedPlans = async () => {
     try {
       const results = await axios.get(
-        "http://localhost:5000/api/manager/finalizedPlans",
+        "/api/manager/finalizedPlans",
       );
       console.log("results assigned finalized ", results);
       const finalTaskArray = results.data?.map((res: any) => ({
@@ -48,3 +48,4 @@ const AcceptedPlan = () => {
 };
 
 export default AcceptedPlan;
+

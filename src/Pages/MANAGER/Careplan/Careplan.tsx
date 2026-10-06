@@ -12,7 +12,7 @@ function appoinment() {
     async function fetchappoinments() {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/appoinment/getappoinments",
+          "/api/appoinment/getappoinments",
         );
         setappoinments(response.data);
       } catch (error) {
@@ -132,7 +132,7 @@ export default appoinment;
 //     async function fetchappoinments() {
 //       try {
 //         const response = await axios.get(
-//           "http://localhost:5000/api/appoinment/getappoinments"
+//           "/api/appoinment/getappoinments"
 //         );
 //         setappoinments(response.data);
 //       } catch (error) {
@@ -234,3 +234,4 @@ export default appoinment;
 // }
 
 // export default appoinment;
+

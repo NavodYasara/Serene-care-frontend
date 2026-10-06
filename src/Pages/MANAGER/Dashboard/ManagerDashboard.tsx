@@ -34,7 +34,7 @@ const ManagerDashboard = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/manager/getCaretakerInformation")
+    fetch("/api/manager/getCaretakerInformation")
       .then((response) => response.json())
       .then((data) => {
         setCaretakers(Array.isArray(data) ? data : []);
@@ -44,7 +44,7 @@ const ManagerDashboard = () => {
       })
       .catch((error) => console.error("Error:", error));
 
-    fetch("http://localhost:5000/api/manager/getCaregivers")
+    fetch("/api/manager/getCaregivers")
       .then((response) => response.json())
       .then((data) => {
         console.log("caregivers", data);
@@ -56,7 +56,7 @@ const ManagerDashboard = () => {
   const handleRowClick = (caretaker: any) => {
     setSelectedCaretaker(caretaker);
     fetch(
-      `http://localhost:5000/api/manager/getCaretakerById/${caretaker.caretakerId}`
+      `/api/manager/getCaretakerById/${caretaker.caretakerId}`
     )
       .then((response) => response.json())
       .then((data) => setCaretakerDetails(data))
@@ -70,7 +70,7 @@ const ManagerDashboard = () => {
 
     if (selectedCaregiver) {
       fetch(
-        `http://localhost:5000/api/manager/getCaregiverById/${selectedCaregiver.caregiverId}`
+        `/api/manager/getCaregiverById/${selectedCaregiver.caregiverId}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -100,7 +100,7 @@ const ManagerDashboard = () => {
         return;
       }
 
-      fetch(`http://localhost:5000/api/manager/getCaretakerById/${caretakerId}`)
+      fetch(`/api/manager/getCaretakerById/${caretakerId}`)
         .then((response) => response.json())
         .then((data) => {
           if (!data.caregiverId || data.caregiverId !== caregiverId) {
@@ -120,14 +120,14 @@ const ManagerDashboard = () => {
             });
 
             fetch(
-              `http://localhost:5000/api/manager/getCaregiverById/${caregiverId}`
+              `/api/manager/getCaregiverById/${caregiverId}`
             )
               .then((response) => response.json())
               .then((data) => {
                 console.log("came gere ", data);
                 setSelectedCaregiver(data);
 
-                fetch(`http://localhost:5000/api/manager/allocateCaregiver`, {
+                fetch(`/api/manager/allocateCaregiver`, {
                   method: "PUT",
                   headers: {
                     "Content-Type": "application/json",
@@ -169,7 +169,7 @@ const ManagerDashboard = () => {
             });
 
             console.log("fetch even came here ", eventKey);
-            fetch(`http://localhost:5000/api/manager/allocateCaregiver`, {
+            fetch(`/api/manager/allocateCaregiver`, {
               method: "PUT",
               headers: {
                 "Content-Type": "application/json",
@@ -247,7 +247,7 @@ const ManagerDashboard = () => {
       const requirementIdToSend = selectedCaretaker?.requirementId; // Ensure requirementId is correctly fetched or passed
 
       const response = await axios.put(
-        "http://localhost:5000/api/manager/handleinstruction",
+        "/api/manager/handleinstruction",
         { instruction: instructionToSend, requirementId: requirementIdToSend }
       );
       console.log(response.data);
@@ -276,7 +276,7 @@ const ManagerDashboard = () => {
 
   const fetchCareGivers = async (startDate: any, endDate: any, preffGender: any) => {
     try {
-      fetch("http://localhost:5000/api/manager/getCaregivers")
+      fetch("/api/manager/getCaregivers")
         .then((response) => response.json())
         .then((data) => {
           console.log("caregivers", data);
@@ -291,7 +291,7 @@ const ManagerDashboard = () => {
   // const fetchCareGivers = async (startDate, endDate, preffGender) => {
   //   try {
   //     const response = await axios.get(
-  //       `http://localhost:5000/api/manager/getCaregivers?startDate=${startDate}&endDate=${endDate}&preffGender=${preffGender}`
+  //       `/api/manager/getCaregivers?startDate=${startDate}&endDate=${endDate}&preffGender=${preffGender}`
   //     );
 
   //     console.log(response);
@@ -511,3 +511,4 @@ const ManagerDashboard = () => {
 };
 
 export default ManagerDashboard;
+

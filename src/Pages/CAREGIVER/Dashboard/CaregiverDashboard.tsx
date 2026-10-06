@@ -25,7 +25,7 @@ const DateCalendarValue = () => {
     try {
       const userID = JSON.parse(localStorage.getItem("userProfile") || "{}")?.userId;
       const response = await axios.get(
-        `http://localhost:5000/api/caregiver/assignedcaretakers?caregiverId=${userID}`,
+        `/api/caregiver/assignedcaretakers?caregiverId=${userID}`,
       );
 
       setCaretakers(response.data);
@@ -38,7 +38,7 @@ const DateCalendarValue = () => {
   const fetchRequirements = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/caregiver/getAllRequirements",
+        "/api/caregiver/getAllRequirements",
       );
       console.log(response.data);
       setRequirements(response.data);
@@ -56,7 +56,7 @@ const DateCalendarValue = () => {
       };
       console.log("statusData", statusData);
       const response = await axios.patch(
-        `http://localhost:5000/api/caregiver/acceptrequest`,
+        `/api/caregiver/acceptrequest`,
         statusData,
       );
       if (response.status === 200) {
@@ -83,7 +83,7 @@ const DateCalendarValue = () => {
   const handleRejectRequest = async (caretakerId: any) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/caregiver/rejectrequest/${caretakerId}`,
+        `/api/caregiver/rejectrequest/${caretakerId}`,
       );
       if (response.status === 200) {
         setCaretakers((prevCaretakers) =>
@@ -261,3 +261,4 @@ const DateCalendarValue = () => {
 };
 
 export default DateCalendarValue;
+

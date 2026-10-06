@@ -32,7 +32,7 @@ const CareGiverSelectingModel = ({
 
   const fetchAvailableCareGivers = async () => {
     try {
-      const careGiverResult = await axios.get("http://localhost:5000/api/manager/getCaregivers");
+      const careGiverResult = await axios.get("/api/manager/getCaregivers");
       setCaregivers(careGiverResult.data[selectedRequirment]);
     } catch (error) {
       console.log("error! ", error);
@@ -48,7 +48,7 @@ const CareGiverSelectingModel = ({
             requirementId:selectedRequirment
         }
     if (selectedCareGiver!=null) {
-        const response = await axios.post("http://localhost:5000/api/manager/addCareGiverAndInstructions", caregiverData);
+        const response = await axios.post("/api/manager/addCareGiverAndInstructions", caregiverData);
         if(response.status === 200){
           message.success('Caregiver updated successfully');
           fetchPendingTasks();
@@ -120,3 +120,4 @@ const CareGiverSelectingModel = ({
 };
 
 export default CareGiverSelectingModel;
+

@@ -79,8 +79,8 @@ const Register = () => {
       // Submit the form if all validations pass
       const endpoint =
         form.usertype === "caregiver"
-          ? "http://localhost:5000/api/user/registerCaregiver"
-          : "http://localhost:5000/api/user/registerCaretaker";
+          ? "/api/user/registerCaregiver"
+          : "/api/user/registerCaretaker";
       const response = await axios.post(endpoint, form);
       console.log(response.data);
       navigate("/Login");
@@ -306,7 +306,7 @@ export default Register;
 
 //     try {
 //       const response = await axios.post(
-//         "http://localhost:5000/api/user/registercaretaker",
+//         "/api/user/registercaretaker",
 //         form
 //       );
 //       console.log(response.data);
@@ -433,3 +433,4 @@ export default Register;
 // };
 
 // export default Register;
+

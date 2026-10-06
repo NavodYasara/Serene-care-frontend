@@ -18,7 +18,7 @@ const NewPlan = () => {
    
     const fetchPendingTasks=async()=>{
         try {
-            const results=await axios.get("http://localhost:5000/api/manager/pendingTasks")
+            const results=await axios.get("/api/manager/pendingTasks")
             console.log("results ",results);
             const finalTaskArray=results.data?.map((res: any)=>({
                 ...res,

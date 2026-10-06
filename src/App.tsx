@@ -45,6 +45,8 @@ function App(): React.JSX.Element {
           <Route element={<MasterLayout />}>
             <Route path="/sandbox" />
           </Route>
+
+          {/* ── Public routes ─────────────────────────────────────────── */}
           <Route element={<StartupLayout />}>
             <Route path="/onboard" element={<OnboardForm />} />
             <Route path="/onboard-step2" element={<ServiceCategory />} />
@@ -52,7 +54,6 @@ function App(): React.JSX.Element {
             <Route path="/onboard-step4" element={<OnboardPassword />} />
           </Route>
 
-          {/* ── Public routes ─────────────────────────────────────────── */}
           <Route element={<AuthLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/Home" element={<Home />} />

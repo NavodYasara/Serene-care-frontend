@@ -39,7 +39,7 @@ const AddFeedbackPage = () => {
     if (userId) {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/feedback/getcaregiver/${userId}`,
+          `/api/feedback/getcaregiver/${userId}`,
         );
         console.log(response);
         const caregiversData = await response.json();
@@ -254,3 +254,4 @@ const AddFeedbackPage = () => {
 };
 
 export default AddFeedbackPage;
+

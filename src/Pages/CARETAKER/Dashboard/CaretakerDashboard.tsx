@@ -52,7 +52,7 @@ const CaretakerDashboard = () => {
     const fetchCaretakerData = async () => {
       try {
         const response = await axios
-          .get("http://localhost:5000/api/user/getCaretakerProfile", {
+          .get("/api/user/getCaretakerProfile", {
             params: { userId: user.userId },
           })
           .catch(() => ({ data: null }));
@@ -94,7 +94,7 @@ const CaretakerDashboard = () => {
         userId: user.userId,
       };
       await axios.put(
-        "http://localhost:5000/api/user/updateCaretakerProfile",
+        "/api/user/updateCaretakerProfile",
         updatedProfileData,
       );
       setOriginalProfileData({ ...profileData });
@@ -717,3 +717,4 @@ const CaretakerDashboard = () => {
 };
 
 export default CaretakerDashboard;
+

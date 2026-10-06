@@ -35,7 +35,7 @@ const CareTakerShowingModel = ({
   const getCareTakerDetails = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/manager/getCaretakerById/${selectedCareTaker}`,
+        `/api/manager/getCaretakerById/${selectedCareTaker}`,
       );
       setCareTakerDetails(response.data);
     } catch (error) {
@@ -133,3 +133,4 @@ const CareTakerShowingModel = ({
 };
 
 export default CareTakerShowingModel;
+

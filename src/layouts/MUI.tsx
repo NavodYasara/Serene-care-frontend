@@ -73,7 +73,7 @@ function ResponsiveDrawer(props: any) {
   const fetchCaretakerProfile = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/caretakerprofile",
+        "/api/caretakerprofile",
       );
       setProfileData(response.data);
       setOriginalProfileData(response.data);
@@ -84,7 +84,7 @@ function ResponsiveDrawer(props: any) {
 
   const fetchCaregivers = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/caregivers");
+      const response = await axios.get("/api/caregivers");
       setCaregivers(response.data);
     } catch (error) {
       console.error(error);
@@ -103,7 +103,7 @@ function ResponsiveDrawer(props: any) {
   const handleProfileSave = async () => {
     try {
       await axios.post(
-        "http://localhost:5000/api/user/updateCaretakerProfile",
+        "/api/user/updateCaretakerProfile",
         profileData,
       );
       setOriginalProfileData({ ...profileData });
@@ -494,3 +494,4 @@ ResponsiveDrawer.propTypes = {
 };
 
 export default ResponsiveDrawer;
+

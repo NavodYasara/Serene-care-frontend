@@ -38,7 +38,7 @@ const OnboardPassword: React.FC = () => {
     try {
       // 1. Register the caretaker account credentials
       const registerRes = await axios.post(
-        "http://localhost:5000/api/user/registerCaretaker",
+        "/api/user/registerCaretaker",
         {
           firstName: "",
           lastName: "",
@@ -56,7 +56,7 @@ const OnboardPassword: React.FC = () => {
       const lastName = nameParts.slice(1).join(" ") || "";
 
       // 3. Save Caretaker Profile details
-      await axios.put("http://localhost:5000/api/user/updateCaretakerProfile", {
+      await axios.put("/api/user/updateCaretakerProfile", {
         userId,
         firstName,
         lastName,
@@ -72,7 +72,7 @@ const OnboardPassword: React.FC = () => {
       // 4. Save Service request requirements
       // Format recurrence if needed, or simply pass the details
       const reqText = `${onboardData.selectedCategory} - Details: ${onboardData.requirementDetails}`;
-      await axios.post("http://localhost:5000/api/requirement/insertRequest", {
+      await axios.post("/api/requirement/insertRequest", {
         userId,
         startDate: onboardData.startDate,
         endDate: onboardData.endDate || null,
@@ -82,7 +82,7 @@ const OnboardPassword: React.FC = () => {
 
       // 5. Automatically log the user in
       const loginResponse = await axios.post(
-        "http://localhost:5000/api/user/login",
+        "/api/user/login",
         {
           email: onboardData.email,
           password: password,
@@ -215,3 +215,4 @@ const OnboardPassword: React.FC = () => {
 };
 
 export default OnboardPassword;
+
