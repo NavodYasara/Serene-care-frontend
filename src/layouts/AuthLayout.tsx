@@ -1,5 +1,5 @@
-import Navbar from "../Components/Navbar/Navbar";
-import Sidebar from "../Components/Sidebar/Sidebar";
+import Navbar from "../components/Navbar/Navbar";
+import Sidebar from "../components/Sidebar/Sidebar";
 import { Outlet } from "react-router-dom";
 
 const AuthLayout = () => {

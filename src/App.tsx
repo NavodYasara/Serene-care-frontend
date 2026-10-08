@@ -6,35 +6,35 @@ import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
 // Public pages
-import Home from "./Pages/Home/Home";
-import Register from "./Pages/Register/Register";
-import Login from "./Pages/Login/Login";
-import Unauthorized from "./Pages/Unauthorized/Unauthorized";
+import Home from "./pages/Home/Home";
+import Register from "./pages/Register/Register";
+import Login from "./pages/Login/Login";
+import Unauthorized from "./pages/Unauthorized/Unauthorized";
 import AuthLayout from "./layouts/AuthLayout";
 
 // Layouts (kept for reference / legacy routes)
 import Layout2 from "./layouts/Layout2";
 import MUI from "./layouts/MUI";
 // ── ADMIN pages ──────────────────────────────────────────────────────────────
-import AdminDashboard from "./Pages/ADMIN/Dashboard/AdminDashboard";
-import ManageStaff from "./Pages/ADMIN/ManageStaff/ManageStaff";
+import AdminDashboard from "./pages/ADMIN/Dashboard/AdminDashboard";
+import ManageStaff from "./pages/ADMIN/ManageStaff/ManageStaff";
 
 // ── CAREGIVER pages ───────────────────────────────────────────────────────────
-import CaregiverDashboard from "./Pages/CAREGIVER/Dashboard/CaregiverDashboard";
-import CaregiverProfile from "./Pages/CAREGIVER/Profile/CaregiverProfile";
+import CaregiverDashboard from "./pages/CAREGIVER/Dashboard/CaregiverDashboard";
+import CaregiverProfile from "./pages/CAREGIVER/Profile/CaregiverProfile";
 
 // ── CARETAKER (patient) pages ─────────────────────────────────────────────────
-import CaretakerDashboard from "./Pages/CARETAKER/Dashboard/CaretakerDashboard";
-import Report from "./Pages/CARETAKER/Report/Report";
-import ServiceRequests from "./Pages/CARETAKER/ServiceRequests/ServiceRequests";
-import Payment from "./Pages/CARETAKER/Payment/Payment";
-import Feedback from "./Pages/CARETAKER/Feedback/Feedback";
+import CaretakerDashboard from "./pages/CARETAKER/Dashboard/CaretakerDashboard";
+import Report from "./pages/CARETAKER/Report/Report";
+import ServiceRequests from "./pages/CARETAKER/ServiceRequests/ServiceRequests";
+import Payment from "./pages/CARETAKER/Payment/Payment";
+import Feedback from "./pages/CARETAKER/Feedback/Feedback";
 import MasterLayout from "./layouts/MasterLayout";
-import AccDashboard from "./Pages/accountant/AccDashboard";
-import OnboardForm from "./Pages/CARETAKER/OnboadPages/Onboard";
-import ServiceCategory from "./Pages/CARETAKER/OnboadPages/ServiceCategory";
-import OnboardRequirement from "./Pages/CARETAKER/OnboadPages/OnboardRequirement";
-import OnboardPassword from "./Pages/CARETAKER/OnboadPages/OnboardPassword";
+import AccDashboard from "./pages/accountant/AccDashboard";
+import OnboardForm from "./pages/CARETAKER/OnboadPages/Onboard";
+import ServiceCategory from "./pages/CARETAKER/OnboadPages/ServiceCategory";
+import OnboardRequirement from "./pages/CARETAKER/OnboadPages/OnboardRequirement";
+import OnboardPassword from "./pages/CARETAKER/OnboadPages/OnboardPassword";
 import StartupLayout from "./layouts/StatupLayout";
 
 function App(): React.JSX.Element {

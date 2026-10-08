@@ -1,7 +1,7 @@
 import React from "react";
-import Sidebar2 from "../Components/Sidebar/sidebar2";
+import Sidebar2 from "../components/Sidebar/sidebar2";
 import { Outlet } from "react-router-dom";
-import HeaderWrapper from "../Components/Navbar/HeaderWrapper";
+import HeaderWrapper from "../components/Navbar/HeaderWrapper";
 
 const MasterLayout = () => {
   return (
