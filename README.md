@@ -1,70 +1,132 @@
-# Getting Started with Create React App
+# 🌿 Serene Care — Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, role-based healthcare management web application built with **React + Vite + TypeScript**.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 📋 Table of Contents
 
-### `npm start`
+- [About the Project](#about-the-project)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [User Roles](#user-roles)
+- [Getting Started](#getting-started)
+- [Running with Docker](#running-with-docker)
+- [CI/CD Pipeline](#cicd-pipeline)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🏥 About the Project
 
-### `npm test`
+Serene Care is a full-stack healthcare management system designed to connect **Caretakers (patients/families)**, **Caregivers (nurses/helpers)**, **Managers**, **Admins**, and **Accountants** through a unified web platform.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This repository contains the **frontend** of the application.
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🛠️ Tech Stack
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+| Technology | Purpose |
+|---|---|
+| React 19 | UI Framework |
+| Vite 6 | Build tool & dev server |
+| TypeScript | Type-safe JavaScript |
+| React Router v6 | Client-side routing |
+| Redux Toolkit | Global state management |
+| MUI (Material UI) | UI component library |
+| Ant Design | Additional UI components |
+| React Bootstrap | Layout & grid system |
+| Axios | HTTP API requests |
+| React Pro Sidebar | Navigation sidebar |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 📁 Project Structure
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+src/
+├── pages/              # Page components (organized by role)
+│   ├── ADMIN/          # Admin dashboard & user management
+│   ├── CAREGIVER/      # Caregiver dashboard & profile
+│   ├── CARETAKER/      # Caretaker dashboard, payments, reports
+│   ├── MANAGER/        # Manager dashboard & care plans
+│   ├── accountant/     # Accountant dashboard
+│   ├── Home/           # Public landing page
+│   ├── Login/          # Authentication page
+│   └── Register/       # Registration page
+├── components/         # Reusable UI components (Navbar, Sidebar)
+├── layouts/            # Page layout wrappers (MasterLayout, AuthLayout)
+├── routes/             # Protected route logic
+├── context/            # Auth context (logged-in user state)
+├── store/              # Redux store & slices
+├── types/              # TypeScript interfaces
+└── utils/              # Helper functions
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 👥 User Roles
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+| Role | Access |
+|---|---|
+| **Admin** | Manage all staff and users |
+| **Manager** | Manage care plans, assign caregivers |
+| **Caregiver** | View assignments, update profile |
+| **Caretaker** | Request services, view reports, make payments |
+| **Accountant** | Financial overview dashboard |
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🚀 Getting Started (Local Development)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Prerequisites
+- Node.js 20+
+- npm
 
-### Code Splitting
+### Steps
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+# 1. Clone the repository
+git clone https://github.com/NavodYasara/Serene-care-frontend.git
+cd Serene-care-frontend
 
-### Analyzing the Bundle Size
+# 2. Install dependencies
+npm install --legacy-peer-deps
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+# 3. Start the dev server
+npm run start
+```
 
-### Making a Progressive Web App
+The app will be available at **http://localhost:5173**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## 🐳 Running with Docker
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Pull the pre-built image
+```bash
+docker pull navodyasara/serene-frontend:latest
+docker run -d -p 3000:80 navodyasara/serene-frontend:latest
+```
 
-### Deployment
+The app will be available at **http://localhost:3000**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Or run the full stack with Docker Compose
+> From the root `SDP/` directory:
+```bash
+docker compose pull
+docker compose up -d
+```
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## ⚙️ CI/CD Pipeline
+
+On every push to the `dev` branch:
+
+1. GitHub Actions builds a Docker image using the `Dockerfile`
+2. The image is pushed to Docker Hub as `navodyasara/serene-frontend:latest`
+
+```
+Push to dev → GitHub Actions → Docker Build → Docker Hub
+```
